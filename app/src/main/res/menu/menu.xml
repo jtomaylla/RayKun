@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/exit_menu"
+        android:title="@string/exit" />
+    <item android:id="@+id/calendar_menu"
+        android:title="@string/calendar"
+        />
+    <item android:id="@+id/tasks_menu"
+        android:title="@string/tasks"
+        />
+    <item android:id="@+id/products_menu"
+        android:title="@string/products"
+        />
+    <item android:id="@+id/surveys_menu"
+        android:title="@string/surveys"
+        />
+    <item android:id="@+id/sales_menu"
+        android:title="@string/sales"
+        />
+    <item android:id="@+id/clients_menu"
+        android:title="@string/clients"
+        />
+    <item android:id="@+id/reports_menu"
+        android:title="@string/reports"
+        />
+    <item android:id="@+id/dashboard_menu"
+        android:title="@string/dashboard"
+        />
+    <item android:id="@+id/geotrack_menu"
+        android:title="@string/geotrack"
+        />
+    <item android:id="@+id/dialing_menu"
+        android:title="@string/dialing"
+        />
+    <item android:id="@+id/expenses_menu"
+        android:title="@string/expenses"
+        />
+    <item android:id="@+id/geolocation_menu"
+        android:title="@string/geolocation"
+        />
+</menu>

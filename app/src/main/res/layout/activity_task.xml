@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/calendar_coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/task_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/task_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true">
+
+                <com.simplemobiletools.commons.views.MyEditText
+                    android:id="@+id/task_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:hint="@string/title"
+                    android:inputType="textCapSentences"
+                    android:maxLength="80"
+                    android:maxLines="1"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+                <com.simplemobiletools.commons.views.MyEditText
+                    android:id="@+id/task_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/task_name"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:autoLink="all"
+                    android:gravity="top"
+                    android:hint="@string/description"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:linksClickable="true"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/task_priority"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/task_description"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:hint="@string/priority"
+                    android:inputType="textCapWords"
+                    android:maxLength="80"
+                    android:maxLines="1"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/task_start_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:textSize="@dimen/day_text_size"
+                    tools:text="1970-01-01"/>
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/task_due_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/task_start_date"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:textSize="@dimen/day_text_size"
+                    tools:text="1970-01-01"/>
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/task_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/task_due_date"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:hint="@string/status"
+                    android:inputType="textCapWords"
+                    android:maxLength="80"
+                    android:maxLines="1"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

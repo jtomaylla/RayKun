@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/calendar_coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/product_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/product_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true">
+
+                <com.simplemobiletools.commons.views.MyEditText
+                    android:id="@+id/product_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:hint="@string/title"
+                    android:inputType="textCapSentences"
+                    android:maxLength="80"
+                    android:maxLines="1"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+                <com.simplemobiletools.commons.views.MyEditText
+                    android:id="@+id/product_long_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/product_description"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:autoLink="all"
+                    android:gravity="top"
+                    android:hint="@string/description"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:linksClickable="true"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+                <com.simplemobiletools.commons.views.MyEditText
+                    android:id="@+id/product_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/product_long_description"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:autoLink="all"
+                    android:gravity="top"
+                    android:hint="@string/rate"
+                    android:inputType="numberDecimal"
+                    android:linksClickable="true"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+
+                <com.simplemobiletools.commons.views.MyEditText
+                    android:id="@+id/product_taxrate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/product_rate"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:autoLink="all"
+                    android:gravity="top"
+                    android:hint="@string/taxrate"
+                    android:inputType="numberDecimal"
+                    android:linksClickable="true"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+                <com.simplemobiletools.commons.views.MyEditText
+                    android:id="@+id/product_taxrate_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/product_taxrate"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:autoLink="all"
+                    android:gravity="top"
+                    android:hint="@string/taxrate_2"
+                    android:inputType="numberDecimal"
+                    android:linksClickable="true"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+                <com.simplemobiletools.commons.views.MyEditText
+                    android:id="@+id/product_group_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/product_taxrate_2"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:autoLink="all"
+                    android:gravity="top"
+                    android:hint="@string/group_id"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:linksClickable="true"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+                <com.simplemobiletools.commons.views.MyEditText
+                    android:id="@+id/product_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/product_group_id"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:autoLink="all"
+                    android:gravity="top"
+                    android:hint="@string/group_id"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:linksClickable="true"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

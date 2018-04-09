@@ -1,0 +1,59 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Base.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Toolbar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
+    <!--<style name="AppTheme" parent="AppTheme.Base"/>-->
+
+    <style name="DayView">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/day_text_size</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="MetaView" parent="DayView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/meta_text_size</item>
+    </style>
+
+    <style name="WeekNumberStyle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">top|center_horizontal</item>
+        <item name="android:textSize">@dimen/day_monthly_text_size</item>
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="ArrowStyle">
+        <item name="android:background">@drawable/transparent_button</item>
+    </style>
+
+    <style name="MonthStyle">
+        <item name="android:background">@drawable/transparent_button</item>
+    </style>
+</resources>
+

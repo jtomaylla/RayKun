@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/blueback"
+    android:gravity="center"
+    tools:context="com.ecandle.raykun.activities.LoginActivity">
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="1dip"-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<TableRow-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center">-->
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="237dp"
+        android:layout_margin="0dp"
+        android:background="@color/blueback"
+        android:src="@drawable/raykunbanner" />
+
+        <!--</TableRow>-->
+    <!--</LinearLayout>-->
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:hint="Enter your email"
+        android:text="juan.tomaylla@gmail.com"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:layout_marginBottom="10pt"
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:hint="Enter your password"
+        android:text="cajahuan02"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/buLogin"
+        android:layout_width="50pt"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bu_color"
+        android:onClick="buLoginEvent"
+        android:layout_marginBottom="10pt"
+        android:layout_marginTop="10pt"
+        android:textColor="@color/white"
+        android:text="Login" />
+    <Button
+        android:id="@+id/buRegister"
+        android:layout_width="50pt"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bu_color"
+        android:onClick="buRegisterUserEvent"
+        android:textColor="@color/white"
+        android:text="Demo Login" />
+</LinearLayout>
