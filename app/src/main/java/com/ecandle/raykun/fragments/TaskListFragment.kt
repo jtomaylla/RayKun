@@ -3,9 +3,9 @@ package com.ecandle.raykun.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.support.v4.view.MenuItemCompat
+import android.support.v7.widget.SearchView
+import android.view.*
 import com.ecandle.raykun.R
 import com.ecandle.raykun.activities.SimpleActivity
 import com.ecandle.raykun.activities.TaskActivity
@@ -22,9 +22,16 @@ import com.simplemobiletools.commons.extensions.beVisibleIf
 import kotlinx.android.synthetic.main.fragment_task_list.view.*
 import java.util.*
 
-class TaskListFragment : Fragment(), DeleteTasksListener {
+class TaskListFragment : Fragment(), DeleteTasksListener , SearchView.OnQueryTextListener{
     private var mTasks: List<Task> = ArrayList()
     lateinit var mView: View
+    private var mTaskListAdapter: TaskListAdapter? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(R.layout.fragment_task_list, container, false)
@@ -58,7 +65,7 @@ class TaskListFragment : Fragment(), DeleteTasksListener {
             listItems.add(Task(it.id, it.name, it.description, it.priority,it.startdate, it.duedate, it.status))
         }
 
-        val tasksAdapter = TaskListAdapter(activity as SimpleActivity, listItems, true, this, mView.calendar_tasks_list) {
+        mTaskListAdapter = TaskListAdapter(activity as SimpleActivity, listItems, true, this, mView.calendar_tasks_list) {
             if (it is Task) {
                 editTask(it)
             }
@@ -66,12 +73,34 @@ class TaskListFragment : Fragment(), DeleteTasksListener {
 
         activity?.runOnUiThread {
             mView.calendar_tasks_list.apply {
-                this@apply.adapter = tasksAdapter
+                this@apply.adapter = mTaskListAdapter
             }
             checkPlaceholderVisibility()
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_task_list_fragment, menu)
+
+        val item = menu.findItem(R.id.action_search)
+        val searchView = MenuItemCompat.getActionView(item) as SearchView
+        searchView.setOnQueryTextListener(this)
+
+        item.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+
+            override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+                // Do something when collapsed
+                mTaskListAdapter!!.setSearchResult(mTasks)
+                return true // Return true to collapse action view
+
+            }
+        })
+    }
     private fun checkPlaceholderVisibility() {
         mView.task_empty_list_placeholder.beVisibleIf(mTasks.isEmpty())
         mView.calendar_tasks_list.beGoneIf(mTasks.isEmpty())
@@ -90,5 +119,32 @@ class TaskListFragment : Fragment(), DeleteTasksListener {
         val eventIDs = Array(ids.size, { i -> (ids[i].toString()) })
         context!!.dbHelper.deleteTasks(eventIDs)
     }
+    override fun onQueryTextSubmit(query: String): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String): Boolean {
+        val filteredTaskList = filter(mTasks, newText)
+        if (newText.isEmpty()) {
+            checkTasks()
+        }else{
+            receivedTasks(filteredTaskList)
+        }
+        return true
+    }
+
+    private fun filter(tasks: List<Task>, query: String): List<Task> {
+        var query = query
+        query = query.toLowerCase()
+        val filteredTaskList = ArrayList<Task>()
+        for (task in tasks) {
+            val text = task.name.toLowerCase()
+            if (text.contains(query)) {
+                filteredTaskList.add(task)
+            }
+        }
+        return filteredTaskList
+    }
+
 
 }

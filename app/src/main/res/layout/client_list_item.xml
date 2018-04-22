@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/client_frame"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="@drawable/selector"
+    android:paddingLeft="@dimen/activity_margin">
+
+    <RelativeLayout
+        android:id="@+id/client_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/medium_margin"
+        android:paddingLeft="@dimen/activity_margin"
+        android:paddingRight="@dimen/activity_margin"
+        android:paddingTop="@dimen/small_margin">
+
+        <com.simplemobiletools.commons.views.MyTextView
+            android:id="@+id/client_userid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/default_text_size"
+            android:width="80dp"
+            tools:text="######"/>
+
+        <com.simplemobiletools.commons.views.MyTextView
+            android:id="@+id/client_phonenumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/client_userid"
+            android:text="######"
+            android:width="80dp"
+            android:textSize="@dimen/default_text_size"/>
+
+        <com.simplemobiletools.commons.views.MyTextView
+            android:id="@+id/client_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_toLeftOf="@+id/client_color"
+            android:layout_toRightOf="@+id/client_userid"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingRight="@dimen/activity_margin"
+            android:textSize="@dimen/default_text_size"
+            tools:text="Company Name"/>
+
+        <com.simplemobiletools.commons.views.MyTextView
+            android:id="@+id/client_contact_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/client_company"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_toLeftOf="@+id/client_color"
+            android:layout_toRightOf="@+id/client_userid"
+            android:alpha=".4"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingRight="@dimen/activity_margin"
+            android:textSize="@dimen/default_text_size"
+            tools:text="Contact Name"/>
+
+
+        <ImageView
+            android:id="@+id/client_color"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/client_userid"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/client_userid"
+            android:paddingRight="@dimen/medium_margin"
+            android:src="@drawable/monthly_event_dot"/>
+
+    </RelativeLayout>
+</FrameLayout>

@@ -14,6 +14,6 @@
     <color name="default_birthdays_color">#FF303DF6</color>
     <color name="default_holidays_color">#FF64DD17</color>
     <color name="default_anniversaries_color">#FFF63030</color>
-
-    
+    <color name="active_status_color">#00d149</color>
+    <color name="inactive_status_color">#ed2939</color>
 </resources>

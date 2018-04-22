@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //val saveSettings= SavedSettings(this)
-        //saveSettings.loadSettings()
+        //val saveLoginSettings= SavedSettings(this)
+        //saveLoginSettings.loadLoginSettings()
         // Set up the toolbar.
         //val toolbar = findViewById(R.id.toolbar) as Toolbar
         //setSupportActionBar(toolbar);
@@ -40,8 +40,15 @@ class MainActivity : AppCompatActivity() {
             setupDrawerContent(navigationView)
         }
         val savedSettings = SavedSettings(applicationContext)
-
-        mUserId = savedSettings.getLoggedUserId() ?: return
+//TODO chequear si user id esta logeado OJO verificar si funciona!!
+//
+        mUserId = savedSettings.getLoggedUserId()
+        if (mUserId == "0")
+        {
+            val intent = Intent(this@MainActivity, LoginActivity::class.java)
+            startActivity(intent)
+            //finish()
+        }
     }
 
     fun opc_event(view: View){
@@ -97,7 +104,10 @@ class MainActivity : AppCompatActivity() {
                 op="sales"
             }
             clients.id -> {
-
+                Intent(this, ClientListActivity::class.java).apply {
+                    putExtra(USER_ID, mUserId)
+                    startActivity(this)
+                }
                 op="clients"
             }
             reports.id -> {

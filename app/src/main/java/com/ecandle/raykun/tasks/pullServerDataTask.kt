@@ -5,9 +5,11 @@ import com.ecandle.raykun.helpers.Operations
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
-
+/**
+ * Created by juantomaylla on 15/04/18.
+ */
 // CALL HTTP
-class loadLoginDataTask: AsyncTask<String, String, String>() {
+class pullServerDataTask : AsyncTask<String, String, String>() {
 
 
     override fun onPreExecute() {
@@ -39,66 +41,12 @@ class loadLoginDataTask: AsyncTask<String, String, String>() {
 
             }
 
-            //Cannot access to ui
-            //publishProgress(inString)
-
-//            val json = JSONArray(result)
-//
-//            return json
-//
-//            val logged =json.getBoolean("logged")
-//
-//            if (logged){
-//                //logged = true
-//
-//                val user_id= json.getJSONObject("user").getString("staffid")
-//
-//                val saveSettings = SavedSettings(applicationContext)
-//                saveSettings.saveSettings(user_id)
-//
-//                App.prefs!!.logged_user_id = user_id
-//                Log.i(LOG_TAG, "user_id:"+ App.prefs!!.logged_user_id)
-//                Log.i(LOG_TAG, "user_id:"+saveSettings.getLoggedUserId())
-//                //finish()
-//            }else{
-//                //Toast.makeText(applicationContext,json.getString("logged"), Toast.LENGTH_LONG).show()
-//                //logged = false
-//            }
-
-
         }catch (ex:Exception){}
 
 
         return ""
 
     }
-
-//    override fun onProgressUpdate(vararg values: String?) {
-//        try{
-//            var json= JSONObject(values[0])
-//
-//            logged =json.getBoolean("logged")
-//
-//            if (logged){
-//                //logged = true
-//
-//                val user_id= json.getJSONObject("user").getString("staffid")
-//
-//                val saveSettings = SavedSettings(applicationContext)
-//                saveSettings.saveSettings(user_id)
-//
-//                App.prefs!!.logged_user_id = user_id
-//                Log.i(LOG_TAG, "user_id:"+ App.prefs!!.logged_user_id)
-//                Log.i(LOG_TAG, "user_id:"+saveSettings.getLoggedUserId())
-//                //finish()
-//            }else{
-//                //Toast.makeText(applicationContext,json.getString("logged"), Toast.LENGTH_LONG).show()
-//                //logged = false
-//            }
-//
-//        }catch (ex:Exception){}
-//
-//    }
 
     override fun onPostExecute(result: String?) {
 
@@ -114,6 +62,4 @@ class loadLoginDataTask: AsyncTask<String, String, String>() {
 
 }
 
-/**
- * Created by juantomaylla on 15/04/18.
- */
+

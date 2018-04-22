@@ -98,9 +98,12 @@ class CalendarActivity : SimpleActivity(), NavigationListener {
         appLaunched()
         //calendar_fab.setOnClickListener { launchNewEventIntent() }
         //checkWhatsNewDialog()
+        var connectionDetector = ConnectionDetector(this)
         mUserId = intent.getStringExtra(USER_ID)
 
-        loadUserEvents()
+        if (connectionDetector!!.isConnectingToInternet) {
+            loadUserEvents()
+        }
 
         if (resources.getBoolean(R.bool.portrait_only))
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT

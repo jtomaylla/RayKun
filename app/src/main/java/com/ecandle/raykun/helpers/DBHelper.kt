@@ -11,10 +11,7 @@ import android.text.TextUtils
 import android.util.SparseIntArray
 import com.ecandle.raykun.R
 import com.ecandle.raykun.extensions.*
-import com.ecandle.raykun.models.Event
-import com.ecandle.raykun.models.EventType
-import com.ecandle.raykun.models.Item
-import com.ecandle.raykun.models.Task
+import com.ecandle.raykun.models.*
 import com.simplemobiletools.commons.extensions.getIntValue
 import com.simplemobiletools.commons.extensions.getLongValue
 import com.simplemobiletools.commons.extensions.getStringValue
@@ -82,6 +79,40 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
     private val COL_ITEM_TAX_RATE_2 = "taxrate_2"
     private val COL_ITEM_GROUP_ID = "group_id"
     private val COL_ITEM_UNIT = "unit"
+
+    public val CLIENTS_TABLE_NAME = "clients"
+    private val COL_CLIENT_ID = "userid"
+    private val COL_CLIENT_COMPANY = "company"
+    private val COL_CLIENT_VAT = "vat"
+    private val COL_CLIENT_PHONENUMBER = "phonenumber"
+    private val COL_CLIENT_COUNTRY = "country"
+    private val COL_CLIENT_CITY = "city"
+    private val COL_CLIENT_ZIP = "zip"
+    private val COL_CLIENT_STATE = "state"
+    private val COL_CLIENT_ADDRESS = "address"
+    private val COL_CLIENT_WEBSITE= "website"
+    private val COL_CLIENT_DATECREATED = "datecreated"
+    private val COL_CLIENT_ACTIVE = "active"
+    private val COL_CLIENT_LEADID = "leadid"
+    private val COL_CLIENT_BILLING_STREET = "billing_street"
+    private val COL_CLIENT_BILLING_CITY = "billing_city"
+    private val COL_CLIENT_BILLING_STATE = "billing_state"
+    private val COL_CLIENT_BILLING_ZIP = "billing_zip"
+    private val COL_CLIENT_BILLING_COUNTRY = "billing_country"
+    private val COL_CLIENT_SHIPPING_STREET = "shipping_street"
+    private val COL_CLIENT_SHIPPING_CITY = "shipping_city"
+    private val COL_CLIENT_SHIPPING_STATE = "shipping_state"
+    private val COL_CLIENT_SHIPPING_ZIP = "shipping_zip"
+    private val COL_CLIENT_SHIPPING_COUNTRY = "shipping_country"
+    private val COL_CLIENT_LONGITUDE = "longitude"
+    private val COL_CLIENT_LATITUDE = "latitude"
+    private val COL_CLIENT_DEFAULT_LANGUAGE = "default_language"
+    private val COL_CLIENT_DEFAULT_CURRENCY = "default_currency"
+    private val COL_CLIENT_SHOW_PRIMARY_CONTACT = "show_primary_contact"
+    private val COL_CLIENT_ADDEDFROM = "addedfrom"
+    private val COL_CLIENT_CONTACT_NAME = "contact_name"
+    private val COL_CLIENT_CONTACT_EMAIL = "contact_email"
+    private val COL_CLIENT_COUNTRY_NAME = "country_name"
 
 
     private val mDb: SQLiteDatabase = writableDatabase
@@ -259,6 +290,28 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
                 "$COL_ITEM_TAX_RATE TEXT, $COL_ITEM_TAX_RATE_2 TEXT, $COL_ITEM_GROUP_ID TEXT, $COL_ITEM_UNIT TEXT)")
     }
 
+    public fun createClientsTable(db: SQLiteDatabase) {
+        db.execSQL("CREATE TABLE $CLIENTS_TABLE_NAME " +
+                "($COL_CLIENT_ID INTEGER PRIMARY KEY, " +
+                "$COL_CLIENT_COMPANY TEXT, $COL_CLIENT_VAT TEXT, $COL_CLIENT_PHONENUMBER TEXT, $COL_CLIENT_COUNTRY TEXT, $COL_CLIENT_CITY TEXT, " +
+                "$COL_CLIENT_ZIP TEXT, $COL_CLIENT_STATE TEXT, $COL_CLIENT_ADDRESS TEXT, $COL_CLIENT_WEBSITE TEXT, $COL_CLIENT_DATECREATED TEXT, " +
+                "$COL_CLIENT_ACTIVE TEXT, $COL_CLIENT_LEADID TEXT, $COL_CLIENT_BILLING_STREET TEXT, $COL_CLIENT_BILLING_CITY TEXT, $COL_CLIENT_BILLING_STATE TEXT, " +
+                "$COL_CLIENT_BILLING_ZIP TEXT, $COL_CLIENT_BILLING_COUNTRY TEXT, $COL_CLIENT_SHIPPING_STREET TEXT, $COL_CLIENT_SHIPPING_CITY TEXT, $COL_CLIENT_SHIPPING_STATE TEXT, " +
+                "$COL_CLIENT_SHIPPING_ZIP TEXT, $COL_CLIENT_SHIPPING_COUNTRY TEXT, $COL_CLIENT_LATITUDE TEXT, $COL_CLIENT_LONGITUDE TEXT, $COL_CLIENT_DEFAULT_LANGUAGE TEXT, " +
+                "$COL_CLIENT_DEFAULT_CURRENCY TEXT, $COL_CLIENT_SHOW_PRIMARY_CONTACT TEXT, $COL_CLIENT_ADDEDFROM TEXT,$COL_CLIENT_CONTACT_NAME TEXT, $COL_CLIENT_CONTACT_EMAIL TEXT,$COL_CLIENT_COUNTRY_NAME TEXT)")
+    }
+
+    public fun createClientsTable() {
+        mDb.execSQL("CREATE TABLE $CLIENTS_TABLE_NAME " +
+                "($COL_CLIENT_ID INTEGER PRIMARY KEY, " +
+                "$COL_CLIENT_COMPANY TEXT, $COL_CLIENT_VAT TEXT, $COL_CLIENT_PHONENUMBER TEXT, $COL_CLIENT_COUNTRY TEXT, $COL_CLIENT_CITY TEXT, " +
+                "$COL_CLIENT_ZIP TEXT, $COL_CLIENT_STATE TEXT, $COL_CLIENT_ADDRESS TEXT, $COL_CLIENT_WEBSITE TEXT, $COL_CLIENT_DATECREATED TEXT, " +
+                "$COL_CLIENT_ACTIVE TEXT, $COL_CLIENT_LEADID TEXT, $COL_CLIENT_BILLING_STREET TEXT, $COL_CLIENT_BILLING_CITY TEXT, $COL_CLIENT_BILLING_STATE TEXT, " +
+                "$COL_CLIENT_BILLING_ZIP TEXT, $COL_CLIENT_BILLING_COUNTRY TEXT, $COL_CLIENT_SHIPPING_STREET TEXT, $COL_CLIENT_SHIPPING_CITY TEXT, $COL_CLIENT_SHIPPING_STATE TEXT, " +
+                "$COL_CLIENT_SHIPPING_ZIP TEXT, $COL_CLIENT_SHIPPING_COUNTRY TEXT, $COL_CLIENT_LATITUDE TEXT, $COL_CLIENT_LONGITUDE TEXT, $COL_CLIENT_DEFAULT_LANGUAGE TEXT, " +
+                "$COL_CLIENT_DEFAULT_CURRENCY TEXT, $COL_CLIENT_SHOW_PRIMARY_CONTACT TEXT, $COL_CLIENT_ADDEDFROM TEXT,$COL_CLIENT_CONTACT_NAME TEXT, $COL_CLIENT_CONTACT_EMAIL TEXT,$COL_CLIENT_COUNTRY_NAME TEXT)")
+    }
+
     private fun addRegularEventType(db: SQLiteDatabase) {
         val regularEvent = context.resources.getString(R.string.regular_event)
         val eventType = EventType(REGULAR_EVENT_TYPE_ID, regularEvent, context.config.primaryColor)
@@ -432,8 +485,56 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
             put(COL_ITEM_UNIT, item.unit)
         }
     }
-    
-    
+
+    fun insertClient(client: Client, db: SQLiteDatabase = mDb): Int {
+        val values = fillClientValues(client)
+        val insertedId = db.insert(CLIENTS_TABLE_NAME, null, values).toInt()
+        return insertedId
+    }
+
+    fun updateClient(client: Client): Int {
+        val selectionArgs = arrayOf(client.userid.toString())
+        val values = fillClientValues(client)
+        val selection = "$COL_CLIENT_ID = ?"
+        return mDb.update(CLIENTS_TABLE_NAME, values, selection, selectionArgs)
+    }
+
+    private fun fillClientValues(client: Client): ContentValues {
+        return ContentValues().apply {
+            put(COL_CLIENT_ID, client.userid)
+            put(COL_CLIENT_COMPANY, client.company)
+            put(COL_CLIENT_VAT, client.vat)
+            put(COL_CLIENT_PHONENUMBER, client.phonenumber)
+            put(COL_CLIENT_COUNTRY, client.country)
+            put(COL_CLIENT_CITY, client.city)
+            put(COL_CLIENT_ZIP, client.zip)
+            put(COL_CLIENT_STATE, client.state)
+            put(COL_CLIENT_ADDRESS, client.address)
+            put(COL_CLIENT_WEBSITE, client.website)
+            put(COL_CLIENT_DATECREATED, client.datecreated)
+            put(COL_CLIENT_ACTIVE, client.active)
+            put(COL_CLIENT_LEADID, client.leadid)
+            put(COL_CLIENT_BILLING_STREET, client.billing_street)
+            put(COL_CLIENT_BILLING_CITY, client.billing_city)
+            put(COL_CLIENT_BILLING_STATE, client.billing_state)
+            put(COL_CLIENT_BILLING_ZIP, client.billing_zip)
+            put(COL_CLIENT_BILLING_COUNTRY, client.billing_country)
+            put(COL_CLIENT_SHIPPING_STREET, client.shipping_street)
+            put(COL_CLIENT_SHIPPING_CITY, client.shipping_city)
+            put(COL_CLIENT_SHIPPING_STATE, client.shipping_state)
+            put(COL_CLIENT_SHIPPING_ZIP, client.shipping_zip)
+            put(COL_CLIENT_SHIPPING_COUNTRY, client.shipping_country)
+            put(COL_CLIENT_LONGITUDE, client.longitude)
+            put(COL_CLIENT_LATITUDE, client.latitude)
+            put(COL_CLIENT_DEFAULT_LANGUAGE, client.default_language)
+            put(COL_CLIENT_DEFAULT_CURRENCY, client.default_currency)
+            put(COL_CLIENT_SHOW_PRIMARY_CONTACT, client.show_primary_contact)
+            put(COL_CLIENT_ADDEDFROM, client.addedfrom)
+            put(COL_CLIENT_CONTACT_NAME,client.contact_name )
+            put(COL_CLIENT_CONTACT_EMAIL,client.contact_email)
+            put(COL_CLIENT_COUNTRY_NAME,client.country_name)
+        }
+    }
     
     private fun fillExceptionValues(parentEventId: Int, occurrenceTS: Int, callback: (values: ContentValues) -> Unit) {
         val childEvent = getEventWithId(parentEventId)
@@ -558,17 +659,23 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
         val args = TextUtils.join(", ", ids)
         val selection = "$TASKS_TABLE_NAME.$COL_TASK_ID IN ($args)"
 
-
         mDb.delete(TASKS_TABLE_NAME, selection, null)
 
     }
 
     fun deleteItems(ids: Array<String>) {
         val args = TextUtils.join(", ", ids)
-        val selection = "$ITEMS_TABLE_NAME.$COL_TASK_ID IN ($args)"
+        val selection = "$ITEMS_TABLE_NAME.$COL_ITEM_ID IN ($args)"
 
+        mDb.delete(ITEMS_TABLE_NAME, selection, null)
 
-        mDb.delete(TASKS_TABLE_NAME, selection, null)
+    }
+
+    fun deleteClients(ids: Array<String>) {
+        val args = TextUtils.join(", ", ids)
+        val selection = "$CLIENTS_TABLE_NAME.$COL_CLIENT_ID IN ($args)"
+
+        mDb.delete(CLIENTS_TABLE_NAME, selection, null)
 
     }
     fun initEventTable() {
@@ -582,7 +689,11 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
     fun initItemsTable() {
         mDb.execSQL("DELETE FROM $ITEMS_TABLE_NAME")
     }
-    
+
+    fun initClientsTable() {
+        mDb.execSQL("DELETE FROM $CLIENTS_TABLE_NAME")
+    }
+
     private fun deleteChildEvents(ids: String, deleteFromCalDAV: Boolean) {
         val projection = arrayOf(COL_ID)
         val selection = "$COL_PARENT_EVENT_ID IN ($ids)"
@@ -979,8 +1090,31 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
         val projection = allItemColumns
         return builder.query(mDb, projection, selection, selectionArgs, "$ITEMS_TABLE_NAME.$COL_ITEM_ID", null, COL_ITEM_DESCRIPTION)
     }
+    fun getClientWithId(id: Int): Client? {
+        val selection = "$CLIENTS_TABLE_NAME.$COL_CLIENT_ID = ?"
+        val selectionArgs = arrayOf(id.toString())
+        val cursor = getClientsCursor(selection, selectionArgs)
+        val clients = fillClients(cursor)
+        return if (clients.isNotEmpty()) {
+            clients[0]
+        } else {
+            null
+        }
+    }
+    
+    fun getClientsWithIds(ids: List<Int>): ArrayList<Client> {
+        val args = TextUtils.join(", ", ids)
+        val selection = "$CLIENTS_TABLE_NAME.$COL_CLIENT_ID IN ($args)"
+        return getClients(selection) as ArrayList<Client>
+    }
 
-
+    private fun getClientsCursor(selection: String = "", selectionArgs: Array<String>? = null): Cursor? {
+        val builder = SQLiteQueryBuilder()
+        builder.tables = "$CLIENTS_TABLE_NAME"
+        val projection = allClientColumns
+        return builder.query(mDb, projection, selection, selectionArgs, "$CLIENTS_TABLE_NAME.$COL_CLIENT_ID", null, COL_CLIENT_COMPANY)
+    }
+    
     private val allColumns: Array<String>
         get() = arrayOf("$MAIN_TABLE_NAME.$COL_ID", COL_START_TS, COL_END_TS, COL_TITLE, COL_DESCRIPTION, COL_REMINDER_MINUTES, COL_REMINDER_MINUTES_2,
                 COL_REMINDER_MINUTES_3, COL_REPEAT_INTERVAL, COL_REPEAT_RULE, COL_IMPORT_ID, COL_FLAGS, COL_REPEAT_LIMIT, COL_EVENT_TYPE, COL_OFFSET,
@@ -993,6 +1127,15 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
     private val allItemColumns: Array<String>
         get() = arrayOf("$ITEMS_TABLE_NAME.$COL_ITEM_ID",  COL_ITEM_DESCRIPTION, COL_ITEM_LONG_DESCRIPTION,COL_ITEM_RATE, COL_ITEM_TAX_RATE, COL_ITEM_TAX_RATE_2,
                 COL_ITEM_GROUP_ID,COL_ITEM_UNIT)
+
+    private val allClientColumns: Array<String>
+        get() = arrayOf("$CLIENTS_TABLE_NAME.$COL_CLIENT_ID",
+        COL_CLIENT_COMPANY , COL_CLIENT_VAT , COL_CLIENT_PHONENUMBER , COL_CLIENT_COUNTRY , COL_CLIENT_CITY , 
+        COL_CLIENT_ZIP , COL_CLIENT_STATE , COL_CLIENT_ADDRESS , COL_CLIENT_WEBSITE , COL_CLIENT_DATECREATED , 
+        COL_CLIENT_ACTIVE , COL_CLIENT_LEADID , COL_CLIENT_BILLING_STREET , COL_CLIENT_BILLING_CITY , COL_CLIENT_BILLING_STATE ,
+        COL_CLIENT_BILLING_ZIP , COL_CLIENT_BILLING_COUNTRY , COL_CLIENT_SHIPPING_STREET , COL_CLIENT_SHIPPING_CITY , COL_CLIENT_SHIPPING_STATE ,
+        COL_CLIENT_SHIPPING_ZIP , COL_CLIENT_SHIPPING_COUNTRY , COL_CLIENT_LATITUDE , COL_CLIENT_LONGITUDE , COL_CLIENT_DEFAULT_LANGUAGE ,
+        COL_CLIENT_DEFAULT_CURRENCY , COL_CLIENT_SHOW_PRIMARY_CONTACT , COL_CLIENT_ADDEDFROM,COL_CLIENT_CONTACT_NAME,COL_CLIENT_CONTACT_EMAIL,COL_CLIENT_COUNTRY_NAME)
     
     private fun fillEvents(cursor: Cursor?): List<Event> {
         val eventTypeColors = SparseIntArray()
@@ -1082,15 +1225,92 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
                     val taxrate_2 = cursor.getStringValue(COL_ITEM_TAX_RATE_2)
                     val group_id = cursor.getStringValue(COL_ITEM_GROUP_ID)
                     val unit = cursor.getStringValue(COL_ITEM_UNIT)
-                    val task = Item(itemid, description, longdescription, rate, taxrate,taxrate_2,group_id,unit)
-                    items.add(task)
+                    val item = Item(itemid, description, longdescription, rate, taxrate,taxrate_2,group_id,unit)
+                    items.add(item)
                 } while (cursor.moveToNext())
             }
         }
         return items
     }
-    
-    
+
+    private fun fillClients(cursor: Cursor?): List<Client> {
+
+        val clients = ArrayList<Client>()
+        cursor?.use {
+            if (cursor.moveToFirst()) {
+                do {
+                    val userid = cursor.getIntValue(COL_CLIENT_ID)
+                    val company = cursor.getStringValue(COL_CLIENT_COMPANY)
+                    val vat = cursor.getStringValue(COL_CLIENT_VAT)
+                    val phonenumber = cursor.getStringValue(COL_CLIENT_PHONENUMBER)
+                    val country = cursor.getStringValue(COL_CLIENT_COUNTRY)
+                    val city = cursor.getStringValue(COL_CLIENT_CITY)
+                    val zip = cursor.getStringValue(COL_CLIENT_ZIP)
+                    val state = cursor.getStringValue(COL_CLIENT_STATE)
+                    val address = cursor.getStringValue(COL_CLIENT_ADDRESS)
+                    val website = cursor.getStringValue(COL_CLIENT_WEBSITE)
+                    val datecreated = cursor.getStringValue(COL_CLIENT_DATECREATED)
+                    val active = cursor.getStringValue(COL_CLIENT_ACTIVE)
+                    val leadid = cursor.getStringValue(COL_CLIENT_LEADID)
+                    val billing_street = cursor.getStringValue(COL_CLIENT_BILLING_CITY)
+                    val billing_city = cursor.getStringValue(COL_CLIENT_BILLING_CITY)
+                    val billing_state = cursor.getStringValue(COL_CLIENT_BILLING_STATE)
+                    val billing_zip = cursor.getStringValue(COL_CLIENT_BILLING_ZIP)
+                    val billing_country = cursor.getStringValue(COL_CLIENT_BILLING_COUNTRY)
+                    val shipping_street = cursor.getStringValue(COL_CLIENT_SHIPPING_STREET)
+                    val shipping_city = cursor.getStringValue(COL_CLIENT_SHIPPING_CITY)
+                    val shipping_state = cursor.getStringValue(COL_CLIENT_SHIPPING_STATE)
+                    val shipping_zip = cursor.getStringValue(COL_CLIENT_SHIPPING_ZIP)
+                    val shipping_country = cursor.getStringValue(COL_CLIENT_SHIPPING_COUNTRY)
+                    val longitude = cursor.getStringValue(COL_CLIENT_LONGITUDE)
+                    val latitude = cursor.getStringValue(COL_CLIENT_LATITUDE)
+                    val default_language = cursor.getStringValue(COL_CLIENT_DEFAULT_LANGUAGE)
+                    val default_currency = cursor.getStringValue(COL_CLIENT_DEFAULT_CURRENCY)
+                    val show_primary_contact = cursor.getStringValue(COL_CLIENT_SHOW_PRIMARY_CONTACT)
+                    val addedfrom = cursor.getStringValue(COL_CLIENT_ADDEDFROM)
+                    val contact_name= cursor.getStringValue(COL_CLIENT_CONTACT_NAME)
+                    val contact_email= cursor.getStringValue(COL_CLIENT_CONTACT_EMAIL)
+                    val country_name= cursor.getStringValue(COL_CLIENT_COUNTRY_NAME)
+
+                    val client = Client(userid ,
+                                    company,
+                                    vat,
+                                    phonenumber ,
+                                    country,
+                                    city,
+                                    zip,
+                                    state ,
+                                    address,
+                                    website,
+                                    datecreated,
+                                    active,
+                                    leadid,
+                                    billing_street,
+                                    billing_city,
+                                    billing_state,
+                                    billing_zip,
+                                    billing_country,
+                                    shipping_street,
+                                    shipping_city,
+                                    shipping_state,
+                                    shipping_zip,
+                                    shipping_country,
+                                    longitude ,
+                                    latitude,
+                                    default_language,
+                                    default_currency,
+                                    show_primary_contact,
+                                    addedfrom,
+                                    contact_name,
+                                    contact_email,
+                                    country_name
+                                    )
+                    clients.add(client)
+                } while (cursor.moveToNext())
+            }
+        }
+        return clients
+    }
     
     fun getEventTypes(callback: (types: ArrayList<EventType>) -> Unit) {
         Thread {
@@ -1221,6 +1441,118 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
         return items
     }
 
+    fun getClients(callback: (clients: ArrayList<Client>) -> Unit) {
+        Thread {
+            callback(fetchClients())
+        }.start()
+    }
+
+
+    private fun getClients(selection: String): List<Client> {
+        val clients = ArrayList<Client>()
+        var cursor: Cursor? = null
+        try {
+            cursor = getClientsCursor(selection)
+            if (cursor != null) {
+                val currClients = fillClients(cursor)
+                clients.addAll(currClients)
+            }
+        } finally {
+            cursor?.close()
+        }
+
+        return clients
+    }
+
+
+    fun fetchClients(): ArrayList<Client> {
+        val clients = ArrayList<Client>(4)
+        val cols = arrayOf(COL_CLIENT_ID,COL_CLIENT_COMPANY , COL_CLIENT_VAT , COL_CLIENT_PHONENUMBER , COL_CLIENT_COUNTRY , COL_CLIENT_CITY ,
+        COL_CLIENT_ZIP , COL_CLIENT_STATE , COL_CLIENT_ADDRESS , COL_CLIENT_WEBSITE , COL_CLIENT_DATECREATED ,
+        COL_CLIENT_ACTIVE , COL_CLIENT_LEADID , COL_CLIENT_BILLING_STREET , COL_CLIENT_BILLING_CITY , COL_CLIENT_BILLING_STATE ,
+        COL_CLIENT_BILLING_ZIP , COL_CLIENT_BILLING_COUNTRY , COL_CLIENT_SHIPPING_STREET , COL_CLIENT_SHIPPING_CITY , COL_CLIENT_SHIPPING_STATE ,
+        COL_CLIENT_SHIPPING_ZIP , COL_CLIENT_SHIPPING_COUNTRY , COL_CLIENT_LATITUDE , COL_CLIENT_LONGITUDE , COL_CLIENT_DEFAULT_LANGUAGE ,
+        COL_CLIENT_DEFAULT_CURRENCY , COL_CLIENT_SHOW_PRIMARY_CONTACT , COL_CLIENT_ADDEDFROM,COL_CLIENT_CONTACT_NAME,COL_CLIENT_CONTACT_EMAIL,
+                COL_CLIENT_COUNTRY_NAME)
+        var cursor: Cursor? = null
+        try {
+            cursor = mDb.query(CLIENTS_TABLE_NAME, cols, null, null, null, null, "$COL_CLIENT_COMPANY ASC")
+            if (cursor?.moveToFirst() == true) {
+                do {
+                    val userid = cursor.getIntValue(COL_CLIENT_ID)
+                    val company = cursor.getStringValue(COL_CLIENT_COMPANY)
+                    val vat = cursor.getStringValue(COL_CLIENT_VAT)
+                    val phonenumber = cursor.getStringValue(COL_CLIENT_PHONENUMBER)
+                    val country = cursor.getStringValue(COL_CLIENT_COUNTRY)
+                    val city = cursor.getStringValue(COL_CLIENT_CITY)
+                    val zip = cursor.getStringValue(COL_CLIENT_ZIP)
+                    val state = cursor.getStringValue(COL_CLIENT_STATE)
+                    val address = cursor.getStringValue(COL_CLIENT_ADDRESS)
+                    val website = cursor.getStringValue(COL_CLIENT_WEBSITE)
+                    val datecreated = cursor.getStringValue(COL_CLIENT_DATECREATED)
+                    val active = cursor.getStringValue(COL_CLIENT_ACTIVE)
+                    val leadid = cursor.getStringValue(COL_CLIENT_LEADID)
+                    val billing_street = cursor.getStringValue(COL_CLIENT_BILLING_CITY)
+                    val billing_city = cursor.getStringValue(COL_CLIENT_BILLING_CITY)
+                    val billing_state = cursor.getStringValue(COL_CLIENT_BILLING_STATE)
+                    val billing_zip = cursor.getStringValue(COL_CLIENT_BILLING_ZIP)
+                    val billing_country = cursor.getStringValue(COL_CLIENT_BILLING_COUNTRY)
+                    val shipping_street = cursor.getStringValue(COL_CLIENT_SHIPPING_STREET)
+                    val shipping_city = cursor.getStringValue(COL_CLIENT_SHIPPING_CITY)
+                    val shipping_state = cursor.getStringValue(COL_CLIENT_SHIPPING_STATE)
+                    val shipping_zip = cursor.getStringValue(COL_CLIENT_SHIPPING_ZIP)
+                    val shipping_country = cursor.getStringValue(COL_CLIENT_SHIPPING_COUNTRY)
+                    val longitude = cursor.getStringValue(COL_CLIENT_LONGITUDE)
+                    val latitude = cursor.getStringValue(COL_CLIENT_LATITUDE)
+                    val default_language = cursor.getStringValue(COL_CLIENT_DEFAULT_LANGUAGE)
+                    val default_currency = cursor.getStringValue(COL_CLIENT_DEFAULT_CURRENCY)
+                    val show_primary_contact = cursor.getStringValue(COL_CLIENT_SHOW_PRIMARY_CONTACT)
+                    val addedfrom = cursor.getStringValue(COL_CLIENT_ADDEDFROM)
+                    val contact_name= cursor.getStringValue(COL_CLIENT_CONTACT_NAME)
+                    val contact_email= cursor.getStringValue(COL_CLIENT_CONTACT_EMAIL)
+                    val country_name= cursor.getStringValue(COL_CLIENT_COUNTRY_NAME)
+
+                    val client = Client(userid ,
+                            company,
+                            vat,
+                            phonenumber ,
+                            country,
+                            city,
+                            zip,
+                            state ,
+                            address,
+                            website,
+                            datecreated,
+                            active,
+                            leadid,
+                            billing_street,
+                            billing_city,
+                            billing_state,
+                            billing_zip,
+                            billing_country,
+                            shipping_street,
+                            shipping_city,
+                            shipping_state,
+                            shipping_zip,
+                            shipping_country,
+                            longitude ,
+                            latitude,
+                            default_language,
+                            default_currency,
+                            show_primary_contact,
+                            addedfrom,
+                            contact_name,
+                            contact_email,
+                            country_name
+                    )
+                    clients.add(client)
+                } while (cursor.moveToNext())
+            }
+        } finally {
+            cursor?.close()
+        }
+        return clients
+    }
 
 
     fun doEventTypesContainEvent(types: ArrayList<EventType>): Boolean {

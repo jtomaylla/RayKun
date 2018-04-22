@@ -13,13 +13,13 @@ import com.ecandle.raykun.R
 /**
  * A simple [Fragment] subclass.
  */
-class TabCustomerListFragment : Fragment() {
+class TabSalesInfoFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tab_customer_list, container, false)
+        return inflater.inflate(R.layout.fragment_tab_sales_info, container, false)
     }
 
 }// Required empty public constructor

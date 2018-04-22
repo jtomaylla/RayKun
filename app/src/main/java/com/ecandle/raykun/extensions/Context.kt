@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.ecandle.raykun.R
+import com.ecandle.raykun.activities.ClientActivity
 import com.ecandle.raykun.activities.EventActivity
 import com.ecandle.raykun.activities.ProductActivity
 import com.ecandle.raykun.activities.TaskActivity
@@ -252,6 +253,11 @@ fun Context.launchNewItemIntent() {
     }
 }
 
+fun Context.launchNewClientIntent() {
+    Intent(applicationContext, ClientActivity::class.java).apply {
+        startActivity(this)
+    }
+}
 
 fun Context.getNewEventTimestampFromCode(dayCode: String): Int {
     val currHour = DateTime(System.currentTimeMillis(), DateTimeZone.getDefault()).hourOfDay

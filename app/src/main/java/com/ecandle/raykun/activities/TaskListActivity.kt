@@ -1,12 +1,11 @@
 package com.ecandle.raykun.activities
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import com.ecandle.raykun.R
 import com.ecandle.raykun.extensions.dbHelper
 import com.ecandle.raykun.extensions.launchNewTaskIntent
 import com.ecandle.raykun.fragments.TaskListFragment
+import com.ecandle.raykun.helpers.ConnectionDetector
 import com.ecandle.raykun.helpers.USER_ID
 import com.ecandle.raykun.models.DataEvent
 import com.ecandle.raykun.models.Task
@@ -18,23 +17,28 @@ class TaskListActivity : SimpleActivity() {
     private val LOG_TAG = TaskListActivity::class.java.simpleName
     private var mUserId: String? = null
     lateinit var mTask: Task
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_list)
+        var connectionDetector = ConnectionDetector(this)
 
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_cross)
 
         supportActionBar?.title = resources.getString(R.string.tasks)
 
         task_fab.setOnClickListener { launchNewTaskIntent() }
-
+//TODO chequear si userr id esta logeado OJO!!
+//
 //        val savedSettings = SavedSettings(applicationContext)
 //
 //        mUserId = savedSettings.getLoggedUserId() ?: return
         mUserId = intent.getStringExtra(USER_ID)
         val intent = intent ?: return
 
-        loadUserTasks()
+        if (connectionDetector!!.isConnectingToInternet) {
+            loadUserTasks()
+        }
 
         fillTasksList()
 
@@ -95,17 +99,17 @@ class TaskListActivity : SimpleActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_task_list, menu)
-        menu.findItem(R.id.exit).isVisible = true
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.exit -> finish()
-            else -> return super.onOptionsItemSelected(item)
-        }
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        menuInflater.inflate(R.menu.menu_task_list, menu)
+//        menu.findItem(R.id.exit).isVisible = true
+//        return true
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            R.id.exit -> finish()
+//            else -> return super.onOptionsItemSelected(item)
+//        }
+//        return true
+//    }
 }

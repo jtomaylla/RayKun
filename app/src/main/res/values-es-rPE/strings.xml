@@ -14,6 +14,7 @@
     <string name="expenses">Gastos</string>
     <string name="geolocation">Geo Ubicacion</string>
     <string name="exit">Salir</string>
+    <string name="no_internet_connection">No hay Internet</string>
 
     <!--<string name="app_name">Simple Calendar</string>-->
     <!--<string name="app_launcher_name">Simple Calendar</string>-->
@@ -50,9 +51,29 @@
     <string name="task_added">Tarea added successfully</string>
     <string name="task_updated">Tarea updated successfully</string>
 
+
+    <!-- Client -->
+    <string name="client">Cliente</string>
+    <string name="edit_client">Editar Cliente</string>
+    <string name="new_client">Nuevo Cliente</string>
+    <string name="client_added">Cliente se ha añadido con éxito</string>
+    <string name="client_updated">Cliente se ha actualizado con éxito</string>
+
+
     <!-- Task details -->
     <string name="priority">Prioridad</string>
     <string name="status">Estado</string>
+
+    <!-- Client details -->
+    <string name="company">Compañia</string>
+    <string name="vat">RUC</string>
+    <string name="phonenumber">Telefono</string>
+    <string name="website">Sitio Web</string>
+    <string name="default_currency">Moneda predeterminada</string>
+    <string name="default_language">Idioma predeterminado</string>
+    <string name="latitude">Latitud</string>
+    <string name="longitude">Longitud</string>
+
 
     <!-- Task Priority -->
     <string name="no_priority">Sin Prioridad</string>

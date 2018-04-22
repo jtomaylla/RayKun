@@ -1,12 +1,11 @@
 package com.ecandle.raykun.activities
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import com.ecandle.raykun.R
 import com.ecandle.raykun.extensions.dbHelper
 import com.ecandle.raykun.extensions.launchNewItemIntent
 import com.ecandle.raykun.fragments.ProductListFragment
+import com.ecandle.raykun.helpers.ConnectionDetector
 import com.ecandle.raykun.helpers.USER_ID
 import com.ecandle.raykun.models.Item
 import com.ecandle.raykun.tasks.loadItemDataTask
@@ -21,6 +20,7 @@ class ProductListActivity : SimpleActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_list)
 
+        var connectionDetector = ConnectionDetector(this)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_cross)
 
         supportActionBar?.title = resources.getString(R.string.items)
@@ -30,7 +30,9 @@ class ProductListActivity : SimpleActivity() {
         mUserId = intent.getStringExtra(USER_ID)
         val intent = intent ?: return
 
-        loadProductItems()
+        if (connectionDetector!!.isConnectingToInternet) {
+            loadProductItems()
+        }
 
         fillItemsList()
 
@@ -85,28 +87,28 @@ class ProductListActivity : SimpleActivity() {
     }
 
     private fun storeItem() {
-        if (mItem.itemid == 0) {
+//        if (mItem.itemid == 0) {
             dbHelper.insertItem(mItem)
                 Log.d(LOG_TAG,"item added")
                 //finish()
-        } else {
-
-            dbHelper.updateItem(mItem)
-                Log.d(LOG_TAG,"item updated")
-        }
+//        } else {
+//
+//            dbHelper.updateItem(mItem)
+//                Log.d(LOG_TAG,"item updated")
+//        }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_task_list, menu)
-        menu.findItem(R.id.exit).isVisible = true
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.exit -> finish()
-            else -> return super.onOptionsItemSelected(item)
-        }
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        menuInflater.inflate(R.menu.menu_product_list, menu)
+//        menu.findItem(R.id.exit).isVisible = true
+//        return true
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            R.id.exit -> finish()
+//            else -> return super.onOptionsItemSelected(item)
+//        }
+//        return true
+//    }
 }

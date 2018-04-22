@@ -22,15 +22,21 @@ import org.json.JSONObject
 import java.util.TreeSet
 import kotlin.collections.ArrayList
 
-class ProductActivity : SimpleActivity() {
-    private val LOG_TAG = ProductActivity::class.java.simpleName
+class ClientActivity : SimpleActivity() {
+    private val LOG_TAG = ClientActivity::class.java.simpleName
     private var mDialogTheme = 0
 
     private var wasActivityInitialized = false
     
     
     lateinit var mItem: Item
+    private var mItemDescription = ""
+    private var mItemLongDescription = ""
+    private var mRate  = ""
+    private var mTaxRate = ""
+    private var mTaxRate2 =  ""
     private var mGroupId = 0
+    private var mUnit = ""
 
     val groups = TreeSet<Int>()
     val data = java.util.ArrayList<ProductGroup>()

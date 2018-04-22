@@ -49,6 +49,7 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.2'
     implementation 'com.google.code.gson:gson:2.8.2'
 
+    implementation 'com.android.support:support-v4:27.0.2'
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
@@ -57,11 +58,5 @@ dependencies {
 //    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     compile 'com.google.android.gms:play-services-auth:11.6.2'
-//    compile 'pub.devrel:easypermissions:0.3.0'
-//    compile('com.google.api-client:google-api-client-android:1.23.0') {
-//        exclude group: 'org.apache.httpcomponents'
-//    }
-//    compile('com.google.apis:google-api-services-calendar:v3-rev276-1.23.0') {
-//        exclude group: 'org.apache.httpcomponents'
-//    }
+
 }

@@ -1,3 +1,3 @@
 package com.ecandle.raykun.models
 
-open class ListItem
+data class ProductGroup(val id: Int, val name: String)

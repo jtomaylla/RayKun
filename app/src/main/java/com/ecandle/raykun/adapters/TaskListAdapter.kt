@@ -1,13 +1,11 @@
 package com.ecandle.raykun.adapters
 
-//import com.simplemobiletools.commons.adapters.MyRecyclerViewAdapter
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import com.ecandle.raykun.R
 import com.ecandle.raykun.activities.SimpleActivity
 import com.ecandle.raykun.dialogs.DeleteEventDialog
-import com.ecandle.raykun.extensions.config
 import com.ecandle.raykun.extensions.shareEvents
 import com.ecandle.raykun.helpers.Formatter
 import com.ecandle.raykun.interfaces.DeleteTasksListener
@@ -22,14 +20,12 @@ import java.util.*
 
 class TaskListAdapter(activity: SimpleActivity, val listItems: ArrayList<ListItem>, val allowLongClick: Boolean, val listener: DeleteTasksListener?,
                       recyclerView: MyRecyclerView, itemClick: (Any) -> Unit) : MyRecyclerViewAdapter(activity, recyclerView, itemClick) {
-
+    private var itemModels: List<Task>? = null
     private val ITEM_EVENT = 0
     private val ITEM_HEADER = 1
 
     private val topDivider = resources.getDrawable(R.drawable.divider_width)
-    private val allDayString = resources.getString(R.string.all_day)
-    private val replaceDescriptionWithLocation = activity.config.replaceDescription
-    private val redTextColor = resources.getColor(R.color.red_text)
+
     private val now = (System.currentTimeMillis() / 1000).toInt()
     private val todayDate = Formatter.getDayTitle(activity, Formatter.getDayCodeFromTS(now))
 
@@ -76,12 +72,9 @@ class TaskListAdapter(activity: SimpleActivity, val listItems: ArrayList<ListIte
     private fun setupListTask(view: View, task: Task) {
         view.apply {
             task_section_title.text = task.name
-            //task_section_title.text = "task.name"
-            task_item_description.text = task.description //
-            //task_item_description.text = "descripcion1234"
+            task_item_description.text = task.description
             task_item_start.text = task.startdate
             task_item_end.beInvisibleIf(task.startdate == task.duedate)
-            //task_item_color.applyColorFilter()
             task_item_end.text=task.duedate
 
 
@@ -132,10 +125,12 @@ class TaskListAdapter(activity: SimpleActivity, val listItems: ArrayList<ListIte
             if (it) {
                 listener?.deleteItems(taskIds)
             }
-//            } else {
-//                listener?.addTaskRepeatException(taskIds, timestamps)
-//            }
             finishActMode()
         }
+    }
+
+    fun setSearchResult(result: List<Task>) {
+        itemModels = result
+        notifyDataSetChanged()
     }
 }
