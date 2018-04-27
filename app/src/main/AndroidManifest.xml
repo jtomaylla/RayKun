@@ -127,6 +127,8 @@
         <activity android:name=".activities.ProductActivity" />
         <activity android:name=".activities.ClientLayoutTabActivity"  android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.ClientListActivity" />
+        <activity android:name=".activities.ContactActivity" />
+        <activity android:name=".activities.ContactListActivity" />
     </application>
 
 </manifest>

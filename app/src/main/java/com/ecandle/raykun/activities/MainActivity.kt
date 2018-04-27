@@ -94,9 +94,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 op="products"
             }
-            surveys.id -> {
-
-                op="surveys"
+            contacts.id -> {
+                Intent(this, ContactListActivity::class.java).apply {
+                    putExtra(USER_ID, mUserId)
+                    startActivity(this)
+                }
+                op="contacts"
             }
 
             sales.id -> {

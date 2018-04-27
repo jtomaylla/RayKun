@@ -17,6 +17,7 @@ val CALDAV = "Caldav"
 
 val USER_ID = "user_id"
 val ITEM_ID = "item_id"
+val CONTACT_ID = "id"
 
 val TASK_ID = "task_id"
 val TASK_START_DATE = "task_start_date"

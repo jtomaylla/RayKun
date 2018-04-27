@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.ecandle.raykun.R
-import com.ecandle.raykun.adapters.ContactListAdapter
+import com.ecandle.raykun.adapters.ContactTabListAdapter
 import com.ecandle.raykun.extensions.config
 import com.ecandle.raykun.extensions.dbHelper
 import com.ecandle.raykun.helpers.ConnectionDetector
@@ -29,7 +29,7 @@ class TabContactListFragment : Fragment()  {
     private val LOG_TAG = TabContactListFragment ::class.java.simpleName
     private var mContacts: List<Contact> = ArrayList()
     lateinit var mView: View
-    private var mContactListAdapter: ContactListAdapter? = null
+    private var mContactTabListAdapter: ContactTabListAdapter? = null
     lateinit var mContact: Contact
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,11 +74,11 @@ class TabContactListFragment : Fragment()  {
             listContacts.add(Contact(it.id,it.userid , it.is_primary,it.firstname, it.lastname,it.email, it.phonenumber, it.title))
         }
 
-        mContactListAdapter = ContactListAdapter(context!!, listContacts)
+        mContactTabListAdapter = ContactTabListAdapter(context!!, listContacts)
 
         activity?.runOnUiThread {
             mView.contact_list.apply {
-                this@apply.adapter = mContactListAdapter
+                this@apply.adapter = mContactTabListAdapter
             }
             checkPlaceholderVisibility()
         }

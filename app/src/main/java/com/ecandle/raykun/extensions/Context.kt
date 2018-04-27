@@ -15,10 +15,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.ecandle.raykun.R
-import com.ecandle.raykun.activities.ClientActivity
-import com.ecandle.raykun.activities.EventActivity
-import com.ecandle.raykun.activities.ProductActivity
-import com.ecandle.raykun.activities.TaskActivity
+import com.ecandle.raykun.activities.*
 import com.ecandle.raykun.helpers.*
 import com.ecandle.raykun.helpers.Formatter
 import com.ecandle.raykun.models.DayMonthly
@@ -255,6 +252,12 @@ fun Context.launchNewItemIntent() {
 
 fun Context.launchNewClientIntent() {
     Intent(applicationContext, ClientActivity::class.java).apply {
+        startActivity(this)
+    }
+}
+
+fun Context.launchNewContactIntent() {
+    Intent(applicationContext, ContactActivity::class.java).apply {
         startActivity(this)
     }
 }
