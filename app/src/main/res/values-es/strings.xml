@@ -28,6 +28,13 @@
     <string name="go_to_today">Ir al día de hoy</string>
     <string name="snooze">Snooze</string>
     <string name="none">Nada</string>
+    <string name="no_upcoming_contacts">Parece que no tienes ningún contacto..</string>
+    <string name="add_some_contacts">Puede añadir contactos con el botón Más en la parte inferior.</string>
+    <string name="no_upcoming_records">Parece que no tienes ningún registro.</string>
+    <string name="add_some_records">Puede añadir registros con el botón Más en la parte inferior.</string>
+    <string name="invoice_info">Info Facturacion</string>
+    <string name="contacts">Contactos</string>
+    <string name="team_sales">Equipo de Ventas</string>
 
     <!-- Widget titles -->
     <string name="widget_monthly">Calendario mensual</string>
@@ -75,7 +82,13 @@
     <string name="default_language">Idioma predeterminado</string>
     <string name="latitude">Latitud</string>
     <string name="longitude">Longitud</string>
-
+    <string name="address">Calle</string>
+    <string name="city">Ciudad</string>
+    <string name="state">Estado</string>
+    <string name="country">Pais</string>
+    <string name="zip">Codigo Postal</string>
+    <string name="billing">Facturacion</string>
+    <string name="shipping">Despacho</string>
 
     <!-- Task Priority -->
     <string name="no_priority">Sin Prioridad</string>

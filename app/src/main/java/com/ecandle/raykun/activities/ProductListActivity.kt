@@ -87,15 +87,8 @@ class ProductListActivity : SimpleActivity() {
     }
 
     private fun storeItem() {
-//        if (mItem.itemid == 0) {
-            dbHelper.insertItem(mItem)
-                Log.d(LOG_TAG,"item added")
-                //finish()
-//        } else {
-//
-//            dbHelper.updateItem(mItem)
-//                Log.d(LOG_TAG,"item updated")
-//        }
+        dbHelper.insertItem(mItem)
+        Log.d(LOG_TAG,"item added")
     }
 
 //    override fun onCreateOptionsMenu(menu: Menu): Boolean {

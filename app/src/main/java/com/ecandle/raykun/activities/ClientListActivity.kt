@@ -1,6 +1,7 @@
 package com.ecandle.raykun.activities
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.ecandle.raykun.R
 import com.ecandle.raykun.extensions.dbHelper
 import com.ecandle.raykun.extensions.launchNewClientIntent
@@ -10,12 +11,14 @@ import com.ecandle.raykun.helpers.USER_ID
 import com.ecandle.raykun.models.Client
 import com.ecandle.raykun.tasks.loadClientDataTask
 import com.simplemobiletools.commons.extensions.beVisible
+import com.simplemobiletools.commons.extensions.toast
 import kotlinx.android.synthetic.main.activity_client_list.*
 
 class ClientListActivity : SimpleActivity() {
     private val LOG_TAG = ClientListActivity::class.java.simpleName
     private var mUserId: String? = null
     lateinit var mClient: Client
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_client_list)
@@ -32,6 +35,8 @@ class ClientListActivity : SimpleActivity() {
 
         if (connectionDetector!!.isConnectingToInternet) {
             loadClients()
+        }else{
+            toast(getString(R.string.no_internet_connection), Toast.LENGTH_LONG)
         }
 
         fillClientsList()
@@ -96,7 +101,8 @@ class ClientListActivity : SimpleActivity() {
         val contact_name = client.contact_name
         val contact_email = client.contact_email
         val country_name = client.country_name
-
+        val billing_country_name = client.billing_country_name
+        val shipping_country_name = client.shipping_country_name
         mClient = Client(userid ,
                 company,
                 vat,
@@ -128,7 +134,9 @@ class ClientListActivity : SimpleActivity() {
                 addedfrom,
                 contact_name,
                 contact_email,
-                country_name
+                country_name,
+                billing_country_name,
+                shipping_country_name
                 )
         storeClient()
     }
@@ -138,6 +146,8 @@ class ClientListActivity : SimpleActivity() {
                 Log.d(LOG_TAG,"client added")
                 //finish()
     }
+
+
 
 //    override fun onCreateOptionsMenu(menu: Menu): Boolean {
 //        menuInflater.inflate(R.menu.menu_client_list, menu)

@@ -29,8 +29,8 @@ class TabClientDetailsFragment() : Fragment() {
         client_vat!!.text = arguments!!.getString("vat")
         client_phonenumber!!.text = arguments!!.getString("phonenumber")
         client_website!!.text = arguments!!.getString("website")
-        client_default_currency!!.text = arguments!!.getString("default_currency")
-        client_default_language!!.text = arguments!!.getString("default_language")
+//        client_default_currency!!.text = arguments!!.getString("default_currency")
+//        client_default_language!!.text = arguments!!.getString("default_language")
         client_latitude!!.text = arguments!!.getString("latitude")
         client_longitude!!.text = arguments!!.getString("longitude")
 
@@ -54,6 +54,7 @@ class TabClientDetailsFragment() : Fragment() {
             arguments.putString("state", client.state)
             arguments.putString("address", client.address)
             arguments.putString("website", client.website)
+
             arguments.putString("datecreate", client.datecreated)
             arguments.putString("active", client.active)
             arguments.putString("leadid", client.leadid)
@@ -76,7 +77,9 @@ class TabClientDetailsFragment() : Fragment() {
             arguments.putString("contact_name",client.contact_name )
             arguments.putString("contact_email",client.contact_email)
             arguments.putString("country_name",client.country_name)
-            
+            arguments.putString("billing_country_name",client.billing_country_name)
+            arguments.putString("shipping_country_name",client.shipping_country_name)
+
             val fragment = TabClientDetailsFragment()
             fragment.arguments = arguments
             return fragment

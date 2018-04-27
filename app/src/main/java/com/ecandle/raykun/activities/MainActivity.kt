@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         ab.setDisplayHomeAsUpEnabled(true)
 
         mDrawerLayout = findViewById(R.id.drawer_layout) as DrawerLayout
-        mDrawerLayout!!.setStatusBarBackground(R.color.colorPrimaryDark)
+        mDrawerLayout!!.setStatusBarBackground(R.color.color_primary_dark)
 
         val navigationView = findViewById(R.id.nav_view) as NavigationView
         if (navigationView != null) {

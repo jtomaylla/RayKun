@@ -1,20 +1,210 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
+    android:id="@+id/calendar_coordinator"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.ecandle.raykun.fragments.TabClientDetailsFragment">
+    android:layout_height="match_parent">
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/client_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <!-- TODO: Update blank fragment layout -->
+        <RelativeLayout
+            android:id="@+id/client_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true">
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/client_billing_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:paddingBottom="@dimen/activity_margin"
+                    android:paddingTop="@dimen/activity_margin"
+                    android:text="@string/billing"
+                    android:textSize="@dimen/day_text_size"/>
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/client_billing_street"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/client_billing_label"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:gravity="top"
+                    android:hint="@string/address"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/client_billing_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/client_billing_street"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:gravity="top"
+                    android:hint="@string/city"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/client_billing_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/client_billing_city"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:gravity="top"
+                    android:hint="@string/state"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/client_billing_country"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/client_billing_state"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:gravity="top"
+                    android:hint="@string/country"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
 
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tab customer fragment"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="234dp" />
-</android.support.constraint.ConstraintLayout>
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/client_billing_zip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/client_billing_country"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:gravity="top"
+                    android:hint="@string/zip"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/client_shipping_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:paddingBottom="@dimen/activity_margin"
+                    android:paddingTop="@dimen/activity_margin"
+                    android:text="@string/shipping"
+                    android:textSize="@dimen/day_text_size"/>
+
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/client_shipping_street"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/client_shipping_label"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:gravity="top"
+                    android:hint="@string/address"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/client_shipping_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/client_shipping_street"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:gravity="top"
+                    android:hint="@string/city"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/client_shipping_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/client_shipping_city"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:gravity="top"
+                    android:hint="@string/state"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/client_shipping_country"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/client_shipping_state"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:gravity="top"
+                    android:hint="@string/country"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/client_shipping_zip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/client_shipping_country"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:gravity="top"
+                    android:hint="@string/zip"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:minEms="20"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/day_text_size"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

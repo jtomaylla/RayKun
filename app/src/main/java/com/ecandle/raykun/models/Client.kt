@@ -31,6 +31,8 @@ data class Client(var userid: Int,
                   var addedfrom: String,
                   var contact_name: String,
                   var contact_email: String,
-                  var country_name: String
+                  var country_name: String,
+                  var billing_country_name: String,
+                  var shipping_country_name: String
 ): ListItem()
 

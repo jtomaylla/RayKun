@@ -93,7 +93,9 @@ class ClientListFragment : Fragment(), DeleteClientsListener, SearchView.OnQuery
                     it.addedfrom,
                     it.contact_name,
                     it.contact_email,
-                    it.country_name
+                    it.country_name,
+                    it.billing_country_name,
+                    it.shipping_country_name
             ))
         }
 

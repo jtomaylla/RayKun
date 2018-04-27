@@ -19,7 +19,7 @@ import org.joda.time.DateTime
 import java.util.*
 import kotlin.collections.ArrayList
 
-class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
+class DBHelper public constructor(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
     private val MAIN_TABLE_NAME = "events"
     private val COL_ID = "id"
     private val COL_START_TS = "start_ts"
@@ -113,7 +113,26 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
     private val COL_CLIENT_CONTACT_NAME = "contact_name"
     private val COL_CLIENT_CONTACT_EMAIL = "contact_email"
     private val COL_CLIENT_COUNTRY_NAME = "country_name"
+    private val COL_CLIENT_BILLING_COUNTRY_NAME = "billing_country_name"
+    private val COL_CLIENT_SHIPPING_COUNTRY_NAME = "shipping_country_name"
 
+    public val CONTACTS_TABLE_NAME = "contacts"
+    private val COL_CONTACT_ID = "id"
+    private val COL_CONTACT_USER_ID = "userid"
+    private val COL_CONTACT_IS_PRIMARY = "is_primary"
+    private val COL_CONTACT_FIRST_NAME = "firstname"
+    private val COL_CONTACT_LAST_NAME = "lastname"
+    private val COL_CONTACT_EMAIL = "email"
+    private val COL_CONTACT_PHONE_NUMBER = "phonenumber"
+    private val COL_CONTACT_TITLE = "title"
+
+    public val STAFFS_TABLE_NAME = "staff"
+    private val COL_STAFF_ID = "staff_id"
+    private val COL_STAFF_CUSTOMER_ID = "customer_id"
+    private val COL_STAFF_DATE_ASSIGNED = "date_assigned"
+    private val COL_STAFF_NAME = "name"
+    private val COL_STAFF_EMAIL = "email"
+    private val COL_STAFF_PHONE_NUMBER = "phonenumber"
 
     private val mDb: SQLiteDatabase = writableDatabase
 
@@ -143,6 +162,9 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
         createExceptionsTable(db)
         createTasksTable(db)
         createItemsTable(db)
+        createClientsTable(db)
+        createContactsTable(db)
+        createStaffsTable(db)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -298,7 +320,8 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
                 "$COL_CLIENT_ACTIVE TEXT, $COL_CLIENT_LEADID TEXT, $COL_CLIENT_BILLING_STREET TEXT, $COL_CLIENT_BILLING_CITY TEXT, $COL_CLIENT_BILLING_STATE TEXT, " +
                 "$COL_CLIENT_BILLING_ZIP TEXT, $COL_CLIENT_BILLING_COUNTRY TEXT, $COL_CLIENT_SHIPPING_STREET TEXT, $COL_CLIENT_SHIPPING_CITY TEXT, $COL_CLIENT_SHIPPING_STATE TEXT, " +
                 "$COL_CLIENT_SHIPPING_ZIP TEXT, $COL_CLIENT_SHIPPING_COUNTRY TEXT, $COL_CLIENT_LATITUDE TEXT, $COL_CLIENT_LONGITUDE TEXT, $COL_CLIENT_DEFAULT_LANGUAGE TEXT, " +
-                "$COL_CLIENT_DEFAULT_CURRENCY TEXT, $COL_CLIENT_SHOW_PRIMARY_CONTACT TEXT, $COL_CLIENT_ADDEDFROM TEXT,$COL_CLIENT_CONTACT_NAME TEXT, $COL_CLIENT_CONTACT_EMAIL TEXT,$COL_CLIENT_COUNTRY_NAME TEXT)")
+                "$COL_CLIENT_DEFAULT_CURRENCY TEXT, $COL_CLIENT_SHOW_PRIMARY_CONTACT TEXT, $COL_CLIENT_ADDEDFROM TEXT,$COL_CLIENT_CONTACT_NAME TEXT, " +
+                "$COL_CLIENT_CONTACT_EMAIL TEXT,$COL_CLIENT_COUNTRY_NAME TEXT,$COL_CLIENT_BILLING_COUNTRY_NAME TEXT,$COL_CLIENT_SHIPPING_COUNTRY_NAME TEXT)")
     }
 
     public fun createClientsTable() {
@@ -309,8 +332,36 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
                 "$COL_CLIENT_ACTIVE TEXT, $COL_CLIENT_LEADID TEXT, $COL_CLIENT_BILLING_STREET TEXT, $COL_CLIENT_BILLING_CITY TEXT, $COL_CLIENT_BILLING_STATE TEXT, " +
                 "$COL_CLIENT_BILLING_ZIP TEXT, $COL_CLIENT_BILLING_COUNTRY TEXT, $COL_CLIENT_SHIPPING_STREET TEXT, $COL_CLIENT_SHIPPING_CITY TEXT, $COL_CLIENT_SHIPPING_STATE TEXT, " +
                 "$COL_CLIENT_SHIPPING_ZIP TEXT, $COL_CLIENT_SHIPPING_COUNTRY TEXT, $COL_CLIENT_LATITUDE TEXT, $COL_CLIENT_LONGITUDE TEXT, $COL_CLIENT_DEFAULT_LANGUAGE TEXT, " +
-                "$COL_CLIENT_DEFAULT_CURRENCY TEXT, $COL_CLIENT_SHOW_PRIMARY_CONTACT TEXT, $COL_CLIENT_ADDEDFROM TEXT,$COL_CLIENT_CONTACT_NAME TEXT, $COL_CLIENT_CONTACT_EMAIL TEXT,$COL_CLIENT_COUNTRY_NAME TEXT)")
+                "$COL_CLIENT_DEFAULT_CURRENCY TEXT, $COL_CLIENT_SHOW_PRIMARY_CONTACT TEXT, $COL_CLIENT_ADDEDFROM TEXT,$COL_CLIENT_CONTACT_NAME TEXT, " +
+                "$COL_CLIENT_CONTACT_EMAIL TEXT,$COL_CLIENT_COUNTRY_NAME TEXT,$COL_CLIENT_BILLING_COUNTRY_NAME TEXT,$COL_CLIENT_SHIPPING_COUNTRY_NAME TEXT)")
     }
+    
+    public fun createContactsTable(db: SQLiteDatabase) {
+        db.execSQL("CREATE TABLE $CONTACTS_TABLE_NAME " +
+                "($COL_CONTACT_ID INTEGER PRIMARY KEY, $COL_CONTACT_USER_ID TEXT, $COL_CONTACT_IS_PRIMARY TEXT, $COL_CONTACT_FIRST_NAME TEXT, $COL_CONTACT_LAST_NAME TEXT, " +
+                "$COL_CONTACT_EMAIL TEXT, $COL_CONTACT_PHONE_NUMBER TEXT, $COL_CONTACT_TITLE TEXT)")
+    }
+
+    public fun createContactsTable() {
+        mDb.execSQL("CREATE TABLE $CONTACTS_TABLE_NAME " +
+                "($COL_CONTACT_ID INTEGER PRIMARY KEY, $COL_CONTACT_USER_ID TEXT, $COL_CONTACT_IS_PRIMARY TEXT, $COL_CONTACT_FIRST_NAME TEXT, $COL_CONTACT_LAST_NAME TEXT, " +
+                "$COL_CONTACT_EMAIL TEXT, $COL_CONTACT_PHONE_NUMBER TEXT, $COL_CONTACT_TITLE TEXT)")
+    }
+
+    public fun createStaffsTable(db: SQLiteDatabase) {
+        db.execSQL("CREATE TABLE $STAFFS_TABLE_NAME " +
+                "($COL_STAFF_ID INTEGER PRIMARY KEY, $COL_STAFF_CUSTOMER_ID TEXT, $COL_STAFF_DATE_ASSIGNED TEXT, $COL_STAFF_NAME TEXT, " +
+                "$COL_STAFF_EMAIL TEXT, $COL_STAFF_PHONE_NUMBER TEXT)")
+    }
+
+    public fun createStaffsTable() {
+        mDb.execSQL("CREATE TABLE $STAFFS_TABLE_NAME " +
+                "($COL_STAFF_ID INTEGER PRIMARY KEY, $COL_STAFF_CUSTOMER_ID TEXT, $COL_STAFF_DATE_ASSIGNED TEXT, $COL_STAFF_NAME TEXT, " +
+                "$COL_STAFF_EMAIL TEXT, $COL_STAFF_PHONE_NUMBER TEXT)")
+    }
+
+
+
 
     private fun addRegularEventType(db: SQLiteDatabase) {
         val regularEvent = context.resources.getString(R.string.regular_event)
@@ -533,6 +584,51 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
             put(COL_CLIENT_CONTACT_NAME,client.contact_name )
             put(COL_CLIENT_CONTACT_EMAIL,client.contact_email)
             put(COL_CLIENT_COUNTRY_NAME,client.country_name)
+            put(COL_CLIENT_BILLING_COUNTRY_NAME,client.billing_country_name)
+            put(COL_CLIENT_SHIPPING_COUNTRY_NAME,client.shipping_country_name)
+        }
+    }
+
+    fun insertContact(contact: Contact, db: SQLiteDatabase = mDb): Int {
+        val values = fillContactValues(contact)
+        val insertedId = db.insert(CONTACTS_TABLE_NAME, null, values).toInt()
+        return insertedId
+    }
+
+    fun updateContact(contact: Contact): Int {
+        val selectionArgs = arrayOf(contact.id.toString())
+        val values = fillContactValues(contact)
+        val selection = "$COL_CONTACT_ID = ?"
+        return mDb.update(CONTACTS_TABLE_NAME, values, selection, selectionArgs)
+    }
+
+    fun insertStaff(staff: Staff, db: SQLiteDatabase = mDb): Int {
+        val values = fillStaffValues(staff)
+        val insertedId = db.insert(STAFFS_TABLE_NAME, null, values).toInt()
+        return insertedId
+    }
+    
+    private fun fillContactValues(contact: Contact): ContentValues {
+        return ContentValues().apply {
+            put(COL_CONTACT_ID, contact.id.toString())
+            put(COL_CONTACT_USER_ID, contact.userid)
+            put(COL_CONTACT_IS_PRIMARY, contact.is_primary)
+            put(COL_CONTACT_FIRST_NAME, contact.firstname)
+            put(COL_CONTACT_LAST_NAME, contact.lastname)
+            put(COL_CONTACT_EMAIL, contact.email)
+            put(COL_CONTACT_PHONE_NUMBER, contact.phonenumber)
+            put(COL_CONTACT_TITLE, contact.title)
+        }
+    }
+
+    private fun fillStaffValues(staff: Staff): ContentValues {
+        return ContentValues().apply {
+            put(COL_STAFF_ID, staff.staff_id.toString())
+            put(COL_STAFF_CUSTOMER_ID, staff.customer_id)
+            put(COL_STAFF_DATE_ASSIGNED, staff.date_assigned)
+            put(COL_STAFF_NAME, staff.name)
+            put(COL_STAFF_EMAIL, staff.email)
+            put(COL_STAFF_PHONE_NUMBER, staff.phonenumber)
         }
     }
     
@@ -678,6 +774,30 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
         mDb.delete(CLIENTS_TABLE_NAME, selection, null)
 
     }
+
+    fun deleteContacts(ids: Array<String>) {
+        val args = TextUtils.join(", ", ids)
+        val selection = "$CONTACTS_TABLE_NAME.$COL_CONTACT_ID IN ($args)"
+
+        mDb.delete(CONTACTS_TABLE_NAME, selection, null)
+
+    }
+
+    fun deleteStaffs(ids: Array<String>) {
+        val args = TextUtils.join(", ", ids)
+        val selection = "$STAFFS_TABLE_NAME.$COL_STAFF_ID IN ($args)"
+
+        mDb.delete(STAFFS_TABLE_NAME, selection, null)
+
+    }
+    
+    
+    
+    fun dropTable(tableName : String) {
+        //DROP TABLE IF EXISTS certification_categories
+        mDb.execSQL("DROP TABLE IF EXISTS $tableName")
+    }
+
     fun initEventTable() {
         mDb.execSQL("DELETE FROM $MAIN_TABLE_NAME")
     }
@@ -692,6 +812,14 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
 
     fun initClientsTable() {
         mDb.execSQL("DELETE FROM $CLIENTS_TABLE_NAME")
+    }
+
+    fun initContactsTable() {
+        mDb.execSQL("DELETE FROM $CONTACTS_TABLE_NAME")
+    }
+
+    fun initStaffsTable() {
+        mDb.execSQL("DELETE FROM $STAFFS_TABLE_NAME")
     }
 
     private fun deleteChildEvents(ids: String, deleteFromCalDAV: Boolean) {
@@ -1114,7 +1242,47 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
         val projection = allClientColumns
         return builder.query(mDb, projection, selection, selectionArgs, "$CLIENTS_TABLE_NAME.$COL_CLIENT_ID", null, COL_CLIENT_COMPANY)
     }
-    
+
+    fun getContactWithId(id: Int): Contact? {
+        val selection = "$CONTACTS_TABLE_NAME.$COL_CONTACT_ID = ?"
+        val selectionArgs = arrayOf(id.toString())
+        val cursor = getContactsCursor(selection, selectionArgs)
+        val items = fillContacts(cursor)
+        return if (items.isNotEmpty()) {
+            items[0]
+        } else {
+            null
+        }
+    }
+
+
+    private fun getContactsCursor(selection: String = "", selectionArgs: Array<String>? = null): Cursor? {
+        val builder = SQLiteQueryBuilder()
+        builder.tables = "$CONTACTS_TABLE_NAME"
+        val projection = allContactColumns
+        return builder.query(mDb, projection, selection, selectionArgs, "$CONTACTS_TABLE_NAME.$COL_CONTACT_ID", null, COL_CONTACT_LAST_NAME)
+    }
+
+
+    fun getStaffWithId(id: Int): Staff? {
+        val selection = "$STAFFS_TABLE_NAME.$COL_STAFF_ID = ?"
+        val selectionArgs = arrayOf(id.toString())
+        val cursor = getStaffsCursor(selection, selectionArgs)
+        val items = fillStaffs(cursor)
+        return if (items.isNotEmpty()) {
+            items[0]
+        } else {
+            null
+        }
+    }
+
+    private fun getStaffsCursor(selection: String = "", selectionArgs: Array<String>? = null): Cursor? {
+        val builder = SQLiteQueryBuilder()
+        builder.tables = "$STAFFS_TABLE_NAME"
+        val projection = allStaffColumns
+        return builder.query(mDb, projection, selection, selectionArgs, "$STAFFS_TABLE_NAME.$COL_STAFF_ID", null, COL_STAFF_NAME)
+    }
+
     private val allColumns: Array<String>
         get() = arrayOf("$MAIN_TABLE_NAME.$COL_ID", COL_START_TS, COL_END_TS, COL_TITLE, COL_DESCRIPTION, COL_REMINDER_MINUTES, COL_REMINDER_MINUTES_2,
                 COL_REMINDER_MINUTES_3, COL_REPEAT_INTERVAL, COL_REPEAT_RULE, COL_IMPORT_ID, COL_FLAGS, COL_REPEAT_LIMIT, COL_EVENT_TYPE, COL_OFFSET,
@@ -1135,7 +1303,17 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
         COL_CLIENT_ACTIVE , COL_CLIENT_LEADID , COL_CLIENT_BILLING_STREET , COL_CLIENT_BILLING_CITY , COL_CLIENT_BILLING_STATE ,
         COL_CLIENT_BILLING_ZIP , COL_CLIENT_BILLING_COUNTRY , COL_CLIENT_SHIPPING_STREET , COL_CLIENT_SHIPPING_CITY , COL_CLIENT_SHIPPING_STATE ,
         COL_CLIENT_SHIPPING_ZIP , COL_CLIENT_SHIPPING_COUNTRY , COL_CLIENT_LATITUDE , COL_CLIENT_LONGITUDE , COL_CLIENT_DEFAULT_LANGUAGE ,
-        COL_CLIENT_DEFAULT_CURRENCY , COL_CLIENT_SHOW_PRIMARY_CONTACT , COL_CLIENT_ADDEDFROM,COL_CLIENT_CONTACT_NAME,COL_CLIENT_CONTACT_EMAIL,COL_CLIENT_COUNTRY_NAME)
+        COL_CLIENT_DEFAULT_CURRENCY , COL_CLIENT_SHOW_PRIMARY_CONTACT , COL_CLIENT_ADDEDFROM,COL_CLIENT_CONTACT_NAME,COL_CLIENT_CONTACT_EMAIL,
+                COL_CLIENT_COUNTRY_NAME,COL_CLIENT_BILLING_COUNTRY_NAME,COL_CLIENT_SHIPPING_COUNTRY_NAME)
+
+    private val allContactColumns: Array<String>
+        get() = arrayOf("$CONTACTS_TABLE_NAME.$COL_CONTACT_ID",  COL_CONTACT_USER_ID, COL_CONTACT_IS_PRIMARY,COL_CONTACT_FIRST_NAME, COL_CONTACT_LAST_NAME, COL_CONTACT_EMAIL,
+                COL_CONTACT_PHONE_NUMBER,COL_CONTACT_TITLE)
+
+    private val allStaffColumns: Array<String>
+        get() = arrayOf("$STAFFS_TABLE_NAME.$COL_STAFF_ID",  COL_STAFF_CUSTOMER_ID , COL_STAFF_DATE_ASSIGNED,COL_STAFF_NAME,
+                COL_STAFF_EMAIL, COL_STAFF_PHONE_NUMBER)
+    
     
     private fun fillEvents(cursor: Cursor?): List<Event> {
         val eventTypeColors = SparseIntArray()
@@ -1252,7 +1430,7 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
                     val datecreated = cursor.getStringValue(COL_CLIENT_DATECREATED)
                     val active = cursor.getStringValue(COL_CLIENT_ACTIVE)
                     val leadid = cursor.getStringValue(COL_CLIENT_LEADID)
-                    val billing_street = cursor.getStringValue(COL_CLIENT_BILLING_CITY)
+                    val billing_street = cursor.getStringValue(COL_CLIENT_BILLING_STREET)
                     val billing_city = cursor.getStringValue(COL_CLIENT_BILLING_CITY)
                     val billing_state = cursor.getStringValue(COL_CLIENT_BILLING_STATE)
                     val billing_zip = cursor.getStringValue(COL_CLIENT_BILLING_ZIP)
@@ -1271,6 +1449,9 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
                     val contact_name= cursor.getStringValue(COL_CLIENT_CONTACT_NAME)
                     val contact_email= cursor.getStringValue(COL_CLIENT_CONTACT_EMAIL)
                     val country_name= cursor.getStringValue(COL_CLIENT_COUNTRY_NAME)
+                    val billing_country_name= cursor.getStringValue(COL_CLIENT_BILLING_COUNTRY_NAME)
+                    val shipping_country_name= cursor.getStringValue(COL_CLIENT_SHIPPING_COUNTRY_NAME)
+
 
                     val client = Client(userid ,
                                     company,
@@ -1303,7 +1484,9 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
                                     addedfrom,
                                     contact_name,
                                     contact_email,
-                                    country_name
+                                    country_name,
+                                    billing_country_name,
+                                    shipping_country_name
                                     )
                     clients.add(client)
                 } while (cursor.moveToNext())
@@ -1311,7 +1494,51 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
         }
         return clients
     }
-    
+
+    private fun fillContacts(cursor: Cursor?): List<Contact> {
+
+        val contacts = ArrayList<Contact>()
+        cursor?.use {
+            if (cursor.moveToFirst()) {
+                do {
+                    val contactid = cursor.getIntValue(COL_CONTACT_ID)
+                    val userid = cursor.getStringValue(COL_CONTACT_USER_ID)
+                    val is_primary = cursor.getStringValue(COL_CONTACT_IS_PRIMARY)
+                    val firstname = cursor.getStringValue(COL_CONTACT_FIRST_NAME)
+                    val lastname = cursor.getStringValue(COL_CONTACT_LAST_NAME)
+                    val email = cursor.getStringValue(COL_CONTACT_EMAIL)
+                    val phonenumber = cursor.getStringValue(COL_CONTACT_PHONE_NUMBER)
+                    val title = cursor.getStringValue(COL_CONTACT_TITLE)
+                    val contact = Contact(contactid, userid, is_primary, firstname, lastname,email,phonenumber,title)
+                    contacts.add(contact)
+                } while (cursor.moveToNext())
+            }
+        }
+        return contacts
+    }
+
+    private fun fillStaffs(cursor: Cursor?): List<Staff> {
+
+        val staffs = ArrayList<Staff>()
+        cursor?.use {
+            if (cursor.moveToFirst()) {
+                do {
+                    val staff_id = cursor.getIntValue(COL_STAFF_ID)
+                    val customer_id = cursor.getStringValue(COL_STAFF_CUSTOMER_ID)
+                    val date_assigned = cursor.getStringValue(COL_STAFF_DATE_ASSIGNED)
+                    val name = cursor.getStringValue(COL_STAFF_NAME)
+                    val email = cursor.getStringValue(COL_STAFF_EMAIL)
+                    val phonenumber = cursor.getStringValue(COL_STAFF_PHONE_NUMBER)
+                    
+                    val staff = Staff(staff_id, customer_id,date_assigned, name, email,phonenumber)
+                    staffs.add(staff)
+                } while (cursor.moveToNext())
+            }
+        }
+        return staffs
+    }
+
+
     fun getEventTypes(callback: (types: ArrayList<EventType>) -> Unit) {
         Thread {
             callback(fetchEventTypes())
@@ -1473,7 +1700,7 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
         COL_CLIENT_BILLING_ZIP , COL_CLIENT_BILLING_COUNTRY , COL_CLIENT_SHIPPING_STREET , COL_CLIENT_SHIPPING_CITY , COL_CLIENT_SHIPPING_STATE ,
         COL_CLIENT_SHIPPING_ZIP , COL_CLIENT_SHIPPING_COUNTRY , COL_CLIENT_LATITUDE , COL_CLIENT_LONGITUDE , COL_CLIENT_DEFAULT_LANGUAGE ,
         COL_CLIENT_DEFAULT_CURRENCY , COL_CLIENT_SHOW_PRIMARY_CONTACT , COL_CLIENT_ADDEDFROM,COL_CLIENT_CONTACT_NAME,COL_CLIENT_CONTACT_EMAIL,
-                COL_CLIENT_COUNTRY_NAME)
+                COL_CLIENT_COUNTRY_NAME,COL_CLIENT_BILLING_COUNTRY_NAME,COL_CLIENT_SHIPPING_COUNTRY_NAME)
         var cursor: Cursor? = null
         try {
             cursor = mDb.query(CLIENTS_TABLE_NAME, cols, null, null, null, null, "$COL_CLIENT_COMPANY ASC")
@@ -1492,7 +1719,7 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
                     val datecreated = cursor.getStringValue(COL_CLIENT_DATECREATED)
                     val active = cursor.getStringValue(COL_CLIENT_ACTIVE)
                     val leadid = cursor.getStringValue(COL_CLIENT_LEADID)
-                    val billing_street = cursor.getStringValue(COL_CLIENT_BILLING_CITY)
+                    val billing_street = cursor.getStringValue(COL_CLIENT_BILLING_STREET)
                     val billing_city = cursor.getStringValue(COL_CLIENT_BILLING_CITY)
                     val billing_state = cursor.getStringValue(COL_CLIENT_BILLING_STATE)
                     val billing_zip = cursor.getStringValue(COL_CLIENT_BILLING_ZIP)
@@ -1511,6 +1738,8 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
                     val contact_name= cursor.getStringValue(COL_CLIENT_CONTACT_NAME)
                     val contact_email= cursor.getStringValue(COL_CLIENT_CONTACT_EMAIL)
                     val country_name= cursor.getStringValue(COL_CLIENT_COUNTRY_NAME)
+                    val billing_country_name= cursor.getStringValue(COL_CLIENT_BILLING_COUNTRY_NAME)
+                    val shipping_country_name= cursor.getStringValue(COL_CLIENT_SHIPPING_COUNTRY_NAME)
 
                     val client = Client(userid ,
                             company,
@@ -1543,7 +1772,9 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
                             addedfrom,
                             contact_name,
                             contact_email,
-                            country_name
+                            country_name,
+                            billing_country_name,
+                            shipping_country_name
                     )
                     clients.add(client)
                 } while (cursor.moveToNext())
@@ -1554,7 +1785,87 @@ class DBHelper private constructor(val context: Context) : SQLiteOpenHelper(cont
         return clients
     }
 
+    fun getContacts(callback: (contacts: ArrayList<Contact>) -> Unit) {
+        Thread {
+            callback(fetchContacts())
+        }.start()
+    }
 
+
+    private fun getContacts(selection: String): List<Contact> {
+        val contacts = ArrayList<Contact>()
+        var cursor: Cursor? = null
+        try {
+            cursor = getContactsCursor(selection)
+            if (cursor != null) {
+                val currContacts = fillContacts(cursor)
+                contacts.addAll(currContacts)
+            }
+        } finally {
+            cursor?.close()
+        }
+
+        return contacts
+    }
+
+
+    fun fetchContacts(): ArrayList<Contact> {
+        val contacts = ArrayList<Contact>(4)
+        val cols = arrayOf(COL_CONTACT_ID, COL_CONTACT_USER_ID, COL_CONTACT_IS_PRIMARY, COL_CONTACT_FIRST_NAME, COL_CONTACT_LAST_NAME, COL_CONTACT_EMAIL, COL_CONTACT_PHONE_NUMBER,COL_CONTACT_TITLE)
+        var cursor: Cursor? = null
+        try {
+            cursor = mDb.query(CONTACTS_TABLE_NAME, cols, null, null, null, null, "$COL_CONTACT_ID ASC")
+            if (cursor?.moveToFirst() == true) {
+                do {
+                    val contactid = cursor.getIntValue(COL_CONTACT_ID)
+                    val userid = cursor.getStringValue(COL_CONTACT_USER_ID)
+                    val is_primary = cursor.getStringValue(COL_CONTACT_IS_PRIMARY)
+                    val firstname = cursor.getStringValue(COL_CONTACT_FIRST_NAME)
+                    val lastname = cursor.getStringValue(COL_CONTACT_LAST_NAME)
+                    val email = cursor.getStringValue(COL_CONTACT_EMAIL)
+                    val phonenumber = cursor.getStringValue(COL_CONTACT_PHONE_NUMBER)
+                    val title = cursor.getStringValue(COL_CONTACT_TITLE)
+                    val contact = Contact(contactid, userid, is_primary, firstname, lastname, email, phonenumber, title)
+                    contacts.add(contact)
+                } while (cursor.moveToNext())
+            }
+        } finally {
+            cursor?.close()
+        }
+        return contacts
+    }
+
+    fun getStaffs(callback: (staffs: ArrayList<Staff>) -> Unit) {
+        Thread {
+            callback(fetchStaffs())
+        }.start()
+    }
+
+    fun fetchStaffs(): ArrayList<Staff> {
+        val staffs = ArrayList<Staff>(4)
+        val cols = arrayOf(COL_STAFF_ID, COL_STAFF_CUSTOMER_ID, COL_STAFF_DATE_ASSIGNED, COL_STAFF_NAME, COL_STAFF_EMAIL, COL_STAFF_PHONE_NUMBER)
+        var cursor: Cursor? = null
+        try {
+            cursor = mDb.query(STAFFS_TABLE_NAME, cols, null, null, null, null, "$COL_STAFF_ID ASC")
+            if (cursor?.moveToFirst() == true) {
+                do {
+                    val staff_id = cursor.getIntValue(COL_STAFF_ID)
+                    val customer_id = cursor.getStringValue(COL_STAFF_CUSTOMER_ID)
+                    val date_assigned = cursor.getStringValue(COL_STAFF_DATE_ASSIGNED)
+                    val name = cursor.getStringValue(COL_STAFF_NAME)
+                    val email = cursor.getStringValue(COL_STAFF_EMAIL)
+                    val phonenumber = cursor.getStringValue(COL_STAFF_PHONE_NUMBER)
+
+                    val staff = Staff(staff_id, customer_id,date_assigned, name, email,phonenumber)
+                    staffs.add(staff)
+                } while (cursor.moveToNext())
+            }
+        } finally {
+            cursor?.close()
+        }
+        return staffs
+    }
+    
     fun doEventTypesContainEvent(types: ArrayList<EventType>): Boolean {
         val args = TextUtils.join(", ", types.map { it.id })
         val columns = arrayOf(COL_ID)

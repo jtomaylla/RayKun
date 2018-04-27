@@ -90,8 +90,8 @@ class LoginActivity : AppCompatActivity() {
 
                 val url2="http://ecandlemobile.com/RayKun/webservice/index.php/admin/clients/showIndex"
                 val loadClientData = pullServerDataTask()
-                val clientData =  loadInvoiceData.execute(url2).get()
-                var json2= JSONObject(invoiceData)
+                val clientData =  loadClientData.execute(url2).get()
+                var json2= JSONObject(clientData)
                 savedSettings.saveSettings("jsonClientData",json2.toString())
 
 

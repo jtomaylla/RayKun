@@ -93,43 +93,43 @@
                     android:textCursorDrawable="@null"
                     android:textSize="@dimen/day_text_size"/>
 
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/client_default_currency"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/client_website"
-                    android:layout_marginLeft="@dimen/activity_margin"
-                    android:layout_marginRight="@dimen/activity_margin"
-                    android:layout_marginTop="@dimen/activity_margin"
-                    android:autoLink="all"
-                    android:gravity="top"
-                    android:hint="@string/default_currency"
-                    android:inputType="numberDecimal"
-                    android:minEms="20"
-                    android:textCursorDrawable="@null"
-                    android:textSize="@dimen/day_text_size"/>
+                <!--<com.simplemobiletools.commons.views.MyTextView-->
+                    <!--android:id="@+id/client_default_currency"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/client_website"-->
+                    <!--android:layout_marginLeft="@dimen/activity_margin"-->
+                    <!--android:layout_marginRight="@dimen/activity_margin"-->
+                    <!--android:layout_marginTop="@dimen/activity_margin"-->
+                    <!--android:autoLink="all"-->
+                    <!--android:gravity="top"-->
+                    <!--android:hint="@string/default_currency"-->
+                    <!--android:inputType="numberDecimal"-->
+                    <!--android:minEms="20"-->
+                    <!--android:textCursorDrawable="@null"-->
+                    <!--android:textSize="@dimen/day_text_size"/>-->
 
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/client_default_language"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/client_default_currency"
-                    android:layout_marginLeft="@dimen/activity_margin"
-                    android:layout_marginRight="@dimen/activity_margin"
-                    android:layout_marginTop="@dimen/activity_margin"
-                    android:hint="@string/default_language"
-                    android:inputType="textCapWords"
-                    android:maxLength="80"
-                    android:maxLines="1"
-                    android:minEms="20"
-                    android:textCursorDrawable="@null"
-                    android:textSize="@dimen/day_text_size"/>
+                <!--<com.simplemobiletools.commons.views.MyTextView-->
+                    <!--android:id="@+id/client_default_language"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/client_default_currency"-->
+                    <!--android:layout_marginLeft="@dimen/activity_margin"-->
+                    <!--android:layout_marginRight="@dimen/activity_margin"-->
+                    <!--android:layout_marginTop="@dimen/activity_margin"-->
+                    <!--android:hint="@string/default_language"-->
+                    <!--android:inputType="textCapWords"-->
+                    <!--android:maxLength="80"-->
+                    <!--android:maxLines="1"-->
+                    <!--android:minEms="20"-->
+                    <!--android:textCursorDrawable="@null"-->
+                    <!--android:textSize="@dimen/day_text_size"/>-->
 
                 <com.simplemobiletools.commons.views.MyTextView
                     android:id="@+id/client_latitude"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/client_default_language"
+                    android:layout_below="@+id/client_website"
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
                     android:layout_marginTop="@dimen/activity_margin"
@@ -164,7 +164,7 @@
                     android:layout_marginRight="@dimen/activity_margin"
                     android:layout_marginTop="@dimen/activity_margin"
                     android:gravity="top"
-                    android:hint="@string/longitude"
+                    android:hint="@string/address"
                     android:inputType="textCapSentences|textMultiLine"
                     android:minEms="20"
                     android:textCursorDrawable="@null"
@@ -179,7 +179,7 @@
                     android:layout_marginRight="@dimen/activity_margin"
                     android:layout_marginTop="@dimen/activity_margin"
                     android:gravity="top"
-                    android:hint="@string/longitude"
+                    android:hint="@string/city"
                     android:inputType="textCapSentences|textMultiLine"
                     android:minEms="20"
                     android:textCursorDrawable="@null"
@@ -194,7 +194,7 @@
                     android:layout_marginRight="@dimen/activity_margin"
                     android:layout_marginTop="@dimen/activity_margin"
                     android:gravity="top"
-                    android:hint="@string/longitude"
+                    android:hint="@string/state"
                     android:inputType="textCapSentences|textMultiLine"
                     android:minEms="20"
                     android:textCursorDrawable="@null"
@@ -209,7 +209,7 @@
                     android:layout_marginRight="@dimen/activity_margin"
                     android:layout_marginTop="@dimen/activity_margin"
                     android:gravity="top"
-                    android:hint="@string/longitude"
+                    android:hint="@string/country"
                     android:inputType="textCapSentences|textMultiLine"
                     android:minEms="20"
                     android:textCursorDrawable="@null"
@@ -225,7 +225,7 @@
                     android:layout_marginRight="@dimen/activity_margin"
                     android:layout_marginTop="@dimen/activity_margin"
                     android:gravity="top"
-                    android:hint="@string/longitude"
+                    android:hint="@string/zip"
                     android:inputType="textCapSentences|textMultiLine"
                     android:minEms="20"
                     android:textCursorDrawable="@null"

@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import com.ecandle.raykun.fragments.TabClientDetailsFragment
 import com.ecandle.raykun.fragments.TabContactListFragment
 import com.ecandle.raykun.fragments.TabInvoiceInfoFragment
-import com.ecandle.raykun.fragments.TabSalesInfoFragment
+import com.ecandle.raykun.fragments.TabTeamSalesFragment
 import com.ecandle.raykun.models.Client
 
 class ClientTabPagerAdapter(fm: FragmentManager, private var tabCount: Int,var client: Client) :
@@ -16,9 +16,9 @@ class ClientTabPagerAdapter(fm: FragmentManager, private var tabCount: Int,var c
 
         when (position) {
             0 -> return TabClientDetailsFragment.newInstance(client)
-            1 -> return TabInvoiceInfoFragment()
-            2 -> return TabContactListFragment()
-            3 -> return TabSalesInfoFragment()
+            1 -> return TabInvoiceInfoFragment.newInstance(client)
+            2 -> return TabContactListFragment.newInstance(client)
+            3 -> return TabTeamSalesFragment.newInstance(client)
             else -> return null
         }
     }

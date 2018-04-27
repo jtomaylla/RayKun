@@ -4,7 +4,7 @@ package com.ecandle.raykun.tasks
 import android.content.Context
 import android.util.Log
 import com.ecandle.raykun.helpers.Operations
-import com.ecandle.raykun.models.Client
+import com.ecandle.raykun.models.Contact
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -15,7 +15,7 @@ import java.net.URL
 /**
  * Created by juantomaylla on 19/02/18.
  */
-class loadClientDataTask(internal var mycontext: Context) : android.os.AsyncTask<String, String, List<Client>>() {
+class loadContactDataTask(internal var mycontext: Context) : android.os.AsyncTask<String, String, List<Contact>>() {
 
 
 
@@ -30,7 +30,7 @@ class loadClientDataTask(internal var mycontext: Context) : android.os.AsyncTask
     }
 
 
-    override fun doInBackground(vararg params: String): List<Client>? {
+    override fun doInBackground(vararg params: String): List<Contact>? {
         val url= URL(params[0])
         val conn=url.openConnection() as HttpURLConnection
 
@@ -54,7 +54,7 @@ class loadClientDataTask(internal var mycontext: Context) : android.os.AsyncTask
         try {
 
             val response_code = conn.responseCode
-            val data = java.util.ArrayList<Client>()
+            val data = java.util.ArrayList<Contact>()
             // Check if successful connection made
             if (response_code == HttpURLConnection.HTTP_OK) {
                 // Read data sent from server
@@ -67,43 +67,17 @@ class loadClientDataTask(internal var mycontext: Context) : android.os.AsyncTask
                 // Extract data from json and store into ArrayList as class objects
                 for (i in 0 until jArray.length()) {
                     val jsondata: JSONObject = jArray.getJSONObject(i)
-                    val clientData = Client(
-                            jsondata.getInt("userid"),
-                            jsondata.getString("company"),
-                            jsondata.getString("vat"),
-                            jsondata.getString("phonenumber"),
-                            jsondata.getString("country"),
-                            jsondata.getString("city"),
-                            jsondata.getString("zip"),
-                            jsondata.getString("state"),
-                            jsondata.getString("address"),
-                            jsondata.getString("website"),
-                            jsondata.getString("datecreated"),
-                            jsondata.getString("active"),
-                            jsondata.getString("leadid"),
-                            jsondata.getString("billing_street"),
-                            jsondata.getString("billing_city"),
-                            jsondata.getString("billing_state"),
-                            jsondata.getString("billing_zip"),
-                            jsondata.getString("billing_country"),
-                            jsondata.getString("shipping_street"),
-                            jsondata.getString("shipping_city"),
-                            jsondata.getString("shipping_state"),
-                            jsondata.getString("shipping_zip"),
-                            jsondata.getString("shipping_country"),
-                            jsondata.getString("longitude"),
-                            jsondata.getString("latitude"),
-                            jsondata.getString("default_language"),
-                            jsondata.getString("default_currency"),
-                            jsondata.getString("show_primary_contact"),
-                            jsondata.getString("addedfrom"),
-                            jsondata.getString("contact_name"),
-                            jsondata.getString("contact_email"),
-                            jsondata.getString("country_name"),
-                            jsondata.getString("billing_country_name"),
-                            jsondata.getString("shipping_country_name")
+                    val contactData = Contact(
+                    jsondata.getInt("id"),
+                    jsondata.getString("userid"),
+                    jsondata.getString("is_primary"),
+                    jsondata.getString("firstname"),
+                    jsondata.getString("lastname"),
+                    jsondata.getString("email"),
+                    jsondata.getString("phonenumber"),
+                    jsondata.getString("title")
                     )
-                    data.add(clientData)
+                    data.add(contactData)
                 }
 
                 return data
@@ -129,13 +103,13 @@ class loadClientDataTask(internal var mycontext: Context) : android.os.AsyncTask
         return null
     }
 
-    override fun onPostExecute(result: List<Client>?) {
+    override fun onPostExecute(result: List<Contact>?) {
 
         //after task done
         //pdLoading.dismiss()
         val mydata = result
         //mydata = data!!
-        Log.d("loadClientDataTask",result.toString())
+        Log.d("loadContactDataTask",result.toString())
     }
 
     companion object {

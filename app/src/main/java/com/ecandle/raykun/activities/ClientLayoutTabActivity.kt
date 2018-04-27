@@ -29,10 +29,10 @@ class ClientLayoutTabActivity  : AppCompatActivity() {
 
     private fun configureTabLayout(client: Client) {
 
-        tab_layout.addTab(tab_layout.newTab().setText("Details"))
-        tab_layout.addTab(tab_layout.newTab().setText("invoice info"))
-        tab_layout.addTab(tab_layout.newTab().setText("Contacts"))
-        tab_layout.addTab(tab_layout.newTab().setText("Sales"))
+        tab_layout.addTab(tab_layout.newTab().setText(getString(R.string.details)))
+        tab_layout.addTab(tab_layout.newTab().setText(getString(R.string.invoice_info)))
+        tab_layout.addTab(tab_layout.newTab().setText(getString(R.string.contacts)))
+        tab_layout.addTab(tab_layout.newTab().setText(getString(R.string.team_sales)))
 
         val adapter = ClientTabPagerAdapter(supportFragmentManager,
                 tab_layout.tabCount,client)
@@ -43,6 +43,8 @@ class ClientLayoutTabActivity  : AppCompatActivity() {
 
         tab_layout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
+                val actionBar = actionBar
+                actionBar!!.hide()
                 pager.currentItem = tab.position
             }
 

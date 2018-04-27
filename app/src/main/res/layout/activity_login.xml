@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/blueback"
+    android:background="@color/color_primary_dark"
     android:gravity="center"
     tools:context="com.ecandle.raykun.activities.LoginActivity">
 
@@ -27,7 +27,7 @@
         android:layout_width="fill_parent"
         android:layout_height="237dp"
         android:layout_margin="0dp"
-        android:background="@color/blueback"
+        android:background="@color/color_primary_dark"
         android:src="@drawable/raykunbanner" />
 
         <!--</TableRow>-->
