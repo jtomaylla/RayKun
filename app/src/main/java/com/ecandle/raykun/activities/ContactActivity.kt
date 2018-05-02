@@ -1,273 +1,292 @@
 package com.ecandle.raykun.activities
 
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
 import com.ecandle.raykun.R
-import com.ecandle.raykun.dialogs.DeleteProductDialog
+import com.ecandle.raykun.dialogs.DeleteContactDialog
 import com.ecandle.raykun.extensions.dbHelper
-import com.ecandle.raykun.helpers.ITEM_ID
-import com.ecandle.raykun.helpers.SavedSettings
-import com.ecandle.raykun.models.Item
-import com.ecandle.raykun.models.ProductGroup
-import com.simplemobiletools.commons.dialogs.RadioGroupDialog
-import com.simplemobiletools.commons.extensions.*
-import com.simplemobiletools.commons.models.RadioItem
-import kotlinx.android.synthetic.main.activity_product.*
-import org.json.JSONArray
-import org.json.JSONObject
-import java.util.TreeSet
-import kotlin.collections.ArrayList
+import com.ecandle.raykun.helpers.CONTACT_ID
+import com.ecandle.raykun.helpers.USER_ID
+import com.ecandle.raykun.models.Contact
+import com.simplemobiletools.commons.extensions.getDialogTheme
+import com.simplemobiletools.commons.extensions.toast
+import com.simplemobiletools.commons.extensions.updateTextColors
+import com.simplemobiletools.commons.extensions.value
+import kotlinx.android.synthetic.main.activity_contact.*
 
 class ContactActivity : SimpleActivity() {
     private val LOG_TAG = ContactActivity::class.java.simpleName
     private var mDialogTheme = 0
 
     private var wasActivityInitialized = false
-    
-    
-    lateinit var mItem: Item
-    private var mGroupId = 0
+    private var wasIsPrimaryToggled = false
+    lateinit var mContact: Contact
 
-    val groups = TreeSet<Int>()
-    val data = java.util.ArrayList<ProductGroup>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_product)
+        setContentView(R.layout.activity_contact)
 
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_cross)
 
         val intent = intent ?: return
         mDialogTheme = getDialogTheme()
 
-        // Load Item Groups from Shared Preferences
-        loadProductGroups()
+        // Load Contact Groups from Shared Preferences
+        //loadContactGroups()
 
-        val itemId = intent.getIntExtra(ITEM_ID, 0)
-        val item = dbHelper.getItemWithId(itemId)
-        if (itemId != 0 && item == null) {
+        val contactId = intent.getIntExtra(CONTACT_ID, 0)
+        val mUserId = intent.getStringExtra(USER_ID)
+        val contact = dbHelper.getContactWithId(contactId)
+        if (contactId != 0 && contact == null) {
             finish()
             return
         }
 
-        if (item != null) {
-            mItem = item
-            setupEditItem()
-            mGroupId = mItem.group_id.toInt()
+        if (contact != null) {
+            mContact = contact
+            setupEditContact()
+            //mGroupId = mContact.group_id.toInt()
         } else {
-            mItem = Item(0,"","","","","","","")
+            mContact = Contact(0,mUserId,"","","","","","")
 
-            setupNewItem()
+            setupNewContact()
         }
 
-        updateDescription()
-        updateLongDescription()
-        updateRate()
-        updateTaxRate()
-        updateTaxRate2()
-        updateGroupIdText()
-        updateUnit()
-
-        product_group_id.setOnClickListener { showGroupIdDialog() }
+        updateFirstName()
+        updateLastName()
+        updateEmail()
+        updatePhoneNumber()
+        updateTitle()
+        updateIsPrimary()
+        updateUserId()
+        setupContactIsPrimary()
+        //contact_group_id.setOnClickListener { showGroupIdDialog() }
         
-        updateTextColors(product_scrollview)
+        updateTextColors(contact_scrollview)
 
         wasActivityInitialized = true
     }
 
-    private fun setupEditItem() {
+    private fun setupContactIsPrimary() {
+        //contact_is_primary_holder.beVisibleIf(wasIsPrimaryToggled || mContact.is_primary != "1")
+
+        contact_is_primary_holder.setOnClickListener {
+            contact_is_primary.toggle()
+            if (contact_is_primary.isChecked){
+                mContact.is_primary = "1"
+            } else {
+                mContact.is_primary = "0"
+            }
+        }
+    }
+
+
+    private fun setupEditContact() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-        supportActionBar?.title = resources.getString(R.string.edit_item)
-        product_description.setText(mItem.description)
-        product_long_description.setText(mItem.long_description)
-        product_rate.setText(mItem.rate)
-        product_taxrate.setText(mItem.taxrate)
-        product_taxrate_2.setText(mItem.taxrate_2)
-        product_description.movementMethod = LinkMovementMethod.getInstance()
-        product_unit.setText(mItem.unit)
-        product_group_id.setText(mItem.group_id)
+        supportActionBar?.title = resources.getString(R.string.edit_client)
+        contact_firstname.setText(mContact.firstname)
+        contact_lastname.setText(mContact.lastname)
+        contact_email.setText(mContact.email)
+        contact_phonenumber.setText(mContact.phonenumber)
+        contact_title.setText(mContact.title)
+        //contact_is_primary.setText(mContact.is_primary)
+        updateIsPrimary()
+        contact_is_primary.isChecked = mContact.is_primary == "1"
+        contact_user_id.text = mContact.userid
+        //contact_group_id.setText(mContact.group_id)
     }
 
-    private fun setupNewItem() {
+    private fun setupNewContact() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
-        supportActionBar?.title = resources.getString(R.string.new_item)
+        supportActionBar?.title = resources.getString(R.string.new_contact)
     }
 
 
-    private fun updateDescription() {
-        product_description.setText(mItem.description)
+    private fun updateFirstName() {
+        contact_firstname.setText(mContact.firstname)
     }
 
-    private fun updateLongDescription() {
-        product_long_description.setText(mItem.long_description)
+    private fun updateLastName() {
+        contact_lastname.setText(mContact.lastname)
     }
 
-    private fun updateRate() {
-        product_rate.setText(mItem.rate)
+    private fun updateEmail() {
+        contact_email.setText(mContact.email)
     }
 
-    private fun updateTaxRate() {
-        product_taxrate.setText(mItem.taxrate)
+    private fun updatePhoneNumber() {
+        contact_phonenumber.setText(mContact.phonenumber)
     }
 
-    private fun updateTaxRate2() {
-        product_taxrate_2.setText(mItem.taxrate_2)
+    private fun updateTitle() {
+        contact_title.setText(mContact.title)
     }
 
-    private fun updateGroupIdText() {
-        product_group_id.setText(getGroupIdText(mGroupId))
+    private fun updateIsPrimary() {
+        contact_is_primary.isChecked = mContact.is_primary == "1"
     }
 
-    private fun updateUnit() {
-        product_unit.setText(mItem.unit)
+    private fun updateUserId() {
+        contact_user_id.text = mContact.userid
     }
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_task, menu)
         if (wasActivityInitialized) {
-            menu.findItem(R.id.delete).isVisible = mItem.itemid != 0
+            menu.findItem(R.id.delete).isVisible = mContact.id != 0
             menu.findItem(R.id.exit).isVisible = true
         }
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.save -> saveItem()
-            R.id.delete -> deleteItem()
+    override fun onOptionsItemSelected(contact: MenuItem): Boolean {
+        when (contact.itemId) {
+            R.id.save -> saveContact()
+            R.id.delete -> deleteContact()
             R.id.exit -> finish()
-            else -> return super.onOptionsItemSelected(item)
+            else -> return super.onOptionsItemSelected(contact)
         }
         return true
     }
 
-    private fun deleteItem() {
-        DeleteProductDialog(this, arrayListOf(mItem.itemid)) {
+    private fun deleteContact() {
+        DeleteContactDialog(this, arrayListOf(mContact.id)) {
             if (it) {
-                dbHelper.deleteItems(arrayOf(mItem.itemid.toString()))
+                dbHelper.deleteContacts(arrayOf(mContact.id.toString()))
             }
             finish()
         }
     }
 
-    private fun saveItem() {
-        val newId = mItem.itemid
-        val newDescription  = product_description.value
-        if (newDescription.isEmpty()) {
+    private fun saveContact() {
+        val newId = mContact.id
+        val newFirstname  = contact_firstname.value
+        if (newFirstname.isEmpty()) {
             toast(R.string.title_empty)
-            product_description.requestFocus()
+            contact_firstname.requestFocus()
             return
         }
-        val newLongDescription = product_long_description.value
-        val newRate = product_rate.value
-        val newTaxRate= product_taxrate.value
-        val newTaxRate2 = product_taxrate_2.value
-        val newGroupId = getGroupIdValue(mGroupId)//mGroupId.toString() //product_group_id.value
-        val newUnit = product_unit.value
+        val newLastname  = contact_lastname.value
+        if (newLastname.isEmpty()) {
+            toast(R.string.title_empty)
+            contact_lastname.requestFocus()
+            return
+        }
+        val newEmail = contact_email.value
+        val newPhonenumber = contact_phonenumber.value
+        val newTitle= contact_title.value
+        var  newIsPrimary = ""
+        if (contact_is_primary.isChecked) {
+            newIsPrimary = "1"
+        } else {
+            newIsPrimary = "0"
+        }
+        val newUserId = contact_user_id.value
 
-        mItem = Item(itemid = newId,
-                description = newDescription,
-                long_description =  newLongDescription,
-                rate = newRate,
-                taxrate = newTaxRate,
-                taxrate_2 = newTaxRate2,
-                group_id = newGroupId,
-                unit = newUnit
+        mContact = Contact(id = newId,
+                userid = newUserId,
+                is_primary =  newIsPrimary,
+                firstname = newFirstname,
+                phonenumber = newPhonenumber,
+                lastname = newLastname,
+                email = newEmail ,
+                title = newTitle
         )
-        //mItem.id = 0
-        Log.d(LOG_TAG,"mItem.itemid = $mItem.itemid")
-        storeItem()
+        //mContact.id = 0
+        Log.d(LOG_TAG,"mContact.contactid = $mContact.id")
+        storeContact()
     }
 
-    private fun storeItem() {
-        if (mItem.itemid == 0) {
-            // Add last Item value ID plus one for new item
-            val items = dbHelper.fetchItems()
-            mItem.itemid = items[items.size-1].itemid + 1
+    private fun storeContact() {
+        if (mContact.id == 0) {
+            // Add last Contact value ID plus one for new contact
+            val contacts = dbHelper.fetchContacts()
+            mContact.id = contacts[contacts.size-1].id + 1
             //
-            dbHelper.insertItem(mItem)
-            Log.d(LOG_TAG,"item added")
+            dbHelper.insertContact(mContact)
+            Log.d(LOG_TAG,"contact added")
             finish()
         } else {
-            dbHelper.updateItem(mItem)
-            Log.d(LOG_TAG,"item updated")
-           itemUpdated()
+            dbHelper.updateContact(mContact)
+            Log.d(LOG_TAG,"contact updated")
+           contactUpdated()
         }
     }
 
-    private fun itemUpdated() {
-        toast(R.string.item_updated)
+    private fun contactUpdated() {
+        toast(R.string.contact_updated)
         finish()
     }
 
 
-    private fun showGroupIdDialog() {
-        showProductGroupIdDialog(mGroupId) {
-            setGroupId(it)
-        }
-    }
-
-    private fun setGroupId(groupid: Int) {
-        mGroupId = groupid
-        updateGroupIdText()
-    }
-
-    protected fun showProductGroupIdDialog(curGroupId: Int, callback: (minutes: Int) -> Unit) {
-        hideKeyboard()
-
-        val items = ArrayList<RadioItem>(groups.size + 1)
-
-        groups.mapIndexedTo(items, { index, value ->
-            RadioItem(index, getGroupIdText(value))
-            RadioItem(index, getGroupIdText(value), value)
-        })
-
-        var selectedIndex = 0
-
-        groups.forEachIndexed { index, value ->
-            if (value == curGroupId)
-                selectedIndex = index
-        }
-
-        RadioGroupDialog(this, items, selectedIndex) {
-            callback(it as Int)
-        }
-    }
-
-
-    fun loadProductGroups(){
-        val savedSettings = SavedSettings(applicationContext)
-
-        val jArray = JSONArray(savedSettings.getJsonInvoiceDataItem("items_groups"))
-        val itemData1 = ProductGroup(
-                0,
-                getString(R.string.empty_name)
-        )
-        data.add(itemData1)
-        groups.add(itemData1.id)
-        // Extract data from json and store into ArrayList as class objects
-        for (i in 0 until jArray.length()) {
-            val jsondata: JSONObject = jArray.getJSONObject(i)
-            val itemData = ProductGroup(
-                    jsondata.getInt("id"),
-                    jsondata.getString("name")
-            )
-            data.add(itemData)
-            groups.add(itemData.id)
-        }
-
-    }
-
-    fun getGroupIdText(groupid: Int) : String {
-        return data.get(groupid).name
-    }
-
-    private fun getGroupIdValue(groupid: Int): String {
-        return data.get(groupid).id.toString()
-    }
+//    private fun showGroupIdDialog() {
+//        showContactGroupIdDialog(mGroupId) {
+//            setGroupId(it)
+//        }
+//    }
+//
+//    private fun setGroupId(groupid: Int) {
+//        mGroupId = groupid
+//        updateIsPrimary()
+//    }
+//
+//    protected fun showContactGroupIdDialog(curGroupId: Int, callback: (minutes: Int) -> Unit) {
+//        hideKeyboard()
+//
+//        val contacts = ArrayList<RadioContact>(groups.size + 1)
+//
+//        groups.mapIndexedTo(contacts, { index, value ->
+//            RadioContact(index, getGroupIdText(value))
+//            RadioContact(index, getGroupIdText(value), value)
+//        })
+//
+//        var selectedIndex = 0
+//
+//        groups.forEachIndexed { index, value ->
+//            if (value == curGroupId)
+//                selectedIndex = index
+//        }
+//
+//        RadioGroupDialog(this, contacts, selectedIndex) {
+//            callback(it as Int)
+//        }
+//    }
+//
+//
+//    fun loadContactGroups(){
+//        val savedSettings = SavedSettings(applicationContext)
+//
+//        val jArray = JSONArray(savedSettings.getJsonInvoiceDataContact("contacts_groups"))
+//        val contactData1 = ContactGroup(
+//                0,
+//                getString(R.string.empty_name)
+//        )
+//        data.add(contactData1)
+//        groups.add(contactData1.id)
+//        // Extract data from json and store into ArrayList as class objects
+//        for (i in 0 until jArray.length()) {
+//            val jsondata: JSONObject = jArray.getJSONObject(i)
+//            val contactData = ContactGroup(
+//                    jsondata.getInt("id"),
+//                    jsondata.getString("name")
+//            )
+//            data.add(contactData)
+//            groups.add(contactData.id)
+//        }
+//
+//    }
+//
+//    fun getGroupIdText(groupid: Int) : String {
+//        return data.get(groupid).name
+//    }
+//
+//    private fun getGroupIdValue(groupid: Int): String {
+//        return data.get(groupid).id.toString()
+//    }
 }

@@ -2,7 +2,6 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:app="http://schemas.android.com/tools"
     android:background="@color/color_primary_dark"
     android:orientation="vertical">
 
@@ -253,7 +252,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="2dip"
                                 android:background="@color/color_primary_dark"
-                                android:src="@drawable/ic_perm_contact_calendar_white_24dp" />
+                                android:src="@drawable/ic_contacts_white_24dp" />
                         </TableRow>
 
                         <TableRow
@@ -275,7 +274,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/sales"
+                        android:id="@+id/leads"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dip"
@@ -294,7 +293,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="2dip"
                                 android:background="@color/color_primary_dark"
-                                android:src="@drawable/ic_shop_white_24dp" />
+                                android:src="@drawable/ic_perm_contact_calendar_white_24dp" />
                         </TableRow>
 
                         <TableRow
@@ -309,7 +308,7 @@
                                 android:layout_marginLeft="2dip"
                                 android:layout_marginRight="2dip"
                                 android:layout_marginTop="1dip"
-                                android:text="Ventas"
+                                android:text="@string/leads"
                                 android:textColor="@color/white"
                                 android:textSize="14sp" />
                         </TableRow>
@@ -496,7 +495,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:id="@+id/dialing"
+                        android:id="@+id/sales"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dip"
@@ -515,7 +514,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="2dip"
                                 android:background="@color/color_primary_dark"
-                                android:src="@drawable/ic_dialer_sip_white_24dp" />
+                                android:src="@drawable/ic_shop_white_24dp" />
                         </TableRow>
 
                         <TableRow
@@ -530,7 +529,7 @@
                                 android:layout_marginLeft="2dip"
                                 android:layout_marginRight="2dip"
                                 android:layout_marginTop="1dip"
-                                android:text="Comunicar"
+                                android:text="Ventas"
                                 android:textColor="@color/white"
                                 android:textSize="14sp" />
                         </TableRow>

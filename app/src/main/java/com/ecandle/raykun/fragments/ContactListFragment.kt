@@ -14,6 +14,7 @@ import com.ecandle.raykun.adapters.ContactListAdapter
 import com.ecandle.raykun.extensions.config
 import com.ecandle.raykun.extensions.dbHelper
 import com.ecandle.raykun.helpers.CONTACT_ID
+import com.ecandle.raykun.helpers.USER_ID
 import com.ecandle.raykun.interfaces.DeleteContactsListener
 import com.ecandle.raykun.models.Contact
 import com.ecandle.raykun.models.ListItem
@@ -122,6 +123,7 @@ class ContactListFragment : Fragment() , DeleteContactsListener, SearchView.OnQu
     private fun editItem(contact: Contact) {
         Intent(context, ContactActivity::class.java).apply {
             putExtra(CONTACT_ID, contact.id)
+            putExtra(USER_ID, contact.userid)
             startActivity(this)
         }
     }

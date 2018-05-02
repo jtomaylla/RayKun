@@ -36,6 +36,8 @@
     <string name="contacts">Contactos</string>
     <string name="team_sales">Equipo de Ventas</string>
 
+    <string name="contact_info">Info del Contacto</string>
+    <string name="general_info">Info General</string>
     <!-- Widget titles -->
     <string name="widget_monthly">Calendario mensual</string>
     <string name="widget_list">Lista de eventos del calendario</string>
@@ -68,6 +70,27 @@
     <string name="no_upcoming_clients">Parece que no tienes ningún cliente..</string>
     <string name="add_some_clients">Puede añadir clientes con el botón Más en la parte inferior.</string>
 
+
+    <!-- Contacto -->
+    <string name="contact">Contacto</string>
+    <string name="edit_contact">Editar Contacto</string>
+    <string name="new_contact">Nuevo Contacto</string>
+    <string name="contact_added">Contacto se ha añadido con éxito</string>
+    <string name="contact_updated">Contacto se ha actualizado con éxito</string>
+
+    <string name="firstname">Nombres</string>
+    <string name="lastname">Apellidos</string>
+    <string name="is_primary_contact">Es contacto principal</string>
+    <string name="email">Email</string>
+    <string name="user_id">ID usuario</string>
+
+    <!-- Lead -->
+    <string name="lead">Lead</string>
+    <string name="edit_lead">Editar Lead</string>
+    <string name="new_lead">Nuevo Lead</string>
+    <string name="lead_added">Lead se ha añadido con éxito</string>
+    <string name="lead_updated">Lead se ha actualizado con éxito</string>
+    <string name="leads">Leads</string>
     <!-- Task details -->
     <string name="priority">Prioridad</string>
     <string name="status">Estado</string>

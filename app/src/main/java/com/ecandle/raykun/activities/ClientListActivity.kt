@@ -1,6 +1,9 @@
 package com.ecandle.raykun.activities
 import android.os.Bundle
+import android.support.design.widget.CoordinatorLayout
 import android.util.Log
+import android.view.Gravity
+import android.view.View
 import android.widget.Toast
 import com.ecandle.raykun.R
 import com.ecandle.raykun.extensions.dbHelper
@@ -18,6 +21,8 @@ class ClientListActivity : SimpleActivity() {
     private val LOG_TAG = ClientListActivity::class.java.simpleName
     private var mUserId: String? = null
     lateinit var mClient: Client
+    private var fabAnchorId: Int = View.NO_ID
+    private val fabParams: CoordinatorLayout.LayoutParams get() = (client_fab.layoutParams as CoordinatorLayout.LayoutParams)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +35,8 @@ class ClientListActivity : SimpleActivity() {
 
         client_fab.setOnClickListener { launchNewClientIntent() }
 
+        hideFab()
+
         mUserId = intent.getStringExtra(USER_ID)
         val intent = intent ?: return
 
@@ -41,6 +48,18 @@ class ClientListActivity : SimpleActivity() {
 
         fillClientsList()
 
+    }
+
+    fun showFab() {
+        fabParams.anchorId = fabAnchorId
+        fabParams.gravity = Gravity.NO_GRAVITY
+        client_fab.show()
+    }
+
+    fun hideFab() {
+        fabParams.anchorId = View.NO_ID
+        fabParams.gravity = Gravity.END.or(Gravity.BOTTOM)
+        client_fab.hide()
     }
 
     private fun fillClientsList() {

@@ -121,6 +121,7 @@
             android:name=".activities.MyBaseSimpleActivity"
             android:label="@string/title_activity_my_base_simple"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".activities.TaskListActivity" />
         <activity android:name=".activities.TaskActivity" />
         <activity android:name=".activities.ProductListActivity" />
@@ -129,6 +130,10 @@
         <activity android:name=".activities.ClientListActivity" />
         <activity android:name=".activities.ContactActivity" />
         <activity android:name=".activities.ContactListActivity" />
+        <activity android:name=".activities.LeadActivity" />
+        <activity android:name=".activities.LeadListActivity" />
+        <activity android:name=".activities.LeadLayoutTabActivity"  android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

@@ -8,19 +8,19 @@
     android:layout_height="match_parent">
 
     <!--<com.simplemobiletools.commons.views.MyViewPager-->
-        <!--android:id="@+id/item_view_pager"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_marginTop="@dimen/activity_margin"/>-->
+    <!--android:id="@+id/item_view_pager"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_marginTop="@dimen/activity_margin"/>-->
 
     <FrameLayout
-        android:id="@+id/client_list_holder"
+        android:id="@+id/lead_list_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"/>
 
     <com.simplemobiletools.commons.views.MyFloatingActionButton
-        android:id="@+id/client_fab"
+        android:id="@+id/lead_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

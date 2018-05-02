@@ -43,8 +43,8 @@ class ClientLayoutTabActivity  : AppCompatActivity() {
 
         tab_layout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                val actionBar = actionBar
-                actionBar!!.hide()
+//                val actionBar = actionBar
+//                actionBar!!.hide()
                 pager.currentItem = tab.position
             }
 

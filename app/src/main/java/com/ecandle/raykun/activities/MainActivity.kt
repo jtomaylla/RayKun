@@ -125,9 +125,12 @@ class MainActivity : AppCompatActivity() {
 
                 op="geotrack"
             }
-            dialing.id -> {
-
-                op="dialing"
+            leads.id -> {
+                Intent(this, LeadListActivity::class.java).apply {
+                    putExtra(USER_ID, mUserId)
+                    startActivity(this)
+                }
+                op="leads"
             }
             expenses.id -> {
 

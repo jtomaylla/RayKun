@@ -134,6 +134,30 @@ class DBHelper public constructor(val context: Context) : SQLiteOpenHelper(conte
     private val COL_STAFF_EMAIL = "email"
     private val COL_STAFF_PHONE_NUMBER = "phonenumber"
 
+    public val LEADS_TABLE_NAME = "leads"
+    private val COL_LEAD_ID = "id"
+    private val COL_LEAD_NAME = "name"
+    private val COL_LEAD_TITLE = "title"
+    private val COL_LEAD_COMPANY = "company"
+    private val COL_LEAD_DESCRIPTION = "description"
+    private val COL_LEAD_COUNTRY = "country"
+    private val COL_LEAD_CITY = "city"
+    private val COL_LEAD_ZIP = "zip"
+    private val COL_LEAD_STATE = "state"
+    private val COL_LEAD_ADDRESS = "address"
+    private val COL_LEAD_ASSIGNED = "assigned"
+    private val COL_LEAD_DATE_ADDED = "dateadded"
+    private val COL_LEAD_STATUS = "status"
+    private val COL_LEAD_SOURCE = "source"
+    private val COL_LEAD_LAST_CONTACT = "lastcontact"
+    private val COL_LEAD_EMAIL = "email"
+    private val COL_LEAD_WEBSITE = "website"
+    private val COL_LEAD_PHONENUMBER = "phonenumber"
+    private val COL_LEAD_STATUS_NAME = "status_name"
+    private val COL_LEAD_SOURCE_NAME = "source_name"
+    private val COL_LEAD_IS_PUBLIC = "is_public"
+    
+
     private val mDb: SQLiteDatabase = writableDatabase
 
     companion object {
@@ -165,6 +189,7 @@ class DBHelper public constructor(val context: Context) : SQLiteOpenHelper(conte
         createClientsTable(db)
         createContactsTable(db)
         createStaffsTable(db)
+        createLeadsTable(db)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -360,8 +385,23 @@ class DBHelper public constructor(val context: Context) : SQLiteOpenHelper(conte
                 "$COL_STAFF_EMAIL TEXT, $COL_STAFF_PHONE_NUMBER TEXT)")
     }
 
+    public fun createLeadsTable(db: SQLiteDatabase) {
+        db.execSQL("CREATE TABLE $LEADS_TABLE_NAME " +
+                "($COL_LEAD_ID INTEGER PRIMARY KEY, $COL_LEAD_NAME TEXT, $COL_LEAD_TITLE TEXT, $COL_LEAD_COMPANY TEXT, $COL_LEAD_DESCRIPTION TEXT, " +
+                "$COL_LEAD_COUNTRY TEXT, $COL_LEAD_CITY TEXT, $COL_LEAD_ZIP TEXT, $COL_LEAD_STATE TEXT, $COL_LEAD_ADDRESS TEXT, " +
+                "$COL_LEAD_ASSIGNED TEXT, $COL_LEAD_DATE_ADDED TEXT, $COL_LEAD_STATUS TEXT, $COL_LEAD_SOURCE TEXT, $COL_LEAD_LAST_CONTACT TEXT, " +
+                "$COL_LEAD_EMAIL TEXT, $COL_LEAD_WEBSITE TEXT, $COL_LEAD_PHONENUMBER TEXT, $COL_LEAD_STATUS_NAME TEXT, $COL_LEAD_SOURCE_NAME TEXT, " +
+                "$COL_LEAD_IS_PUBLIC TEXT)")
+    }
 
-
+    public fun createLeadsTable() {
+        mDb.execSQL("CREATE TABLE $LEADS_TABLE_NAME " +
+                "($COL_LEAD_ID INTEGER PRIMARY KEY, $COL_LEAD_NAME TEXT, $COL_LEAD_TITLE TEXT, $COL_LEAD_COMPANY TEXT, $COL_LEAD_DESCRIPTION TEXT, " +
+                "$COL_LEAD_COUNTRY TEXT, $COL_LEAD_CITY TEXT, $COL_LEAD_ZIP TEXT, $COL_LEAD_STATE TEXT, $COL_LEAD_ADDRESS TEXT, " +
+                "$COL_LEAD_ASSIGNED TEXT, $COL_LEAD_DATE_ADDED TEXT, $COL_LEAD_STATUS TEXT, $COL_LEAD_SOURCE TEXT, $COL_LEAD_LAST_CONTACT TEXT, " +
+                "$COL_LEAD_EMAIL TEXT, $COL_LEAD_WEBSITE TEXT, $COL_LEAD_PHONENUMBER TEXT, $COL_LEAD_STATUS_NAME TEXT, $COL_LEAD_SOURCE_NAME TEXT, " +
+                "$COL_LEAD_IS_PUBLIC TEXT)")
+    }
 
     private fun addRegularEventType(db: SQLiteDatabase) {
         val regularEvent = context.resources.getString(R.string.regular_event)
@@ -607,6 +647,13 @@ class DBHelper public constructor(val context: Context) : SQLiteOpenHelper(conte
         val insertedId = db.insert(STAFFS_TABLE_NAME, null, values).toInt()
         return insertedId
     }
+
+    fun insertLead(lead: Lead, db: SQLiteDatabase = mDb): Int {
+        val values = fillLeadValues(lead)
+        val insertedId = db.insert(LEADS_TABLE_NAME, null, values).toInt()
+        return insertedId
+    }
+    
     
     private fun fillContactValues(contact: Contact): ContentValues {
         return ContentValues().apply {
@@ -631,6 +678,35 @@ class DBHelper public constructor(val context: Context) : SQLiteOpenHelper(conte
             put(COL_STAFF_PHONE_NUMBER, staff.phonenumber)
         }
     }
+
+
+    private fun fillLeadValues(lead: Lead): ContentValues {
+        return ContentValues().apply {
+            put(COL_LEAD_ID, lead.id.toString())
+            put(COL_LEAD_NAME, lead.name)
+            put(COL_LEAD_TITLE, lead.title)
+            put(COL_LEAD_COMPANY, lead.company)
+            put(COL_LEAD_DESCRIPTION, lead.description)
+            put(COL_LEAD_COUNTRY, lead.country)
+            put(COL_LEAD_CITY, lead.city)
+            put(COL_LEAD_ZIP, lead.zip)
+            put(COL_LEAD_STATE, lead.state)
+            put(COL_LEAD_ADDRESS, lead.address)
+            put(COL_LEAD_ASSIGNED, lead.assigned)
+            put(COL_LEAD_DATE_ADDED, lead.dateadded)
+            put(COL_LEAD_STATUS, lead.status)
+            put(COL_LEAD_SOURCE, lead.source)
+            put(COL_LEAD_LAST_CONTACT, lead.lastcontact)
+            put(COL_LEAD_EMAIL, lead.email)
+            put(COL_LEAD_WEBSITE, lead.website)
+            put(COL_LEAD_PHONENUMBER, lead.phonenumber)
+            put(COL_LEAD_STATUS_NAME, lead.status_name)
+            put(COL_LEAD_SOURCE_NAME, lead.source_name)
+            put(COL_LEAD_IS_PUBLIC, lead.is_public)
+        }
+    }
+    
+    
     
     private fun fillExceptionValues(parentEventId: Int, occurrenceTS: Int, callback: (values: ContentValues) -> Unit) {
         val childEvent = getEventWithId(parentEventId)
@@ -790,8 +866,14 @@ class DBHelper public constructor(val context: Context) : SQLiteOpenHelper(conte
         mDb.delete(STAFFS_TABLE_NAME, selection, null)
 
     }
-    
-    
+
+    fun deleteLeads(ids: Array<String>) {
+        val args = TextUtils.join(", ", ids)
+        val selection = "$LEADS_TABLE_NAME.$COL_LEAD_ID IN ($args)"
+
+        mDb.delete(LEADS_TABLE_NAME, selection, null)
+
+    }
     
     fun dropTable(tableName : String) {
         //DROP TABLE IF EXISTS certification_categories
@@ -820,6 +902,10 @@ class DBHelper public constructor(val context: Context) : SQLiteOpenHelper(conte
 
     fun initStaffsTable() {
         mDb.execSQL("DELETE FROM $STAFFS_TABLE_NAME")
+    }
+
+    fun initLeadsTable() {
+        mDb.execSQL("DELETE FROM $LEADS_TABLE_NAME")
     }
 
     private fun deleteChildEvents(ids: String, deleteFromCalDAV: Boolean) {
@@ -1283,6 +1369,25 @@ class DBHelper public constructor(val context: Context) : SQLiteOpenHelper(conte
         return builder.query(mDb, projection, selection, selectionArgs, "$STAFFS_TABLE_NAME.$COL_STAFF_ID", null, COL_STAFF_NAME)
     }
 
+    fun getLeadWithId(id: Int): Lead? {
+        val selection = "$LEADS_TABLE_NAME.$COL_LEAD_ID = ?"
+        val selectionArgs = arrayOf(id.toString())
+        val cursor = getLeadsCursor(selection, selectionArgs)
+        val items = fillLeads(cursor)
+        return if (items.isNotEmpty()) {
+            items[0]
+        } else {
+            null
+        }
+    }
+
+    private fun getLeadsCursor(selection: String = "", selectionArgs: Array<String>? = null): Cursor? {
+        val builder = SQLiteQueryBuilder()
+        builder.tables = "$LEADS_TABLE_NAME"
+        val projection = allLeadColumns
+        return builder.query(mDb, projection, selection, selectionArgs, "$LEADS_TABLE_NAME.$COL_LEAD_ID", null, COL_LEAD_NAME)
+    }
+
     private val allColumns: Array<String>
         get() = arrayOf("$MAIN_TABLE_NAME.$COL_ID", COL_START_TS, COL_END_TS, COL_TITLE, COL_DESCRIPTION, COL_REMINDER_MINUTES, COL_REMINDER_MINUTES_2,
                 COL_REMINDER_MINUTES_3, COL_REPEAT_INTERVAL, COL_REPEAT_RULE, COL_IMPORT_ID, COL_FLAGS, COL_REPEAT_LIMIT, COL_EVENT_TYPE, COL_OFFSET,
@@ -1313,7 +1418,14 @@ class DBHelper public constructor(val context: Context) : SQLiteOpenHelper(conte
     private val allStaffColumns: Array<String>
         get() = arrayOf("$STAFFS_TABLE_NAME.$COL_STAFF_ID",  COL_STAFF_CUSTOMER_ID , COL_STAFF_DATE_ASSIGNED,COL_STAFF_NAME,
                 COL_STAFF_EMAIL, COL_STAFF_PHONE_NUMBER)
-    
+
+    private val allLeadColumns: Array<String>
+        get() = arrayOf("$LEADS_TABLE_NAME.$COL_LEAD_ID",
+                COL_LEAD_NAME, COL_LEAD_TITLE, COL_LEAD_COMPANY , COL_LEAD_DESCRIPTION ,
+                COL_LEAD_COUNTRY, COL_LEAD_CITY, COL_LEAD_ZIP, COL_LEAD_STATE, COL_LEAD_ADDRESS,
+                COL_LEAD_ASSIGNED, COL_LEAD_DATE_ADDED, COL_LEAD_STATUS, COL_LEAD_SOURCE, COL_LEAD_LAST_CONTACT,
+                COL_LEAD_EMAIL, COL_LEAD_WEBSITE, COL_LEAD_PHONENUMBER, COL_LEAD_STATUS_NAME, COL_LEAD_SOURCE_NAME,
+                COL_LEAD_IS_PUBLIC)
     
     private fun fillEvents(cursor: Cursor?): List<Event> {
         val eventTypeColors = SparseIntArray()
@@ -1538,6 +1650,62 @@ class DBHelper public constructor(val context: Context) : SQLiteOpenHelper(conte
         return staffs
     }
 
+    private fun fillLeads(cursor: Cursor?): List<Lead> {
+
+        val leads = ArrayList<Lead>()
+        cursor?.use {
+            if (cursor.moveToFirst()) {
+                do {
+                    val lead_id = cursor.getIntValue(COL_LEAD_ID)
+                    val name = cursor.getStringValue(COL_LEAD_NAME)
+                    val title = cursor.getStringValue(COL_LEAD_TITLE)
+                    val company= cursor.getStringValue(COL_LEAD_COMPANY)
+                    val description= cursor.getStringValue(COL_LEAD_DESCRIPTION)
+                    val country= cursor.getStringValue(COL_LEAD_COUNTRY)
+                    val city= cursor.getStringValue(COL_LEAD_CITY)
+                    val zip= cursor.getStringValue(COL_LEAD_ZIP)
+                    val state = cursor.getStringValue(COL_LEAD_STATE)
+                    val address= cursor.getStringValue(COL_LEAD_ADDRESS)
+                    val assigned= cursor.getStringValue(COL_LEAD_ASSIGNED)
+                    val dateadded= cursor.getStringValue(COL_LEAD_DATE_ADDED)
+                    val status= cursor.getStringValue(COL_LEAD_STATUS)
+                    val source= cursor.getStringValue(COL_LEAD_SOURCE)
+                    val lastcontact= cursor.getStringValue(COL_LEAD_LAST_CONTACT)
+                    val email = cursor.getStringValue(COL_LEAD_EMAIL)
+                    val website= cursor.getStringValue(COL_LEAD_WEBSITE)
+                    val phonenumber= cursor.getStringValue(COL_LEAD_PHONENUMBER)
+                    val status_name = cursor.getStringValue(COL_LEAD_STATUS_NAME)
+                    val source_name= cursor.getStringValue(COL_LEAD_SOURCE_NAME)
+                    val is_public= cursor.getStringValue(COL_LEAD_IS_PUBLIC)
+                    
+                    val lead = Lead(lead_id,
+                                name,
+                                title,
+                                company,
+                                description,
+                                country,
+                                city,
+                                zip,
+                                state,
+                                address,
+                                assigned,
+                                dateadded,
+                                status,
+                                source,
+                                lastcontact,
+                                email,
+                                website,
+                                phonenumber,
+                                status_name,
+                                source_name,
+                                is_public)
+                    
+                    leads.add(lead)
+                } while (cursor.moveToNext())
+            }
+        }
+        return leads
+    }
 
     fun getEventTypes(callback: (types: ArrayList<EventType>) -> Unit) {
         Thread {
@@ -1865,7 +2033,78 @@ class DBHelper public constructor(val context: Context) : SQLiteOpenHelper(conte
         }
         return staffs
     }
-    
+
+    fun getLeads(callback: (leads: ArrayList<Lead>) -> Unit) {
+        Thread {
+            callback(fetchLeads())
+        }.start()
+    }
+
+    fun fetchLeads(): ArrayList<Lead> {
+        val leads = ArrayList<Lead>(4)
+        val cols = arrayOf(COL_LEAD_ID, COL_LEAD_NAME, COL_LEAD_TITLE, COL_LEAD_COMPANY , COL_LEAD_DESCRIPTION ,
+                COL_LEAD_COUNTRY, COL_LEAD_CITY, COL_LEAD_ZIP, COL_LEAD_STATE, COL_LEAD_ADDRESS,
+                COL_LEAD_ASSIGNED, COL_LEAD_DATE_ADDED, COL_LEAD_STATUS, COL_LEAD_SOURCE, COL_LEAD_LAST_CONTACT,
+                COL_LEAD_EMAIL, COL_LEAD_WEBSITE, COL_LEAD_PHONENUMBER, COL_LEAD_STATUS_NAME, COL_LEAD_SOURCE_NAME,
+                COL_LEAD_IS_PUBLIC)
+        var cursor: Cursor? = null
+        try {
+            cursor = mDb.query(LEADS_TABLE_NAME, cols, null, null, null, null, "$COL_LEAD_ID ASC")
+            if (cursor?.moveToFirst() == true) {
+                do {
+                    val lead_id = cursor.getIntValue(COL_LEAD_ID)
+                    val name = cursor.getStringValue(COL_LEAD_NAME)
+                    val title = cursor.getStringValue(COL_LEAD_TITLE)
+                    val company= cursor.getStringValue(COL_LEAD_COMPANY)
+                    val description= cursor.getStringValue(COL_LEAD_DESCRIPTION)
+                    val country= cursor.getStringValue(COL_LEAD_COUNTRY)
+                    val city= cursor.getStringValue(COL_LEAD_CITY)
+                    val zip= cursor.getStringValue(COL_LEAD_ZIP)
+                    val state = cursor.getStringValue(COL_LEAD_STATE)
+                    val address= cursor.getStringValue(COL_LEAD_ADDRESS)
+                    val assigned= cursor.getStringValue(COL_LEAD_ASSIGNED)
+                    val dateadded= cursor.getStringValue(COL_LEAD_DATE_ADDED)
+                    val status= cursor.getStringValue(COL_LEAD_STATUS)
+                    val source= cursor.getStringValue(COL_LEAD_SOURCE)
+                    val lastcontact= cursor.getStringValue(COL_LEAD_LAST_CONTACT)
+                    val email = cursor.getStringValue(COL_LEAD_EMAIL)
+                    val website= cursor.getStringValue(COL_LEAD_WEBSITE)
+                    val phonenumber= cursor.getStringValue(COL_LEAD_PHONENUMBER)
+                    val status_name = cursor.getStringValue(COL_LEAD_STATUS_NAME)
+                    val source_name= cursor.getStringValue(COL_LEAD_SOURCE_NAME)
+                    val is_public= cursor.getStringValue(COL_LEAD_IS_PUBLIC)
+
+                    val lead = Lead(lead_id,
+                            name,
+                            title,
+                            company,
+                            description,
+                            country,
+                            city,
+                            zip,
+                            state,
+                            address,
+                            assigned,
+                            dateadded,
+                            status,
+                            source,
+                            lastcontact,
+                            email,
+                            website,
+                            phonenumber,
+                            status_name,
+                            source_name,
+                            is_public)
+
+                    leads.add(lead)
+                } while (cursor.moveToNext())
+            }
+        } finally {
+            cursor?.close()
+        }
+        return leads
+    }
+
     fun doEventTypesContainEvent(types: ArrayList<EventType>): Boolean {
         val args = TextUtils.join(", ", types.map { it.id })
         val columns = arrayOf(COL_ID)

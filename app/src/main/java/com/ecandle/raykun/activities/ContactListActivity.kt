@@ -1,9 +1,9 @@
 package com.ecandle.raykun.activities
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.ecandle.raykun.R
 import com.ecandle.raykun.extensions.dbHelper
-import com.ecandle.raykun.extensions.launchNewContactIntent
 import com.ecandle.raykun.fragments.ContactListFragment
 import com.ecandle.raykun.helpers.ConnectionDetector
 import com.ecandle.raykun.helpers.USER_ID
@@ -37,6 +37,13 @@ class ContactListActivity : SimpleActivity() {
 
         fillContactsList()
 
+    }
+
+    fun launchNewContactIntent() {
+        Intent(applicationContext, ContactActivity::class.java).apply {
+            putExtra(USER_ID, mUserId)
+            startActivity(this)
+        }
     }
 
     private fun fillContactsList() {
