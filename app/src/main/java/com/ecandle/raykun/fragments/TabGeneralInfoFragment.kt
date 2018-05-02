@@ -37,8 +37,9 @@ class TabGeneralInfoFragment : Fragment() {
         lead_assigned!!.text = arguments!!.getString("assigned")
         lead_dateadded!!.text = arguments!!.getString("dateadded")
         lead_last_contact!!.text = arguments!!.getString("lastcontact")
-        lead_is_public!!.text = arguments!!.getString("is_public")
-        
+        //lead_is_public!!.text = arguments!!.getString("is_public")
+
+        lead_is_public.isChecked = arguments!!.getString("is_public") == "1"
     }
 
     companion object {

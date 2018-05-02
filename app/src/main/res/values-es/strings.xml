@@ -403,6 +403,7 @@
 
         Esta aplicación es sólo una parte de una mayor serie de aplicaciones. Puede encontrar el resto en http://www.simplemobiletools.com
     </string>
+    <string name="is_public_lead">Es publico</string>
 
     <!--
         Haven't found some strings? There's more at

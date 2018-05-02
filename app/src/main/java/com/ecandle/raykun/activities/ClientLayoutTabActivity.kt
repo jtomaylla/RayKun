@@ -20,7 +20,7 @@ class ClientLayoutTabActivity  : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_client_layout_tab)
         setSupportActionBar(mytoolbar)
-
+        supportActionBar?.title = resources.getString(R.string.clients)
         val clientId = intent.getIntExtra(ITEM_ID, 0)
         val mClient = dbHelper.getClientWithId(clientId)
 

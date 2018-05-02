@@ -20,7 +20,7 @@ class LeadLayoutTabActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lead_layout_tab)
         setSupportActionBar(mytoolbar)
-
+        supportActionBar?.title = resources.getString(R.string.leads)
         val leadId = intent.getIntExtra(LEAD_ID, 0)
         val mLead = dbHelper.getLeadWithId(leadId)
 

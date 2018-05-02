@@ -98,14 +98,11 @@ class TabTeamSalesFragment: Fragment()  {
         val mUserId =arguments!!.getString("userid")
 
         if (!context!!.dbHelper.isTableExists(context!!.dbHelper.CONTACTS_TABLE_NAME)) {
-            //context!!.dbHelper.initStaffsTable()
             context!!.dbHelper.dropTable(context!!.dbHelper.CONTACTS_TABLE_NAME)
             context!!.dbHelper.createStaffsTable()
-//        }else{
-//            context!!.dbHelper.createStaffsTable()
+        }else{
+            context!!.dbHelper.initStaffsTable()
         }
-        //context!!.dbHelper.dropTable(context!!.dbHelper.CONTACTS_TABLE_NAME)
-        //context!!.dbHelper.createStaffsTable()
         //http://ecandlemobile.com/RayKun/webservice/index.php/admin/clients/showCustomerAdmins?id=1
         val url="http://ecandlemobile.com/RayKun/webservice/index.php/admin/clients/showCustomerAdmins?id="+mUserId
         val loadStaffData = loadStaffDataTask(context!!.applicationContext)

@@ -119,6 +119,8 @@
     <string name="lead_added">Lead added successfully</string>
     <string name="lead_updated">Lead updated successfully</string>
 
+    <string name="is_public_lead">Is Public Lead</string>
+
     <string name="leads">Leads</string>
     <!-- Event Repetition -->
     <string name="repetition">Repetition</string>

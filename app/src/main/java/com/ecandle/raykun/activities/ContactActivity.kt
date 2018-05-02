@@ -32,7 +32,7 @@ class ContactActivity : SimpleActivity() {
         setContentView(R.layout.activity_contact)
 
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_cross)
-
+        supportActionBar?.title = resources.getString(R.string.contacts)
         val intent = intent ?: return
         mDialogTheme = getDialogTheme()
 
@@ -88,7 +88,7 @@ class ContactActivity : SimpleActivity() {
 
     private fun setupEditContact() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-        supportActionBar?.title = resources.getString(R.string.edit_client)
+        supportActionBar?.title = resources.getString(R.string.edit_contact)
         contact_firstname.setText(mContact.firstname)
         contact_lastname.setText(mContact.lastname)
         contact_email.setText(mContact.email)
