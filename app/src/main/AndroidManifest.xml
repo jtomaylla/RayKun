@@ -5,7 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -121,19 +122,27 @@
             android:name=".activities.MyBaseSimpleActivity"
             android:label="@string/title_activity_my_base_simple"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity android:name=".activities.TaskListActivity" />
         <activity android:name=".activities.TaskActivity" />
         <activity android:name=".activities.ProductListActivity" />
         <activity android:name=".activities.ProductActivity" />
-        <activity android:name=".activities.ClientLayoutTabActivity"  android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.ClientLayoutTabActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.ClientListActivity" />
         <activity android:name=".activities.ContactActivity" />
         <activity android:name=".activities.ContactListActivity" />
         <activity android:name=".activities.LeadActivity" />
         <activity android:name=".activities.LeadListActivity" />
-        <activity android:name=".activities.LeadLayoutTabActivity"  android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.LeadLayoutTabActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
+        <service
+            android:name=".services.TrackGPS"
+            android:enabled="true"
+            android:exported="true"></service>
+        <activity android:name=".activities.GeoTrackListActivity" />
     </application>
 
 </manifest>

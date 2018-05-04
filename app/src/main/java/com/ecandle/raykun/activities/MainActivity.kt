@@ -122,7 +122,10 @@ class MainActivity : AppCompatActivity() {
                 op="dashboard"
             }
             geotrack.id -> {
-
+                Intent(this, GeoTrackListActivity::class.java).apply {
+                    putExtra(USER_ID, mUserId)
+                    startActivity(this)
+                }
                 op="geotrack"
             }
             leads.id -> {

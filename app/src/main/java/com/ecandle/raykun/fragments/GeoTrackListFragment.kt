@@ -9,7 +9,7 @@ import android.view.*
 import com.ecandle.raykun.R
 import com.ecandle.raykun.activities.ClientLayoutTabActivity
 import com.ecandle.raykun.activities.SimpleActivity
-import com.ecandle.raykun.adapters.ClientListAdapter
+import com.ecandle.raykun.adapters.GeoTrackListAdapter
 import com.ecandle.raykun.extensions.config
 import com.ecandle.raykun.extensions.dbHelper
 import com.ecandle.raykun.helpers.ITEM_ID
@@ -21,11 +21,11 @@ import com.simplemobiletools.commons.extensions.beVisibleIf
 import kotlinx.android.synthetic.main.fragment_client_list.view.*
 
 
-class ClientListFragment : Fragment(), DeleteClientsListener, SearchView.OnQueryTextListener {
+class GeoTrackListFragment : Fragment(), DeleteClientsListener, SearchView.OnQueryTextListener {
 
     private var mClients: List<Client> = ArrayList()
     lateinit var mView: View
-    private var mClientListAdapter: ClientListAdapter? = null
+    private var mGeoTrackListAdapter: GeoTrackListAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -98,7 +98,7 @@ class ClientListFragment : Fragment(), DeleteClientsListener, SearchView.OnQuery
             ))
         }
 
-        mClientListAdapter = ClientListAdapter(activity as SimpleActivity, listClients, true, this, mView.client_list) {
+        mGeoTrackListAdapter = GeoTrackListAdapter(activity as SimpleActivity, listClients, true, this, mView.client_list) {
             if (it is Client) {
                 editClient(it)
             }
@@ -106,7 +106,7 @@ class ClientListFragment : Fragment(), DeleteClientsListener, SearchView.OnQuery
 
         activity?.runOnUiThread {
             mView.client_list.apply {
-                this@apply.adapter = mClientListAdapter
+                this@apply.adapter = mGeoTrackListAdapter
             }
             checkPlaceholderVisibility()
         }
@@ -128,7 +128,7 @@ class ClientListFragment : Fragment(), DeleteClientsListener, SearchView.OnQuery
 
             override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
                 // Do something when collapsed
-                mClientListAdapter!!.setSearchResult(mClients)
+                mGeoTrackListAdapter!!.setSearchResult(mClients)
                 return true // Return true to collapse action view
 
             }
@@ -160,7 +160,7 @@ class ClientListFragment : Fragment(), DeleteClientsListener, SearchView.OnQuery
 
     override fun onQueryTextChange(newText: String): Boolean {
         val filteredClientList = filter(mClients, newText)
-        //mClientListAdapter!!.setSearchResult(filteredModelList)
+        //mGeoTrackListAdapter!!.setSearchResult(filteredModelList)
         if (newText.isEmpty()) {
             checkClients()
         }else{

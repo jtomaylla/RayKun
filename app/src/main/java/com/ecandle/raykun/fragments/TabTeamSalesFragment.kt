@@ -50,7 +50,7 @@ class TabTeamSalesFragment: Fragment()  {
         super.onResume()
         var connectionDetector = ConnectionDetector(context!!.applicationContext)
         if (connectionDetector!!.isConnectingToInternet) {
-            context!!.dbHelper.initStaffsTable()
+            ///context!!.dbHelper.initStaffsTable()
             loadStaffs()
         }else{
             context!!.toast(getString(R.string.no_internet_connection), Toast.LENGTH_LONG)
