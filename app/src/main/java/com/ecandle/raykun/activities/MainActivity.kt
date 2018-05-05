@@ -140,7 +140,8 @@ class MainActivity : AppCompatActivity() {
                 op="expenses"
             }
             geolocation.id -> {
-
+                val intent = Intent(this@MainActivity, MapsActivity::class.java)
+                startActivity(intent)
                 op="geolocation"
             }
 
@@ -250,8 +251,8 @@ class MainActivity : AppCompatActivity() {
                         }
                         R.id.geolocation_menu -> {
                             Toast.makeText(this@MainActivity, "You have selected geolocation", Toast.LENGTH_SHORT).show()
-                            //val intent = Intent(this@MainActivity, CalendarGActivity::class.java)
-                            //startActivity(intent)
+                            val intent = Intent(this@MainActivity, MapsActivity::class.java)
+                            startActivity(intent)
                             return@OnNavigationItemSelectedListener true
                         }
                         else -> {

@@ -8,6 +8,7 @@ import com.ecandle.raykun.R
 import com.ecandle.raykun.activities.SimpleActivity
 import com.ecandle.raykun.dialogs.DeleteEventDialog
 import com.ecandle.raykun.helpers.Operations
+import com.ecandle.raykun.helpers.SavedSettings
 import com.ecandle.raykun.interfaces.DeleteClientsListener
 import com.ecandle.raykun.models.Client
 import com.ecandle.raykun.models.ListItem
@@ -19,6 +20,8 @@ class GeoTrackListAdapter(activity: SimpleActivity, val listClients: ArrayList<L
                           recyclerView: MyRecyclerView, clientClick: (Any) -> Unit) : MyRecyclerViewAdapter(activity, recyclerView, clientClick) {
 
     private var clientModels: List<Client>? = null
+
+    val savedSettings = SavedSettings(activity)
 
     private val topDivider = resources.getDrawable(R.drawable.divider_width)
 
@@ -43,11 +46,13 @@ class GeoTrackListAdapter(activity: SimpleActivity, val listClients: ArrayList<L
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MyRecyclerViewAdapter.ViewHolder {
         val layoutId =  R.layout.geotrack_list_item
+
         return createViewHolder(layoutId, parent)
     }
 
     override fun onBindViewHolder(holder: MyRecyclerViewAdapter.ViewHolder, position: Int) {
         val listClient = listClients[position]
+
         val view = holder.bindView(listClient, allowLongClick) { clientView, layoutPosition ->
             if (listClient is Client) {
                 setupListClient(clientView, listClient)
@@ -60,13 +65,18 @@ class GeoTrackListAdapter(activity: SimpleActivity, val listClients: ArrayList<L
 
     private fun setupListClient(view: View, client: Client) {
         view.apply {
+
+            var myCurrentLat = savedSettings.getSettings("myCurrentLat").toString()
+            var myCurrentLon = savedSettings.getSettings("myCurrentLon").toString()
+
             val op= Operations()
-            var result = op.calculateDistanceInKilometer("-12.13588935","-77.014846647263",client.latitude,client.longitude)
+            //var result = op.calculateDistanceInKilometer("-12.13588935","-77.014846647263",client.latitude,client.longitude)
+            var result = op.calculateDistanceInKilometer(myCurrentLat,myCurrentLon,client.latitude,client.longitude)
             client_userid.text=client.userid.toString()
             client_company.text = client.company
             client_contact_name.text = client.contact_name
             client_phonenumber.text = client.phonenumber
-            client_location.text = result  //+" (Lat:"+client.latitude+"Long:"+client.longitude+")"
+            client_location.text = result ///+"x:"+client.latitude+"y:"+client.longitude+")"
 
             var startTextColor = textColor
             var endTextColor = textColor

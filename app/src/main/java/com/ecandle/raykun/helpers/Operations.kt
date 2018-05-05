@@ -5,7 +5,6 @@ import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.util.*
-
 /**
  * Created by hussienecandle on 8/6/17.
  */
@@ -29,17 +28,19 @@ class Operations{
         return AllString
     }
 
-    fun calculateDistanceInKilometer(myLocLat: String,myLocLon: String, clientLocLat: String,clientLocLon: String): String {
-
+    fun calculateDistanceInKilometer(fromLocLat: String, fromLocLon: String, toLocLat: String, toLocLon: String): String {
+        //var context: Context? = Context
         var myLoc = Location("MyLocation")
-        myLoc!!.latitude = myLocLat.toDouble()
-        myLoc!!.longitude = myLocLon.toDouble()
+        myLoc!!.latitude = fromLocLat.toDouble()
+        myLoc!!.longitude = fromLocLon.toDouble()
 
-        var clientLoc = Location("")
-        clientLoc!!.latitude = clientLocLat.toDouble()
-        clientLoc!!.longitude =  clientLocLon.toDouble()
+        var clientLoc = Location("ClientLocation")
+        clientLoc!!.latitude = toLocLat.toDouble()
+        clientLoc!!.longitude =  toLocLon.toDouble()
 
         val distance = clientLoc!!.distanceTo(myLoc!!) / 1000
+        //val textDistance = context!!.getResources().getString(R.string.distance_away)
+        //val distanceText = String.format(Locale.getDefault(), "%.2f", distance) + textDistance //" km Away"
         val distanceText = String.format(Locale.getDefault(), "%.2f", distance) + " km Away"
         return distanceText
     }

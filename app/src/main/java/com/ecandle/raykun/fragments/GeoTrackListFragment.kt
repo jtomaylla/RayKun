@@ -7,12 +7,12 @@ import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.SearchView
 import android.view.*
 import com.ecandle.raykun.R
-import com.ecandle.raykun.activities.ClientLayoutTabActivity
+import com.ecandle.raykun.activities.MapsActivity
 import com.ecandle.raykun.activities.SimpleActivity
 import com.ecandle.raykun.adapters.GeoTrackListAdapter
 import com.ecandle.raykun.extensions.config
 import com.ecandle.raykun.extensions.dbHelper
-import com.ecandle.raykun.helpers.ITEM_ID
+import com.ecandle.raykun.helpers.*
 import com.ecandle.raykun.interfaces.DeleteClientsListener
 import com.ecandle.raykun.models.Client
 import com.ecandle.raykun.models.ListItem
@@ -143,8 +143,12 @@ class GeoTrackListFragment : Fragment(), DeleteClientsListener, SearchView.OnQue
     }
 
     private fun editClient(client: Client) {
-        Intent(context, ClientLayoutTabActivity::class.java).apply {
+        Intent(context, MapsActivity::class.java).apply {
             putExtra(ITEM_ID, client.userid)
+            putExtra(CLIENT_LATITUDE, client.latitude)
+            putExtra(CLIENT_LONGITUDE, client.longitude)
+            putExtra(CLIENT_COMPANY, client.company)
+            putExtra(CLIENT_ADDRESS, client.address)
             startActivity(this)
         }
     }

@@ -35,6 +35,8 @@
     <string name="invoice_info">Info Facturacion</string>
     <string name="contacts">Contactos</string>
     <string name="team_sales">Equipo de Ventas</string>
+    <string name="distance_away"> km de distancia</string>
+
 
     <string name="contact_info">Info del Contacto</string>
     <string name="general_info">Info General</string>

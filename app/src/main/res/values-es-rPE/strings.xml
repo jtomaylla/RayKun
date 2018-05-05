@@ -19,6 +19,8 @@
     <string name="contacts">Contactos</string>
     <string name="team_sales">Equipo de Ventas</string>
 
+    <string name="distance_away"> km de distancia</string>
+
     <!--<string name="app_name">Simple Calendar</string>-->
     <!--<string name="app_launcher_name">Simple Calendar</string>-->
     <string name="change_view">Cambiar vista</string>

@@ -20,6 +20,11 @@ val ITEM_ID = "item_id"
 val CONTACT_ID = "id"
 val LEAD_ID = "id"
 
+val CLIENT_LATITUDE ="latitude"
+val CLIENT_LONGITUDE ="longitude"
+val CLIENT_COMPANY = "company"
+val CLIENT_ADDRESS = "address"
+
 val TASK_ID = "task_id"
 val TASK_START_DATE = "task_start_date"
 val NEW_TASK_START_TS = "new_task_start_ts"

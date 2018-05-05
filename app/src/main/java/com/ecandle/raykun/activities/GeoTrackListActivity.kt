@@ -24,7 +24,9 @@ import com.ecandle.raykun.tasks.loadClientDataTask
 import com.simplemobiletools.commons.extensions.beVisible
 import com.simplemobiletools.commons.extensions.toast
 import kotlinx.android.synthetic.main.activity_client_list.*
-
+/**
+ * Created by juantomaylla on 3/5/18.
+ */
 class GeoTrackListActivity : SimpleActivity() {
     private val LOG_TAG = GeoTrackListActivity::class.java.simpleName
     private var mUserId: String? = null
@@ -47,19 +49,22 @@ class GeoTrackListActivity : SimpleActivity() {
 
         hideFab()
 
-        var myCurrentLoc = getCurrentLocation()
 
-        var myCurrentLat = myCurrentLoc.latitude.toString()
-        var myCurrentLon = myCurrentLoc.longitude.toString()
-
-        val savedSettings = SavedSettings(applicationContext)
-        savedSettings.saveSettings("myCurrentLat",myCurrentLat)
-        savedSettings.saveSettings("myCurrentLon",myCurrentLon)
 
         mUserId = intent.getStringExtra(USER_ID)
         val intent = intent ?: return
 
         if (connectionDetector!!.isConnectingToInternet) {
+            // Saving Current Location on Shared Preferences
+            var myCurrentLoc = getCurrentLocation()
+
+            var myCurrentLat = myCurrentLoc.latitude.toString()
+            var myCurrentLon = myCurrentLoc.longitude.toString()
+
+            val savedSettings = SavedSettings(applicationContext)
+            savedSettings.saveSettings("myCurrentLat",myCurrentLat)
+            savedSettings.saveSettings("myCurrentLon",myCurrentLon)
+
             loadClients()
         }else{
             toast(getString(R.string.no_internet_connection), Toast.LENGTH_LONG)
