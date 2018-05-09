@@ -95,7 +95,7 @@
                                 android:layout_marginLeft="2dip"
                                 android:layout_marginRight="2dip"
                                 android:layout_marginTop="1dip"
-                                android:text="Calendar"
+                                android:text="@string/calendar"
                                 android:textColor="@color/white"
                                 android:textSize="14sp" />
                         </TableRow>
@@ -136,7 +136,7 @@
                                 android:layout_marginLeft="2dip"
                                 android:layout_marginRight="2dip"
                                 android:layout_marginTop="1dip"
-                                android:text="Actividad"
+                                android:text="@string/tasks"
                                 android:textColor="@color/white"
                                 android:textSize="14sp" />
                         </TableRow>
@@ -177,7 +177,7 @@
                                 android:layout_marginLeft="2dip"
                                 android:layout_marginRight="2dip"
                                 android:layout_marginTop="1dip"
-                                android:text="Productos"
+                                android:text="@string/products"
                                 android:textColor="@color/white"
                                 android:textSize="14sp" />
                         </TableRow>
@@ -349,7 +349,7 @@
                                 android:layout_marginLeft="2dip"
                                 android:layout_marginRight="2dip"
                                 android:layout_marginTop="1dip"
-                                android:text="Clientes"
+                                android:text="@string/clients"
                                 android:textColor="@color/white"
                                 android:textSize="14sp" />
                         </TableRow>
@@ -398,7 +398,7 @@
                                 android:layout_marginLeft="2dip"
                                 android:layout_marginRight="2dip"
                                 android:layout_marginTop="1dip"
-                                android:text="Reportes"
+                                android:text="@string/reports"
                                 android:textColor="@color/white"
                                 android:textSize="14sp" />
                         </TableRow>
@@ -439,7 +439,7 @@
                                 android:layout_marginLeft="2dip"
                                 android:layout_marginRight="2dip"
                                 android:layout_marginTop="1dip"
-                                android:text="Panel de Control"
+                                android:text="@string/dashboard"
                                 android:textColor="@color/white"
                                 android:textSize="14sp" />
                         </TableRow>
@@ -480,7 +480,7 @@
                                 android:layout_marginLeft="2dip"
                                 android:layout_marginRight="2dip"
                                 android:layout_marginTop="1dip"
-                                android:text="Geo Track"
+                                android:text="@string/geotrack"
                                 android:textColor="@color/white"
                                 android:textSize="14sp" />
                         </TableRow>
@@ -494,87 +494,87 @@
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:id="@+id/sales"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="1dip"
-                        android:layout_weight="1"
-                        android:onClick="opc_event"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                    <!--<LinearLayout-->
+                        <!--android:id="@+id/sales"-->
+                        <!--android:layout_width="0dip"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_margin="1dip"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:onClick="opc_event"-->
+                        <!--android:gravity="center_horizontal"-->
+                        <!--android:orientation="vertical">-->
 
-                        <TableRow
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center">
+                        <!--<TableRow-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:gravity="center">-->
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="2dip"
-                                android:background="@color/color_primary_dark"
-                                android:src="@drawable/ic_shop_white_24dp" />
-                        </TableRow>
+                            <!--<ImageView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_margin="2dip"-->
+                                <!--android:background="@color/color_primary_dark"-->
+                                <!--android:src="@drawable/ic_shop_white_24dp" />-->
+                        <!--</TableRow>-->
 
-                        <TableRow
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center">
+                        <!--<TableRow-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:gravity="center">-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="3dip"
-                                android:layout_marginLeft="2dip"
-                                android:layout_marginRight="2dip"
-                                android:layout_marginTop="1dip"
-                                android:text="Ventas"
-                                android:textColor="@color/white"
-                                android:textSize="14sp" />
-                        </TableRow>
-                    </LinearLayout>
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginBottom="3dip"-->
+                                <!--android:layout_marginLeft="2dip"-->
+                                <!--android:layout_marginRight="2dip"-->
+                                <!--android:layout_marginTop="1dip"-->
+                                <!--android:text="Ventas"-->
+                                <!--android:textColor="@color/white"-->
+                                <!--android:textSize="14sp" />-->
+                        <!--</TableRow>-->
+                    <!--</LinearLayout>-->
 
-                    <LinearLayout
-                        android:id="@+id/expenses"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="1dip"
-                        android:layout_weight="1"
-                        android:onClick="opc_event"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                    <!--<LinearLayout-->
+                        <!--android:id="@+id/expenses"-->
+                        <!--android:layout_width="0dip"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_margin="1dip"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:onClick="opc_event"-->
+                        <!--android:gravity="center_horizontal"-->
+                        <!--android:orientation="vertical">-->
 
-                        <TableRow
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center">
+                        <!--<TableRow-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:gravity="center">-->
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="2dip"
-                                android:background="@color/color_primary_dark"
-                                android:src="@drawable/ic_attach_money_white_24dp" />
-                        </TableRow>
+                            <!--<ImageView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_margin="2dip"-->
+                                <!--android:background="@color/color_primary_dark"-->
+                                <!--android:src="@drawable/ic_attach_money_white_24dp" />-->
+                        <!--</TableRow>-->
 
-                        <TableRow
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center">
+                        <!--<TableRow-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:gravity="center">-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="3dip"
-                                android:layout_marginLeft="2dip"
-                                android:layout_marginRight="2dip"
-                                android:layout_marginTop="1dip"
-                                android:text="Gastos"
-                                android:textColor="@color/white"
-                                android:textSize="14sp" />
-                        </TableRow>
-                    </LinearLayout>
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginBottom="3dip"-->
+                                <!--android:layout_marginLeft="2dip"-->
+                                <!--android:layout_marginRight="2dip"-->
+                                <!--android:layout_marginTop="1dip"-->
+                                <!--android:text="Gastos"-->
+                                <!--android:textColor="@color/white"-->
+                                <!--android:textSize="14sp" />-->
+                        <!--</TableRow>-->
+                    <!--</LinearLayout>-->
 
                     <LinearLayout
                         android:id="@+id/geolocation"
@@ -611,7 +611,7 @@
                                 android:layout_marginLeft="2dip"
                                 android:layout_marginRight="2dip"
                                 android:layout_marginTop="1dip"
-                                android:text="Geo Ubicacion"
+                                android:text="@string/geolocation"
                                 android:textColor="@color/white"
                                 android:textSize="14sp" />
                         </TableRow>

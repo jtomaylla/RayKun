@@ -33,14 +33,14 @@
         android:icon="@drawable/ic_widgets_white_24dp"
         android:title="@string/products"
         />
-    <item android:id="@+id/surveys_menu"
-        android:icon="@drawable/ic_playlist_add_check_white_24dp"
-        android:title="@string/surveys"
+    <item android:id="@+id/leads_menu"
+        android:icon="@drawable/ic_perm_contact_calendar_white_24dp"
+        android:title="@string/leads"
         />
-    <item android:id="@+id/sales_menu"
-        android:icon="@drawable/ic_shop_white_24dp"
-        android:title="@string/sales"
-        />
+    <!--<item android:id="@+id/sales_menu"-->
+        <!--android:icon="@drawable/ic_shop_white_24dp"-->
+        <!--android:title="@string/sales"-->
+        <!--/>-->
     <item android:id="@+id/clients_menu"
         android:icon="@drawable/ic_people_outline_white_24dp"
         android:title="@string/clients"
@@ -57,14 +57,14 @@
         android:icon="@drawable/ic_person_pin_circle_white_24dp"
         android:title="@string/geotrack"
         />
-    <item android:id="@+id/dialing_menu"
-        android:icon="@drawable/ic_dialer_sip_white_24dp"
-        android:title="@string/dialing"
-        />
-    <item android:id="@+id/expenses_menu"
-        android:icon="@drawable/ic_attach_money_white_24dp"
-        android:title="@string/expenses"
-        />
+    <!--<item android:id="@+id/dialing_menu"-->
+        <!--android:icon="@drawable/ic_dialer_sip_white_24dp"-->
+        <!--android:title="@string/dialing"-->
+        <!--/>-->
+    <!--<item android:id="@+id/expenses_menu"-->
+        <!--android:icon="@drawable/ic_attach_money_white_24dp"-->
+        <!--android:title="@string/expenses"-->
+        <!--/>-->
     <item android:id="@+id/geolocation_menu"
         android:icon="@drawable/ic_location_on_white_24dp"
         android:title="@string/geolocation"

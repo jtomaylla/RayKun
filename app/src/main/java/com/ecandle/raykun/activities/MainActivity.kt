@@ -51,103 +51,145 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun startCalendar(){
+        op="calendar"
+
+        when {
+            intent.extras?.containsKey(DAY_CODE) == true -> Intent(this, CalendarActivity::class.java).apply {
+                putExtra(DAY_CODE, intent.getStringExtra(DAY_CODE))
+                startActivity(this)
+            }
+            intent.extras?.containsKey(EVENT_ID) == true -> Intent(this, CalendarActivity::class.java).apply {
+                putExtra(EVENT_ID, intent.getIntExtra(EVENT_ID, 0))
+                putExtra(EVENT_OCCURRENCE_TS, intent.getIntExtra(EVENT_OCCURRENCE_TS, 0))
+                startActivity(this)
+            }
+            else -> Intent(this, CalendarActivity::class.java).apply {
+                putExtra(USER_ID, mUserId)
+                startActivity(this)
+            }
+        }
+
+    }
+    fun startTasks(){
+        Intent(this, TaskListActivity::class.java).apply {
+            putExtra(USER_ID, mUserId)
+            startActivity(this)
+        }
+        op=getString(R.string.tasks)
+    }
+    fun startProducts(){
+        Intent(this, ProductListActivity::class.java).apply {
+            putExtra(USER_ID, mUserId)
+            startActivity(this)
+        }
+        op="products"
+    }
+    fun startContacts(){
+        Intent(this, ContactListActivity::class.java).apply {
+            putExtra(USER_ID, mUserId)
+            startActivity(this)
+        }
+        op="contacts"
+    }
+    fun startClients(){
+        Intent(this, ClientListActivity::class.java).apply {
+            putExtra(USER_ID, mUserId)
+            startActivity(this)
+        }
+        op="clients"
+    }
+    fun startGeotrack(){
+        Intent(this, GeoTrackListActivity::class.java).apply {
+            putExtra(USER_ID, mUserId)
+            startActivity(this)
+        }
+        op="geotrack"
+    }
+    fun startDashboard(){
+        Toast.makeText(this@MainActivity, "You don't have access to dashboard", Toast.LENGTH_SHORT).show()
+//        Intent(this, DashboardActivity::class.java).apply {
+//            putExtra(USER_ID, mUserId)
+//            startActivity(this)
+//        }
+        op="dashboard"
+    }
+    fun startGeoRouting(){
+        Toast.makeText(this@MainActivity, "You don't have access to Clients Routing", Toast.LENGTH_SHORT).show()
+
+//        Intent(this, GeoRoutingListActivity::class.java).apply {
+//            putExtra(USER_ID, mUserId)
+//            startActivity(this)
+//        }
+        op="GeoRouting"
+    }
+    fun startLeads(){
+
+        Intent(this, LeadListActivity::class.java).apply {
+            putExtra(USER_ID, mUserId)
+            startActivity(this)
+        }
+        op="leads"
+    }
+
+    fun startReports(){
+        Toast.makeText(this@MainActivity, "You don't have access to reports", Toast.LENGTH_SHORT).show()
+//        Intent(this, ReportsListActivity::class.java).apply {
+//            putExtra(USER_ID, mUserId)
+//            startActivity(this)
+//        }
+        op="Reports"
+    }
     fun opc_event(view: View){
 
         val buSelect= view as LinearLayout
         when(buSelect.id) {
 
             calendar.id -> {
-
-                op="calendar"
-
-                //startActivity(Intent(this, CalendarGActivity::class.java))
-                when {
-                    intent.extras?.containsKey(DAY_CODE) == true -> Intent(this, CalendarActivity::class.java).apply {
-                        putExtra(DAY_CODE, intent.getStringExtra(DAY_CODE))
-                        startActivity(this)
-                    }
-                    intent.extras?.containsKey(EVENT_ID) == true -> Intent(this, CalendarActivity::class.java).apply {
-                        putExtra(EVENT_ID, intent.getIntExtra(EVENT_ID, 0))
-                        putExtra(EVENT_OCCURRENCE_TS, intent.getIntExtra(EVENT_OCCURRENCE_TS, 0))
-                        startActivity(this)
-                    }
-                    else -> Intent(this, CalendarActivity::class.java).apply {
-                        putExtra(USER_ID, mUserId)
-                        startActivity(this)
-                    }
-                //startActivity(Intent(this, CalendarActivity::class.java))
-                }
-
+                startCalendar()
             }
             tasks.id -> {
-                Intent(this, TaskListActivity::class.java).apply {
-                    putExtra(USER_ID, mUserId)
-                    startActivity(this)
-                }
-                //startActivity(Intent(this, TaskListActivity::class.java))
-                op="tasks"
+                startTasks()
             }
             products.id -> {
-                Intent(this, ProductListActivity::class.java).apply {
-                    putExtra(USER_ID, mUserId)
-                    startActivity(this)
-                }
-                op="products"
+                startProducts()
             }
             contacts.id -> {
-                Intent(this, ContactListActivity::class.java).apply {
-                    putExtra(USER_ID, mUserId)
-                    startActivity(this)
-                }
-                op="contacts"
+                startContacts()
             }
 
-            sales.id -> {
+//            sales.id -> {
+//
+//                op="sales"
+//            }
 
-                op="sales"
-            }
             clients.id -> {
-                Intent(this, ClientListActivity::class.java).apply {
-                    putExtra(USER_ID, mUserId)
-                    startActivity(this)
-                }
-                op="clients"
+                startClients()
             }
             reports.id -> {
-
+                startReports()
                 op="reports"
             }
             dashboard.id -> {
-
-                op="dashboard"
+                startDashboard()
             }
             geotrack.id -> {
-                Intent(this, GeoTrackListActivity::class.java).apply {
-                    putExtra(USER_ID, mUserId)
-                    startActivity(this)
-                }
-                op="geotrack"
+                startGeotrack()
             }
             leads.id -> {
-                Intent(this, LeadListActivity::class.java).apply {
-                    putExtra(USER_ID, mUserId)
-                    startActivity(this)
-                }
-                op="leads"
+                startLeads()
             }
-            expenses.id -> {
-
-                op="expenses"
-            }
+//            expenses.id -> {
+//
+//                op="expenses"
+//            }
             geolocation.id -> {
-                val intent = Intent(this@MainActivity, GeoTrackMapsActivity::class.java)
-                startActivity(intent)
-                op="geolocation"
+                startGeoRouting()
             }
 
 
         }
-        Toast.makeText(this,"ID:"+ op, Toast.LENGTH_LONG).show()
+        //Toast.makeText(this,"ID:"+ op, Toast.LENGTH_LONG).show()
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -174,49 +216,34 @@ class MainActivity : AppCompatActivity() {
                         R.id.calendar_menu -> {
                             Toast.makeText(this@MainActivity, "You have selected Calendar Menu", Toast.LENGTH_SHORT).show()
                             //val intent = Intent(this@MainActivity, CalendarGActivity::class.java)
-                            //startActivity(intent)
-                            when {
-                                intent.extras?.containsKey(DAY_CODE) == true -> Intent(this, CalendarActivity::class.java).apply {
-                                    putExtra(DAY_CODE, intent.getStringExtra(DAY_CODE))
-                                    startActivity(this)
-                                }
-                                intent.extras?.containsKey(EVENT_ID) == true -> Intent(this, CalendarActivity::class.java).apply {
-                                    putExtra(EVENT_ID, intent.getIntExtra(EVENT_ID, 0))
-                                    putExtra(EVENT_OCCURRENCE_TS, intent.getIntExtra(EVENT_OCCURRENCE_TS, 0))
-                                    startActivity(this)
-                                }
-                                else -> startActivity(Intent(this, CalendarActivity::class.java))
-                            }
+                            startCalendar()
                             return@OnNavigationItemSelectedListener true
                         }
                         R.id.tasks_menu -> {
                             Toast.makeText(this@MainActivity, "You have selected  Tasks", Toast.LENGTH_SHORT).show()
-                            //val intent = Intent(this@MainActivity, CalendarGActivity::class.java)
-                            //startActivity(intent)
+                            startTasks()
                             return@OnNavigationItemSelectedListener true
                         }
                         R.id.products_menu -> {
                             Toast.makeText(this@MainActivity, "You have selected products ", Toast.LENGTH_SHORT).show()
-                            //val intent = Intent(this@MainActivity, CalendarGActivity::class.java)
-                            //startActivity(intent)
+                            startProducts()
                             return@OnNavigationItemSelectedListener true
                         }
-                        R.id.surveys_menu -> {
-                            Toast.makeText(this@MainActivity, "You have selected  Tasks", Toast.LENGTH_SHORT).show()
-                            //val intent = Intent(this@MainActivity, CalendarGActivity::class.java)
-                            //startActivity(intent)
-                            return@OnNavigationItemSelectedListener true
-                        }
-                        R.id.sales_menu -> {
-                            Toast.makeText(this@MainActivity, "You have selected surveys", Toast.LENGTH_SHORT).show()
-                            //val intent = Intent(this@MainActivity, CalendarGActivity::class.java)
-                            //startActivity(intent)
-                            return@OnNavigationItemSelectedListener true
-                        }
+//                        R.id.surveys_menu -> {
+//                            Toast.makeText(this@MainActivity, "You have selected  Tasks", Toast.LENGTH_SHORT).show()
+//                            //val intent = Intent(this@MainActivity, CalendarGActivity::class.java)
+//                            //startActivity(intent)
+//                            return@OnNavigationItemSelectedListener true
+//                        }
+//                        R.id.sales_menu -> {
+//                            Toast.makeText(this@MainActivity, "You have selected surveys", Toast.LENGTH_SHORT).show()
+//                            //val intent = Intent(this@MainActivity, CalendarGActivity::class.java)
+//                            //startActivity(intent)
+//                            return@OnNavigationItemSelectedListener true
+//                        }
                         R.id.clients_menu -> {
                             Toast.makeText(this@MainActivity, "You have selected  clients", Toast.LENGTH_SHORT).show()
-                            //val intent = Intent(this@MainActivity, CalendarGActivity::class.java)
-                            //startActivity(intent)
+                            startClients()
                             return@OnNavigationItemSelectedListener true
                         }
                         R.id.reports_menu -> {
@@ -226,33 +253,28 @@ class MainActivity : AppCompatActivity() {
                             return@OnNavigationItemSelectedListener true
                         }
                         R.id.dashboard_menu -> {
-                            Toast.makeText(this@MainActivity, "You have selected  dashboard", Toast.LENGTH_SHORT).show()
-                            //val intent = Intent(this@MainActivity, CalendarGActivity::class.java)
-                            //startActivity(intent)
+
                             return@OnNavigationItemSelectedListener true
                         }
                         R.id.geotrack_menu -> {
                             Toast.makeText(this@MainActivity, "You have selected geotrack", Toast.LENGTH_SHORT).show()
-                            //val intent = Intent(this@MainActivity, CalendarGActivity::class.java)
-                            //startActivity(intent)
+                            startGeotrack()
                             return@OnNavigationItemSelectedListener true
                         }
-                        R.id.dialing_menu -> {
-                            Toast.makeText(this@MainActivity, "You have selected  dialing", Toast.LENGTH_SHORT).show()
-                            //val intent = Intent(this@MainActivity, CalendarGActivity::class.java)
-                            //startActivity(intent)
-                            return@OnNavigationItemSelectedListener true
-                        }
-                        R.id.expenses_menu -> {
-                            Toast.makeText(this@MainActivity, "You have selected expenses", Toast.LENGTH_SHORT).show()
-                            //val intent = Intent(this@MainActivity, CalendarGActivity::class.java)
-                            //startActivity(intent)
-                            return@OnNavigationItemSelectedListener true
-                        }
+//                        R.id.dialing_menu -> {
+//                            Toast.makeText(this@MainActivity, "You have selected  dialing", Toast.LENGTH_SHORT).show()
+//                            //val intent = Intent(this@MainActivity, CalendarGActivity::class.java)
+//                            //startActivity(intent)
+//                            return@OnNavigationItemSelectedListener true
+//                        }
+//                        R.id.expenses_menu -> {
+//                            Toast.makeText(this@MainActivity, "You have selected expenses", Toast.LENGTH_SHORT).show()
+//                            //val intent = Intent(this@MainActivity, CalendarGActivity::class.java)
+//                            //startActivity(intent)
+//                            return@OnNavigationItemSelectedListener true
+//                        }
                         R.id.geolocation_menu -> {
-                            Toast.makeText(this@MainActivity, "You have selected geolocation", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this@MainActivity, GeoTrackMapsActivity::class.java)
-                            startActivity(intent)
+                            startGeoRouting()
                             return@OnNavigationItemSelectedListener true
                         }
                         else -> {
