@@ -24,6 +24,7 @@ class TabContactInfoFragment() : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        val textcolor:Int = this.resources.getColor(R.color.default_text_color)
         lead_name!!.text = arguments!!.getString("name")
         lead_title!!.text = arguments!!.getString("title")
         lead_email!!.text = arguments!!.getString("email")
@@ -36,6 +37,19 @@ class TabContactInfoFragment() : Fragment() {
         lead_country!!.text = arguments!!.getString("country")
         lead_zip!!.text = arguments!!.getString("zip")
         lead_description!!.text = arguments!!.getString("description")
+
+        lead_name.setTextColor(textcolor)
+        lead_title.setTextColor(textcolor)
+        lead_email.setTextColor(textcolor)
+        lead_website.setTextColor(textcolor)
+        lead_phonenumber.setTextColor(textcolor)
+        lead_company.setTextColor(textcolor)
+        lead_address.setTextColor(textcolor)
+        lead_city.setTextColor(textcolor)
+        lead_state.setTextColor(textcolor)
+        lead_country.setTextColor(textcolor)
+        lead_zip.setTextColor(textcolor)
+        lead_description.setTextColor(textcolor)
     }
 
     companion object {

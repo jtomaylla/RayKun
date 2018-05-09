@@ -14,7 +14,10 @@
     <string name="geolocation">Geolocation</string>
     <string name="exit">Exit</string>
     <string name="no_internet_connection">No Internet Connection</string>
+    <string name="proceed_with_deletion">Are you sure you want to proceed with the deletion?</string>
+    <string name="proceed_with_routing">Are you sure you want to proceed with the routing?</string>
 
+    
     <string name="invoice_info">Invoice Info</string>
     <string name="contacts">Contacts</string>
     <string name="team_sales">Team Sales</string>

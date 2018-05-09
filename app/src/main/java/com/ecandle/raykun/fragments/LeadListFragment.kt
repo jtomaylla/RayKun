@@ -94,7 +94,7 @@ class LeadListFragment : Fragment() , DeleteLeadsListener, SearchView.OnQueryTex
                     it.is_public))
         }
 
-        mLeadListAdapter = LeadListAdapter(activity as SimpleActivity, listLeads, true, this, mView.lead_list) {
+        mLeadListAdapter = LeadListAdapter(activity as SimpleActivity, listLeads, false, this, mView.lead_list) {
             if (it is Lead) {
                 editItem(it)
             }

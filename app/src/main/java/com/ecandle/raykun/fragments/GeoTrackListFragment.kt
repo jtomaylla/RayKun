@@ -7,13 +7,14 @@ import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.SearchView
 import android.view.*
 import com.ecandle.raykun.R
-import com.ecandle.raykun.activities.MapsActivity
+import com.ecandle.raykun.activities.GeoTrackMapsActivity
+import com.ecandle.raykun.activities.RoutingMapsActivity
 import com.ecandle.raykun.activities.SimpleActivity
 import com.ecandle.raykun.adapters.GeoTrackListAdapter
 import com.ecandle.raykun.extensions.config
 import com.ecandle.raykun.extensions.dbHelper
 import com.ecandle.raykun.helpers.*
-import com.ecandle.raykun.interfaces.DeleteClientsListener
+import com.ecandle.raykun.interfaces.RoutingClientsListener
 import com.ecandle.raykun.models.Client
 import com.ecandle.raykun.models.ListItem
 import com.simplemobiletools.commons.extensions.beGoneIf
@@ -21,7 +22,7 @@ import com.simplemobiletools.commons.extensions.beVisibleIf
 import kotlinx.android.synthetic.main.fragment_client_list.view.*
 
 
-class GeoTrackListFragment : Fragment(), DeleteClientsListener, SearchView.OnQueryTextListener {
+class GeoTrackListFragment : Fragment(), RoutingClientsListener, SearchView.OnQueryTextListener {
 
     private var mClients: List<Client> = ArrayList()
     lateinit var mView: View
@@ -143,7 +144,7 @@ class GeoTrackListFragment : Fragment(), DeleteClientsListener, SearchView.OnQue
     }
 
     private fun editClient(client: Client) {
-        Intent(context, MapsActivity::class.java).apply {
+        Intent(context, GeoTrackMapsActivity::class.java).apply {
             putExtra(ITEM_ID, client.userid)
             putExtra(CLIENT_LATITUDE, client.latitude)
             putExtra(CLIENT_LONGITUDE, client.longitude)
@@ -153,9 +154,19 @@ class GeoTrackListFragment : Fragment(), DeleteClientsListener, SearchView.OnQue
         }
     }
 
-    override fun deleteClients(ids: ArrayList<Int>) {
+//    override fun deleteClients(ids: ArrayList<Int>) {
+//        val clientIDs = Array(ids.size, { i -> (ids[i].toString()) })
+//        context!!.dbHelper.deleteClients(clientIDs)
+//    }
+
+
+    override  fun routingClients(ids: ArrayList<Int>) {
         val clientIDs = Array(ids.size, { i -> (ids[i].toString()) })
-        context!!.dbHelper.deleteClients(clientIDs)
+        //var selectedClients = context!!.dbHelper.getClientsWithIds(clientIDs)
+        Intent(context, RoutingMapsActivity::class.java).apply {
+            putExtra(SELECTED_CLIENTS, clientIDs)
+            startActivity(this)
+        }
     }
 
     override fun onQueryTextSubmit(query: String): Boolean {
@@ -164,7 +175,6 @@ class GeoTrackListFragment : Fragment(), DeleteClientsListener, SearchView.OnQue
 
     override fun onQueryTextChange(newText: String): Boolean {
         val filteredClientList = filter(mClients, newText)
-        //mGeoTrackListAdapter!!.setSearchResult(filteredModelList)
         if (newText.isEmpty()) {
             checkClients()
         }else{

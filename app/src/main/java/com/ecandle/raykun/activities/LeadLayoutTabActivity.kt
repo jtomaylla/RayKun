@@ -2,7 +2,8 @@ package com.ecandle.raykun.activities
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import com.ecandle.raykun.R
 import com.ecandle.raykun.adapters.LeadTabPagerAdapter
 import com.ecandle.raykun.extensions.dbHelper
@@ -11,7 +12,7 @@ import com.ecandle.raykun.models.Lead
 import kotlinx.android.synthetic.main.activity_lead_layout_tab.*
 
 
-class LeadLayoutTabActivity : AppCompatActivity() {
+class LeadLayoutTabActivity : SimpleActivity() {
     private val LOG_TAG = LeadLayoutTabActivity::class.java.simpleName
 
     //lateinit var mLead: Lead
@@ -19,8 +20,9 @@ class LeadLayoutTabActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lead_layout_tab)
-        setSupportActionBar(mytoolbar)
+        //setSupportActionBar(mytoolbar)
         supportActionBar?.title = resources.getString(R.string.leads)
+
         val leadId = intent.getIntExtra(LEAD_ID, 0)
         val mLead = dbHelper.getLeadWithId(leadId)
 
@@ -57,5 +59,17 @@ class LeadLayoutTabActivity : AppCompatActivity() {
         })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_product_list, menu)
+        menu.findItem(R.id.exit).isVisible = true
+        return true
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.exit -> finish()
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
+    }
 }

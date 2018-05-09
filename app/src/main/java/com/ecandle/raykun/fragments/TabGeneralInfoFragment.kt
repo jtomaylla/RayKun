@@ -30,7 +30,7 @@ class TabGeneralInfoFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        
+        val textcolor:Int = this.resources.getColor(R.color.default_text_color)
 
         lead_status_name!!.text = arguments!!.getString("status_name")
         lead_source_name!!.text = arguments!!.getString("source_name")
@@ -40,6 +40,12 @@ class TabGeneralInfoFragment : Fragment() {
         //lead_is_public!!.text = arguments!!.getString("is_public")
 
         lead_is_public.isChecked = arguments!!.getString("is_public") == "1"
+        lead_status_name.setTextColor(textcolor)
+        lead_source_name.setTextColor(textcolor)
+        lead_assigned.setTextColor(textcolor)
+        lead_dateadded.setTextColor(textcolor)
+        lead_last_contact.setTextColor(textcolor)
+        lead_is_public.setTextColor(textcolor)
     }
 
     companion object {

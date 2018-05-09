@@ -98,7 +98,7 @@ class ClientListFragment : Fragment(), DeleteClientsListener, SearchView.OnQuery
             ))
         }
 
-        mClientListAdapter = ClientListAdapter(activity as SimpleActivity, listClients, true, this, mView.client_list) {
+        mClientListAdapter = ClientListAdapter(activity as SimpleActivity, listClients, false, this, mView.client_list) {
             if (it is Client) {
                 editClient(it)
             }

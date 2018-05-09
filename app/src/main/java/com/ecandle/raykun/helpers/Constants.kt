@@ -24,6 +24,7 @@ val CLIENT_LATITUDE ="latitude"
 val CLIENT_LONGITUDE ="longitude"
 val CLIENT_COMPANY = "company"
 val CLIENT_ADDRESS = "address"
+val SELECTED_CLIENTS = "selected_clients"
 
 val TASK_ID = "task_id"
 val TASK_START_DATE = "task_start_date"

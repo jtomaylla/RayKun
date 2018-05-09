@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.fragment_tab_client_details.*
  * A simple [Fragment] subclass.
  */
 class TabClientDetailsFragment() : Fragment() {
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -24,6 +23,7 @@ class TabClientDetailsFragment() : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        val textcolor:Int = this.resources.getColor(R.color.default_text_color)
 
         client_company!!.text = arguments!!.getString("company")
         client_vat!!.text = arguments!!.getString("vat")
@@ -33,12 +33,24 @@ class TabClientDetailsFragment() : Fragment() {
 //        client_default_language!!.text = arguments!!.getString("default_language")
         client_latitude!!.text = arguments!!.getString("latitude")
         client_longitude!!.text = arguments!!.getString("longitude")
-
         client_address!!.text = arguments!!.getString("address")
         client_city!!.text = arguments!!.getString("city")
         client_state!!.text = arguments!!.getString("state")
         client_country!!.text = arguments!!.getString("country_name")
         client_zip!!.text = arguments!!.getString("zip")
+
+
+        client_company.setTextColor(textcolor)
+        client_vat.setTextColor(textcolor)
+        client_phonenumber.setTextColor(textcolor)
+        client_website.setTextColor(textcolor)
+        client_latitude.setTextColor(textcolor)
+        client_longitude.setTextColor(textcolor)
+        client_address.setTextColor(textcolor)
+        client_city.setTextColor(textcolor)
+        client_state.setTextColor(textcolor)
+        client_country.setTextColor(textcolor)
+        client_zip.setTextColor(textcolor)
     }
 
     companion object {

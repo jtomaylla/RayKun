@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/routing_client_holder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/big_margin"
+    android:paddingRight="@dimen/big_margin"
+    android:paddingTop="@dimen/big_margin">
+
+    <com.simplemobiletools.commons.views.MyTextView
+        android:id="@+id/routing_client_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/proceed_with_routing"
+        android:textSize="@dimen/bigger_text_size"/>
+
+
+    <RadioGroup
+        android:id="@+id/routing_client_radio_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.simplemobiletools.commons.views.MyCompatRadioButton
+            android:id="@+id/routing_client_one_only"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:paddingBottom="@dimen/normal_margin"
+            android:paddingTop="@dimen/normal_margin"
+            android:text="@string/delete_one_only"/>
+
+        <com.simplemobiletools.commons.views.MyCompatRadioButton
+            android:id="@+id/routing_client_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/normal_margin"
+            android:paddingTop="@dimen/normal_margin"
+            android:text="@string/delete_all_occurrences"/>
+    </RadioGroup>
+</LinearLayout>

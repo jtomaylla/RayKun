@@ -2,7 +2,8 @@ package com.ecandle.raykun.activities
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import com.ecandle.raykun.R
 import com.ecandle.raykun.adapters.ClientTabPagerAdapter
 import com.ecandle.raykun.extensions.dbHelper
@@ -11,7 +12,7 @@ import com.ecandle.raykun.models.Client
 import kotlinx.android.synthetic.main.activity_client_layout_tab.*
 
 
-class ClientLayoutTabActivity  : AppCompatActivity() {
+class ClientLayoutTabActivity  : SimpleActivity() {
     private val LOG_TAG = ClientLayoutTabActivity ::class.java.simpleName
 
     //lateinit var mClient: Client
@@ -19,7 +20,7 @@ class ClientLayoutTabActivity  : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_client_layout_tab)
-        setSupportActionBar(mytoolbar)
+        //setSupportActionBar(mytoolbar)
         supportActionBar?.title = resources.getString(R.string.clients)
         val clientId = intent.getIntExtra(ITEM_ID, 0)
         val mClient = dbHelper.getClientWithId(clientId)
@@ -59,5 +60,17 @@ class ClientLayoutTabActivity  : AppCompatActivity() {
         })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_product_list, menu)
+        menu.findItem(R.id.exit).isVisible = true
+        return true
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.exit -> finish()
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
+    }
 }

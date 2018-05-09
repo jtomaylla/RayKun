@@ -31,8 +31,8 @@ class TabInvoiceInfoFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        
-
+        val textcolor:Int = this.resources.getColor(R.color.default_text_color)
+        val texttitlecolor:Int = this.resources.getColor(R.color.md_grey_500_dark)
         client_billing_street!!.text = arguments!!.getString("billing_street")
         client_billing_city!!.text = arguments!!.getString("billing_city")
         client_billing_state!!.text = arguments!!.getString("billing_state")
@@ -44,7 +44,21 @@ class TabInvoiceInfoFragment : Fragment() {
         client_shipping_state!!.text = arguments!!.getString("shipping_state")
         client_shipping_country!!.text = arguments!!.getString("shipping_country_name")
         client_shipping_zip!!.text = arguments!!.getString("shipping_zip")
-        
+
+        client_billing_label.setTextColor(texttitlecolor)
+        client_billing_street.setTextColor(textcolor)
+        client_billing_city.setTextColor(textcolor)
+        client_billing_state.setTextColor(textcolor)
+        client_billing_country.setTextColor(textcolor)
+        client_billing_zip.setTextColor(textcolor)
+
+        client_shipping_label.setTextColor(texttitlecolor)
+        client_shipping_street.setTextColor(textcolor)
+        client_shipping_city.setTextColor(textcolor)
+        client_shipping_state.setTextColor(textcolor)
+        client_shipping_country.setTextColor(textcolor)
+        client_shipping_zip.setTextColor(textcolor)
+
     }
 
     companion object {

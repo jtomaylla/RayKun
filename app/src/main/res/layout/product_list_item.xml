@@ -28,7 +28,7 @@
             <!--android:alpha=".4"-->
             <!--android:ellipsize="end"-->
             <!--android:maxLines="1"-->
-            <!--android:textSize="@dimen/day_text_size"-->
+            <!--android:textSize="@dimen/default_text_size"-->
             <!--tools:text="Description"/>-->
 
         <!--<com.simplemobiletools.commons.views.MyTextView-->
@@ -40,7 +40,7 @@
             <!--android:ellipsize="end"-->
             <!--android:maxLines="1"-->
             <!--android:text="Long Description"-->
-            <!--android:textSize="@dimen/day_text_size"/>-->
+            <!--android:textSize="@dimen/default_text_size"/>-->
 
         <!--<com.simplemobiletools.commons.views.MyTextView-->
             <!--android:id="@+id/product_item_rate"-->
@@ -50,7 +50,7 @@
             <!--android:layout_toLeftOf="@+id/product_item_color"-->
             <!--android:layout_toRightOf="@+id/product_item_description"-->
             <!--android:paddingRight="@dimen/activity_margin"-->
-            <!--android:textSize="@dimen/day_text_size"-->
+            <!--android:textSize="@dimen/default_text_size"-->
             <!--tools:text="######"/>-->
 
         <!--<com.simplemobiletools.commons.views.MyTextView-->
@@ -61,14 +61,14 @@
             <!--android:layout_marginLeft="@dimen/activity_margin"-->
             <!--android:layout_toLeftOf="@+id/product_item_color"-->
             <!--android:layout_toRightOf="@+id/product_item_long_description"-->
-            <!--android:textSize="@dimen/day_text_size"-->
+            <!--android:textSize="@dimen/default_text_size"-->
             <!--android:paddingRight="@dimen/activity_margin"-->
             <!--tools:text="######"/>-->
         <com.simplemobiletools.commons.views.MyTextView
             android:id="@+id/product_item_itemid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/day_text_size"
+            android:textSize="@dimen/default_text_size"
             tools:text="######"/>
 
         <com.simplemobiletools.commons.views.MyTextView
@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/product_item_itemid"
             android:text="######"
-            android:textSize="@dimen/day_text_size"/>
+            android:textSize="@dimen/default_text_size"/>
 
         <com.simplemobiletools.commons.views.MyTextView
             android:id="@+id/product_item_description"
@@ -89,7 +89,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:paddingRight="@dimen/activity_margin"
-            android:textSize="@dimen/day_text_size"
+            android:textSize="@dimen/default_text_size"
             tools:text="Description"/>
 
         <com.simplemobiletools.commons.views.MyTextView
@@ -104,7 +104,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:paddingRight="@dimen/activity_margin"
-            android:textSize="@dimen/day_text_size"
+            android:textSize="@dimen/default_text_size"
             tools:text="Long Description"/>
 
 

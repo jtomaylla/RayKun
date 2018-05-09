@@ -65,7 +65,7 @@ class ProductListFragment : Fragment(), DeleteProductsListener, SearchView.OnQue
             listItems.add(Item(it.itemid, it.description, it.long_description, it.rate,it.taxrate, it.taxrate_2, it.group_id,it.unit))
         }
 
-        mProductListAdapter = ProductListAdapter(activity as SimpleActivity, listItems, true, this, mView.product_list) {
+        mProductListAdapter = ProductListAdapter(activity as SimpleActivity, listItems, false, this, mView.product_list) {
             if (it is Item) {
                 editItem(it)
             }

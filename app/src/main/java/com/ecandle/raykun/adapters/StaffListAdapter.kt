@@ -19,7 +19,7 @@ class StaffListAdapter(private val context: Context, val data: ArrayList<Staff>)
 
     // Bind data
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
+        val textcolor:Int = context.resources.getColor(R.color.default_text_color)
         // Get current position of item in recyclerview to bind data and assign values from list
         val myHolder = holder as MyHolder
         val current = data[position]
@@ -28,6 +28,10 @@ class StaffListAdapter(private val context: Context, val data: ArrayList<Staff>)
         myHolder.staff_name.text = current.name
         myHolder.staff_email.text = current.email
 
+        myHolder.staff_date_assigned.setTextColor(textcolor)
+        myHolder.staff_phonenumber.setTextColor(textcolor)
+        myHolder.staff_name.setTextColor(textcolor)
+        myHolder.staff_email.setTextColor(textcolor)
     }
     // return total item from List
     override fun getItemCount(): Int {

@@ -78,7 +78,7 @@ class ContactListFragment : Fragment() , DeleteContactsListener, SearchView.OnQu
         //mContactListAdapter = ContactListAdapter(context!!, listContacts)
 
 
-        mContactListAdapter = ContactListAdapter(activity as SimpleActivity, listContacts, true, this, mView.contact_list) {
+        mContactListAdapter = ContactListAdapter(activity as SimpleActivity, listContacts, false, this, mView.contact_list) {
             if (it is Contact) {
                 editItem(it)
             }

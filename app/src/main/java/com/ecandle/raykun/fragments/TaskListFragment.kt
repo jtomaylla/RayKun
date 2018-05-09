@@ -65,7 +65,7 @@ class TaskListFragment : Fragment(), DeleteTasksListener , SearchView.OnQueryTex
             listItems.add(Task(it.id, it.name, it.description, it.priority,it.startdate, it.duedate, it.status))
         }
 
-        mTaskListAdapter = TaskListAdapter(activity as SimpleActivity, listItems, true, this, mView.calendar_tasks_list) {
+        mTaskListAdapter = TaskListAdapter(activity as SimpleActivity, listItems, false, this, mView.calendar_tasks_list) {
             if (it is Task) {
                 editTask(it)
             }

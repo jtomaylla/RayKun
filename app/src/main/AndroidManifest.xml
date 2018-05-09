@@ -158,11 +158,15 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activities.GeoTrackMapsActivity"
+            android:name=".activities.GeoTrackMapsActivityOld"
             android:label="@string/title_activity_geo_track_maps" />
         <activity
-            android:name=".activities.MapsActivity"
+            android:name=".activities.GeoTrackMapsActivity"
             android:label="@string/title_activity_maps"></activity>
+        <activity
+            android:name=".activities.RoutingMapsActivity"
+            android:label="@string/title_activity_maps"></activity>
+
     </application>
 
 </manifest>
