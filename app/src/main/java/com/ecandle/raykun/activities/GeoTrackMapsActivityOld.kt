@@ -72,7 +72,6 @@ class GeoTrackMapsActivityOld : FragmentActivity(), OnMapReadyCallback  {
 
     fun GetUserLocation(){
         Toast.makeText(this,"User location access on",Toast.LENGTH_LONG).show()
-        //TODO: Will implement later
 
         var myLocation= MylocationListener()
 
