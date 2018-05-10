@@ -16,6 +16,7 @@ import com.ecandle.raykun.extensions.dbHelper
 import com.ecandle.raykun.extensions.launchNewClientIntent
 import com.ecandle.raykun.fragments.GeoTrackListFragment
 import com.ecandle.raykun.helpers.ConnectionDetector
+import com.ecandle.raykun.helpers.MAP_MODE
 import com.ecandle.raykun.helpers.SavedSettings
 import com.ecandle.raykun.helpers.USER_ID
 import com.ecandle.raykun.models.Client
@@ -36,6 +37,8 @@ class GeoTrackListActivity : SimpleActivity() {
     private var gps: TrackGPS? = null
     var PERMISSION_CODE_1 = 23
 
+    private var mMapMode: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_client_list)
@@ -49,9 +52,9 @@ class GeoTrackListActivity : SimpleActivity() {
 
         hideFab()
 
-
-
         mUserId = intent.getStringExtra(USER_ID)
+        mMapMode = intent.getStringExtra(MAP_MODE)
+
         val intent = intent ?: return
 
         if (connectionDetector!!.isConnectingToInternet) {
@@ -151,7 +154,7 @@ class GeoTrackListActivity : SimpleActivity() {
     }
     private fun fillClientsList() {
         client_list_holder.beVisible()
-        supportFragmentManager.beginTransaction().replace(R.id.client_list_holder, GeoTrackListFragment(), "").commit()
+        supportFragmentManager.beginTransaction().replace(R.id.client_list_holder, GeoTrackListFragment.newInstance(this!!.mMapMode), "").commit()
     }
 
     fun loadClients(){

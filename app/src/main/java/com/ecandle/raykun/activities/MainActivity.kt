@@ -102,6 +102,7 @@ class MainActivity : AppCompatActivity() {
     fun startGeotrack(){
         Intent(this, GeoTrackListActivity::class.java).apply {
             putExtra(USER_ID, mUserId)
+            putExtra(MAP_MODE, "1")
             startActivity(this)
         }
         op="geotrack"
@@ -115,12 +116,11 @@ class MainActivity : AppCompatActivity() {
         op="dashboard"
     }
     fun startGeoRouting(){
-        Toast.makeText(this@MainActivity, "You don't have access to Clients Routing", Toast.LENGTH_SHORT).show()
-
-//        Intent(this, GeoRoutingListActivity::class.java).apply {
-//            putExtra(USER_ID, mUserId)
-//            startActivity(this)
-//        }
+        Intent(this, GeoTrackListActivity::class.java).apply {
+            putExtra(USER_ID, mUserId)
+            putExtra(MAP_MODE, "2")
+            startActivity(this)
+        }
         op="GeoRouting"
     }
     fun startLeads(){

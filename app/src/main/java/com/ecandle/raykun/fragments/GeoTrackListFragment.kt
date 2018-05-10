@@ -99,7 +99,12 @@ class GeoTrackListFragment : Fragment(), RoutingClientsListener, SearchView.OnQu
             ))
         }
 
-        mGeoTrackListAdapter = GeoTrackListAdapter(activity as SimpleActivity, listClients, true, this, mView.client_list) {
+        var allowLongClick = false
+        if (arguments!!.getString("map_mode") == "2"){
+            allowLongClick = true
+        }
+
+        mGeoTrackListAdapter = GeoTrackListAdapter(activity as SimpleActivity, listClients, allowLongClick, this, mView.client_list) {
             if (it is Client) {
                 editClient(it)
             }
@@ -196,5 +201,15 @@ class GeoTrackListFragment : Fragment(), RoutingClientsListener, SearchView.OnQu
         return filteredClientList
     }
 
+    companion object {
 
+        fun newInstance(mapMode: String): GeoTrackListFragment {
+            val arguments = Bundle()
+
+            arguments.putString("map_mode", mapMode)
+            val fragment = GeoTrackListFragment()
+            fragment.arguments = arguments
+            return fragment
+        }
+    }
 }

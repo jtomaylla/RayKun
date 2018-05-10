@@ -37,6 +37,8 @@ val WEEKLY_VIEW = 4
 
 val REMINDER_OFF = -1
 
+val MAP_MODE = "map_mode"
+
 val DAY = 86400
 val WEEK = 604800
 val MONTH = 2592001    // exact value not taken into account, Joda is used for adding months and years
