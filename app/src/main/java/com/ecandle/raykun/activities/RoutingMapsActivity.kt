@@ -55,21 +55,6 @@ class RoutingMapsActivity : FragmentActivity(), OnMapReadyCallback  {
     }
 
     var ACCESSLOCATION=123
-//    fun checkPermmision(){
-//
-//        if(Build.VERSION.SDK_INT>=23){
-//
-//            if(ActivityCompat.
-//                            checkSelfPermission(this,
-//                                    android.Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
-//
-//                requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),ACCESSLOCATION)
-//                return
-//            }
-//        }
-//
-//        GetUserLocation()
-//    }
 
     fun GetUserLocation(){
         Toast.makeText(this,"User location access on",Toast.LENGTH_LONG).show()
@@ -232,7 +217,7 @@ class RoutingMapsActivity : FragmentActivity(), OnMapReadyCallback  {
 
                     }
 
-                    Thread.sleep(1000)
+                    //Thread.sleep(1000)
 
                 }catch (ex:Exception){}
 

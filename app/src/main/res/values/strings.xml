@@ -7,7 +7,7 @@
     <string name="sales">Sales</string>
     <string name="clients">Clients</string>
     <string name="reports">Reports</string>
-    <string name="dashboard">Dashboard</string>
+    <string name="dashboard">Anaylitics</string>
     <string name="geotrack">Geotrack</string>
     <string name="dialing">Dialing</string>
     <string name="expenses">Expenses</string>
@@ -17,7 +17,7 @@
     <string name="proceed_with_deletion">Are you sure you want to proceed with the deletion?</string>
     <string name="proceed_with_routing">Are you sure you want to proceed with the routing?</string>
 
-    
+
     <string name="invoice_info">Invoice Info</string>
     <string name="contacts">Contacts</string>
     <string name="team_sales">Team Sales</string>
@@ -84,7 +84,6 @@
     <string name="completed_status">Completed</string>
 
     <!-- Item -->
-    <string name="item">Item</string>
     <string name="edit_item">Edit Item</string>
     <string name="new_item">New Item</string>
     <string name="item_added">Item added successfully</string>
@@ -425,13 +424,15 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_tab_layout_customers">TabLayoutCustomersActivity</string>
+    <string name="title_activity_tab_layout_customers">Customers Info</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="title_activity_geo_track_maps">Map</string>
+    <string name="title_activity_geo_track_maps">GeoTrack</string>
     <string name="title_activity_maps">Map</string>
-
+    <string name="title_activity_analytics">Analytics</string>
+    <string name="app_launcher_name">Raykun</string>
+    <string name="item">Item</string>
 </resources>

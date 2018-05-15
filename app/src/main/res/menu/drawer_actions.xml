@@ -45,10 +45,10 @@
         android:icon="@drawable/ic_people_outline_white_24dp"
         android:title="@string/clients"
         />
-    <item android:id="@+id/reports_menu"
-        android:icon="@drawable/ic_timeline_white_24dp"
-        android:title="@string/reports"
-        />
+    <!--<item android:id="@+id/reports_menu"-->
+        <!--android:icon="@drawable/ic_timeline_white_24dp"-->
+        <!--android:title="@string/reports"-->
+        <!--/>-->
     <item android:id="@+id/dashboard_menu"
         android:icon="@drawable/ic_track_changes_white_24dp"
         android:title="@string/dashboard"

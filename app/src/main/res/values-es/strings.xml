@@ -7,7 +7,7 @@
     <string name="sales">Ventas</string>
     <string name="clients">Clientes</string>
     <string name="reports">Reports</string>
-    <string name="dashboard">Panel de Control</string>
+    <string name="dashboard">Analitica</string>
     <string name="geotrack">Geo Seguimiento</string>
     <string name="dialing">Comunicar</string>
     <string name="expenses">Gastos</string>
@@ -18,7 +18,7 @@
     <string name="proceed_with_routing">¿Está seguro de querer continuar con el routeo?</string>
 
     <string name="app_name">Simple Calendar</string>
-    <string name="app_launcher_name">Simple Calendar</string>
+    <string name="app_launcher_name">Raykun</string>
     <string name="change_view">Cambiar vista</string>
     <string name="weekly_view">Vista semanal</string>
     <string name="monthly_view">Vista mensual</string>
@@ -408,6 +408,19 @@
         Esta aplicación es sólo una parte de una mayor serie de aplicaciones. Puede encontrar el resto en http://www.simplemobiletools.com
     </string>
     <string name="is_public_lead">Es publico</string>
+    <string name="no_upcoming_products">Parece que no tienes ningún producto..</string>
+    <string name="add_some_products">Puede añadir products con el botón Más en la parte inferior.</string>
+    <string name="action_settings">Configuraciones</string>
+    <string name="edit_item">Editar Item</string>
+    <string name="item">Item</string>
+    <string name="title_activity_analytics">Analitica</string>
+    <string name="title_activity_geo_track_maps">GeoTrack</string>
+    <string name="title_activity_maps">Mapa</string>
+    <string name="title_activity_tab_layout_customers">Info Clientes</string>
+    <string name="item_added">El item se ha añadido con éxito</string>
+    <string name="item_updated">El item se ha actualizado con éxito</string>
+    <string name="items">Items</string>
+    <string name="new_item">Nuevo Item</string>
 
     <!--
         Haven't found some strings? There's more at

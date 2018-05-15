@@ -108,11 +108,11 @@ class MainActivity : AppCompatActivity() {
         op="geotrack"
     }
     fun startDashboard(){
-        Toast.makeText(this@MainActivity, "You don't have access to dashboard", Toast.LENGTH_SHORT).show()
-//        Intent(this, DashboardActivity::class.java).apply {
-//            putExtra(USER_ID, mUserId)
-//            startActivity(this)
-//        }
+        //Toast.makeText(this@MainActivity, "You don't have access to dashboard", Toast.LENGTH_SHORT).show()
+        Intent(this, AnalyticsActivity::class.java).apply {
+            putExtra(USER_ID, mUserId)
+            startActivity(this)
+        }
         op="dashboard"
     }
     fun startGeoRouting(){
@@ -166,10 +166,10 @@ class MainActivity : AppCompatActivity() {
             clients.id -> {
                 startClients()
             }
-            reports.id -> {
-                startReports()
-                op="reports"
-            }
+//            reports.id -> {
+//                startReports()
+//                op="reports"
+//            }
             dashboard.id -> {
                 startDashboard()
             }
@@ -229,12 +229,10 @@ class MainActivity : AppCompatActivity() {
                             startProducts()
                             return@OnNavigationItemSelectedListener true
                         }
-//                        R.id.surveys_menu -> {
-//                            Toast.makeText(this@MainActivity, "You have selected  Tasks", Toast.LENGTH_SHORT).show()
-//                            //val intent = Intent(this@MainActivity, CalendarGActivity::class.java)
-//                            //startActivity(intent)
-//                            return@OnNavigationItemSelectedListener true
-//                        }
+                        R.id.leads_menu -> {
+                            startLeads()
+                            return@OnNavigationItemSelectedListener true
+                        }
 //                        R.id.sales_menu -> {
 //                            Toast.makeText(this@MainActivity, "You have selected surveys", Toast.LENGTH_SHORT).show()
 //                            //val intent = Intent(this@MainActivity, CalendarGActivity::class.java)
@@ -253,7 +251,7 @@ class MainActivity : AppCompatActivity() {
                             return@OnNavigationItemSelectedListener true
                         }
                         R.id.dashboard_menu -> {
-
+                            startDashboard()
                             return@OnNavigationItemSelectedListener true
                         }
                         R.id.geotrack_menu -> {
