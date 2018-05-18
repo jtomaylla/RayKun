@@ -1,5 +1,10 @@
 <resources>
-    <string name="app_name">Raykun</string>
+    <string name="app_name">RayKun</string>
+    <string name="smart_sales_force">Smart Sales Force</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="login">Login</string>
+    <string name="demo_login">Demo Login</string>
     <string name="calendar">Calendar</string>
     <string name="tasks">Tasks</string>
     <string name="products">Products</string>

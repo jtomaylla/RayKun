@@ -8,6 +8,8 @@ import android.widget.Toast
 import com.ecandle.raykun.R
 import com.ecandle.raykun.helpers.ConnectionDetector
 import com.ecandle.raykun.helpers.SavedSettings
+import com.ecandle.raykun.helpers.USER_EMAIL
+import com.ecandle.raykun.helpers.USER_KEY
 import com.ecandle.raykun.tasks.pullServerDataTask
 import com.simplemobiletools.commons.extensions.toast
 import kotlinx.android.synthetic.main.activity_login.*
@@ -114,9 +116,11 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun buRegisterUserEvent(view:View){
-        val intent=Intent(this, DemoLogin::class.java)
-        startActivity(intent)
+    fun buDemoLoginEvent(view:View){
+        etEmail.setText(USER_EMAIL)
+        etPassword.setText(USER_KEY)
+
+        buLoginEvent(view)
     }
 
 }

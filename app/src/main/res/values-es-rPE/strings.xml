@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Raykun</string>
+    <string name="app_name">RayKun</string>
+    <string name="smart_sales_force">Fuerza de Ventas Inteligente</string>
+    <string name="enter_your_email">Ingrese su correo</string>
+    <string name="enter_your_password">Ingrese su contraseña</string>
+    <string name="login">Iniciar Sesion</string>
+    <string name="demo_login">Iniciar Sesion Demo</string>
     <string name="calendar">Calendario</string>
     <string name="tasks">Tareas</string>
     <string name="products">Productos</string>

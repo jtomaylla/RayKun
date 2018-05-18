@@ -20,6 +20,9 @@ val ITEM_ID = "item_id"
 val CONTACT_ID = "id"
 val LEAD_ID = "id"
 
+val USER_EMAIL = "juan.tomaylla@gmail.com"
+val USER_KEY = "cajahuan02"
+
 val CLIENT_LATITUDE ="latitude"
 val CLIENT_LONGITUDE ="longitude"
 val CLIENT_COMPANY = "company"
