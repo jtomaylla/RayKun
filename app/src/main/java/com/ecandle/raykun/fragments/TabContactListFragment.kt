@@ -107,11 +107,15 @@ class TabContactListFragment : Fragment()  {
 
         val contactsData =  loadContactData.execute(url).get()
 
-        Log.d("loadContactData",contactsData.toString())
-
-        for (contact in contactsData){
-            saveContact(contact)
-        }
+        if (contactsData != null) {
+            Log.d("loadContactData",contactsData.toString())
+            for (contact in contactsData) {
+                saveContact(contact)
+            }
+        } //else {
+//            context!!.toast(getString(R.string.no_upcoming_contacts), Toast.LENGTH_LONG)
+//
+//        }
     }
     private fun saveContact(contact: Contact) {
 

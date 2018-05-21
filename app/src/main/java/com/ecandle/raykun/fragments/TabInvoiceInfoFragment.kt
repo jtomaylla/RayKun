@@ -37,12 +37,15 @@ class TabInvoiceInfoFragment : Fragment() {
         client_billing_city!!.text = arguments!!.getString("billing_city")
         client_billing_state!!.text = arguments!!.getString("billing_state")
         client_billing_country!!.text = arguments!!.getString("billing_country_name")
+        if (client_billing_country!!.text==null) client_billing_country!!.text=""
         client_billing_zip!!.text = arguments!!.getString("billing_zip")
 
         client_shipping_street!!.text = arguments!!.getString("shipping_street")
         client_shipping_city!!.text = arguments!!.getString("shipping_city")
         client_shipping_state!!.text = arguments!!.getString("shipping_state")
+
         client_shipping_country!!.text = arguments!!.getString("shipping_country_name")
+        if (client_shipping_country!!.text==null) client_shipping_country!!.text=""
         client_shipping_zip!!.text = arguments!!.getString("shipping_zip")
 
         client_billing_label.setTextColor(texttitlecolor)
@@ -76,7 +79,7 @@ class TabInvoiceInfoFragment : Fragment() {
             arguments.putString("shipping_state", client.shipping_state)
             arguments.putString("shipping_zip", client.shipping_zip)
             arguments.putString("shipping_country", client.shipping_country)
-            arguments.putString("billing_country_name",client.billing_country_name)
+            arguments.putString("billing_country_name", client.billing_country_name)
             arguments.putString("shipping_country_name",client.shipping_country_name)
             val fragment = TabInvoiceInfoFragment()
             fragment.arguments = arguments
