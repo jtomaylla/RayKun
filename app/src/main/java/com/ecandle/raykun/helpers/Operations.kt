@@ -33,12 +33,23 @@ class Operations{
         var myLoc = Location("MyLocation")
         myLoc!!.latitude = fromLocLat.toDouble()
         myLoc!!.longitude = fromLocLon.toDouble()
-
+        var distance:Float = 0f
         var clientLoc = Location("ClientLocation")
-        clientLoc!!.latitude = toLocLat.toDouble()
-        clientLoc!!.longitude =  toLocLon.toDouble()
 
-        val distance = clientLoc!!.distanceTo(myLoc!!) / 1000
+        if(toLocLat.isEmpty() || toLocLon.isEmpty()){
+            val toLocLatTemp = CURRENT_LATITUDE
+            clientLoc!!.latitude = toLocLatTemp.toDouble()
+            val toLocLonTemp = CURRENT_LONGITUDE
+            clientLoc!!.longitude =  toLocLonTemp.toDouble()
+        }else{
+            clientLoc!!.latitude = toLocLat.toDouble()
+            clientLoc!!.longitude = toLocLon.toDouble()
+        }
+
+        if (!toLocLat.isEmpty() && !toLocLon.isEmpty()) {
+            distance = clientLoc!!.distanceTo(myLoc!!) / 1000
+        }
+
         //val textDistance = context!!.getResources().getString(R.string.distance_away)
         //val distanceText = String.format(Locale.getDefault(), "%.2f", distance) + textDistance //" km Away"
         val distanceText = String.format(Locale.getDefault(), "%.2f", distance) + " km Away"

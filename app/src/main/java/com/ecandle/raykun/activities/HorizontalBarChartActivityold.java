@@ -32,7 +32,7 @@ import com.github.mikephil.charting.utils.MPPointF;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HorizontalBarChartActivity extends DemoBase implements OnSeekBarChangeListener,
+public class HorizontalBarChartActivityold extends DemoBase implements OnSeekBarChangeListener,
         OnChartValueSelectedListener {
 
     protected HorizontalBarChart mChart;

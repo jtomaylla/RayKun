@@ -46,7 +46,7 @@ class GeoTrackListActivity : SimpleActivity() {
         var connectionDetector = ConnectionDetector(this)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_cross)
 
-        supportActionBar?.title = resources.getString(R.string.clients)
+        supportActionBar?.title = resources.getString(R.string.geotrack)
 
         client_fab.setOnClickListener { launchNewClientIntent() }
 
@@ -54,6 +54,8 @@ class GeoTrackListActivity : SimpleActivity() {
 
         mUserId = intent.getStringExtra(USER_ID)
         mMapMode = intent.getStringExtra(MAP_MODE)
+
+        if (mMapMode == "2") supportActionBar?.title = resources.getString(R.string.geolocation)
 
         val intent = intent ?: return
 

@@ -166,3 +166,6 @@ val SOURCE_CONTACT_ANNIVERSARY = "contact-anniversary"
 
 // deprecated
 val SOURCE_GOOGLE_CALENDAR = 1
+
+val CURRENT_LATITUDE = "-12.3456"
+val CURRENT_LONGITUDE = "37.7785"

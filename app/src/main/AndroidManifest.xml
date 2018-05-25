@@ -169,7 +169,6 @@
         <activity
             android:name=".activities.AnalyticsActivity"
             android:label="@string/title_activity_analytics" />
-
         <activity
             android:name=".activities.LineChartActivity1"
             android:label="@string/title_activity_analytics" />
@@ -177,7 +176,7 @@
             android:name=".activities.BarChartActivity"
             android:label="@string/title_activity_analytics" />
         <activity
-            android:name=".activities.HorizontalBarChartActivity"
+            android:name=".activities.TopFinanceBarChartActivity"
             android:label="@string/title_activity_analytics" />
         <activity
             android:name=".activities.PieChartActivity"
@@ -185,15 +184,24 @@
         <activity
             android:name=".activities.PiePolylineChartActivity"
             android:label="@string/title_activity_analytics" />
-
         <activity
             android:name=".activities.StackedBarActivity"
             android:label="@string/title_activity_analytics" />
         <activity
             android:name=".activities.RadarChartActivity"
             android:label="@string/title_activity_analytics" />
-
-
+        <activity
+            android:name=".activities.InvoiceOverviewPieChartActivity"
+            android:label="@string/title_activity_analytics"/>
+        <activity
+            android:name=".activities.InvoicingOverviewBarChartActivity"
+            android:label="@string/title_activity_analytics"/>
+        <activity
+            android:name=".activities.BudgetsOverviewBarChartActivity"
+            android:label="@string/title_activity_analytics"/>
+        <activity
+            android:name=".activities.ProposalsOverviewBarChartActivity"
+            android:label="@string/title_activity_analytics"/>
     </application>
 
 </manifest>

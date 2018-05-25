@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import com.ecandle.raykun.R
 import com.ecandle.raykun.activities.SimpleActivity
 import com.ecandle.raykun.dialogs.RoutingClientDialog
+import com.ecandle.raykun.helpers.CURRENT_LATITUDE
+import com.ecandle.raykun.helpers.CURRENT_LONGITUDE
 import com.ecandle.raykun.helpers.Operations
 import com.ecandle.raykun.helpers.SavedSettings
 import com.ecandle.raykun.interfaces.RoutingClientsListener
@@ -79,6 +81,11 @@ class GeoTrackListAdapter(activity: SimpleActivity, val listClients: ArrayList<L
 
             var myCurrentLat = savedSettings.getSettings("myCurrentLat").toString()
             var myCurrentLon = savedSettings.getSettings("myCurrentLon").toString()
+
+            if(myCurrentLat.isEmpty() || myCurrentLon.isEmpty()){
+                myCurrentLat = CURRENT_LATITUDE
+                myCurrentLon = CURRENT_LONGITUDE
+            }
 
             val op= Operations()
             //var result = op.calculateDistanceInKilometer("-12.13588935","-77.014846647263",client.latitude,client.longitude)

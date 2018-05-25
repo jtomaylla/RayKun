@@ -4,8 +4,8 @@
     <string name="smart_sales_force">Fuerza de Ventas Inteligente</string>
     <string name="enter_your_email">Ingrese su correo</string>
     <string name="enter_your_password">Ingrese su contraseña</string>
-    <string name="login">Iniciar Sesion</string>
-    <string name="demo_login">Iniciar Sesion Demo</string>
+    <string name="login">Iniciar Sesión</string>
+    <string name="demo_login">Sesión Demo</string>
     <string name="calendar">Calendario</string>
     <string name="tasks">Tareas</string>
     <string name="products">Productos</string>
@@ -13,11 +13,11 @@
     <string name="sales">Ventas</string>
     <string name="clients">Clientes</string>
     <string name="reports">Reports</string>
-    <string name="dashboard">Analitica</string>
-    <string name="geotrack">Geo Seguimiento</string>
+    <string name="dashboard">Analítica</string>
+    <string name="geotrack">GeoRutas</string>
     <string name="dialing">Comunicar</string>
     <string name="expenses">Gastos</string>
-    <string name="geolocation">Geo Ubicacion</string>
+    <string name="geolocation">GeoUbic.</string>
     <string name="exit">Salir</string>
     <string name="no_internet_connection">No hay Internet</string>
     <string name="invoice_info">Info Facturacion</string>
@@ -92,12 +92,12 @@
     <string name="user_id">ID usuario</string>
 
     <!-- Lead -->
-    <string name="lead">Lead</string>
+    <string name="lead">Prospecto</string>
     <string name="edit_lead">Editar Lead</string>
     <string name="new_lead">Nuevo Lead</string>
     <string name="lead_added">Lead se ha añadido con éxito</string>
     <string name="lead_updated">Lead se ha actualizado con éxito</string>
-    <string name="leads">Leads</string>
+    <string name="leads">Prospectos</string>
 
     <!-- Task details -->
     <string name="priority">Prioridad</string>

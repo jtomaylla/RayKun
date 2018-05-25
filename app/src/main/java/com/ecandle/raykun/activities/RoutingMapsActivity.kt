@@ -182,7 +182,7 @@ class RoutingMapsActivity : FragmentActivity(), OnMapReadyCallback  {
                         mMap!!.addMarker(MarkerOptions()
                                 .position(sydney)
                                 .title("Me")
-                                .snippet(" here is my location lat:"+location!!.latitude+"lng:"+location!!.longitude)
+                                .snippet(" My location: "+ "lat:"+location!!.latitude+" lng:"+location!!.longitude)
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_google_maps_marker)))
                         mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10f))
 
@@ -198,16 +198,16 @@ class RoutingMapsActivity : FragmentActivity(), OnMapReadyCallback  {
                                 mMap!!.addMarker(MarkerOptions()
                                         .position(GeoTrackLoc)
                                         .title(newGeoTrack.name!!)
-                                        .snippet(newGeoTrack.des!! +", power:"+ newGeoTrack!!.power)
+                                        .snippet(newGeoTrack.des!! +", location:"+ "lat:"+location!!.latitude+"lng:"+location!!.longitude)
                                         .icon(BitmapDescriptorFactory.fromResource(newGeoTrack.image!!)))
 
 
                                 if (location!!.distanceTo(newGeoTrack.location)<2){
                                     newGeoTrack.IsCatch=true
                                     listGeoTracks[i]=newGeoTrack
-                                    playerPower+=newGeoTrack.power!!
+                                    //playerPower+=newGeoTrack.power!!
                                     Toast.makeText(applicationContext,
-                                            "You catch new GeoTrack your new pwoer is " + playerPower,
+                                            "You catch a client location " + "lat:"+location!!.latitude+" lng:"+location!!.longitude,
                                             Toast.LENGTH_LONG).show()
 
                                 }
@@ -217,7 +217,7 @@ class RoutingMapsActivity : FragmentActivity(), OnMapReadyCallback  {
 
                     }
 
-                    //Thread.sleep(1000)
+                    Thread.sleep(1000)
 
                 }catch (ex:Exception){}
 
@@ -243,8 +243,10 @@ class RoutingMapsActivity : FragmentActivity(), OnMapReadyCallback  {
         var selectedClients = dbHelper.getClientsWithIds(clientids)
 
         for (client  in selectedClients) {
-            listGeoTracks.add(GeoTrack(R.drawable.ic_google_maps_marker_verde,
-                    client.company, client.address, 90.5, client.latitude.toDouble(), client.longitude.toDouble()))
+            if (!client.latitude.isEmpty() || !client.longitude.isEmpty()) {
+                listGeoTracks.add(GeoTrack(R.drawable.ic_google_maps_marker_verde,
+                        client.company, client.address, 90.5, client.latitude.toDouble(), client.longitude.toDouble()))
+            }
         }
 
 
