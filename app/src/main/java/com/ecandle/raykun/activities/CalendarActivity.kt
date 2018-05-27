@@ -102,6 +102,11 @@ class CalendarActivity : SimpleActivity(), NavigationListener {
         mUserId = intent.getStringExtra(USER_ID)
 
         if (connectionDetector!!.isConnectingToInternet) {
+            // JT: Loading Progress Bar
+            var dialog = M.setProgressDialog(this)
+            dialog.show()
+            Handler().postDelayed({dialog.dismiss()},3000)
+            //JT
             loadUserEvents()
         }
 
@@ -156,11 +161,17 @@ class CalendarActivity : SimpleActivity(), NavigationListener {
 
         val eventsData =  loadEventData.execute(url).get()
 
-        Log.d("loadEventDataTask",eventsData.toString())
+        if (eventsData == null){
+            toast(getString(R.string.no_calendar_data),Toast.LENGTH_LONG)
+            finish()
+        } else {
+            Log.d("loadEventDataTask",eventsData.toString())
 
-        for (event in eventsData){
-            saveEvent(event)
+            for (event in eventsData){
+                saveEvent(event)
+            }
         }
+
     }
 
     private fun saveEvent(event:DataEvent) {

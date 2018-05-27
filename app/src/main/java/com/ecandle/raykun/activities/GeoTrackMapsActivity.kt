@@ -47,7 +47,12 @@ class GeoTrackMapsActivity : FragmentActivity(), OnMapReadyCallback {
         clientLatitude = intent.getStringExtra(CLIENT_LATITUDE)
         clientCompany = intent.getStringExtra(CLIENT_COMPANY)
         clientAddress = intent.getStringExtra(CLIENT_ADDRESS)
-
+        // JT: Check empty Lat and Long
+        if (clientLatitude.isEmpty() || clientLongitude.isEmpty()){
+            clientLongitude = CURRENT_LONGITUDE
+            clientLatitude = CURRENT_LATITUDE
+        }
+        // JT
         var savedSettings = SavedSettings(applicationContext)
         myCurrentLat = savedSettings.getSettings("myCurrentLat").toString()
         myCurrentLon = savedSettings.getSettings("myCurrentLon").toString()

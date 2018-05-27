@@ -4,6 +4,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.CoordinatorLayout
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
@@ -15,10 +16,7 @@ import com.ecandle.raykun.R
 import com.ecandle.raykun.extensions.dbHelper
 import com.ecandle.raykun.extensions.launchNewClientIntent
 import com.ecandle.raykun.fragments.GeoTrackListFragment
-import com.ecandle.raykun.helpers.ConnectionDetector
-import com.ecandle.raykun.helpers.MAP_MODE
-import com.ecandle.raykun.helpers.SavedSettings
-import com.ecandle.raykun.helpers.USER_ID
+import com.ecandle.raykun.helpers.*
 import com.ecandle.raykun.models.Client
 import com.ecandle.raykun.services.TrackGPS
 import com.ecandle.raykun.tasks.loadClientDataTask
@@ -69,7 +67,11 @@ class GeoTrackListActivity : SimpleActivity() {
             val savedSettings = SavedSettings(applicationContext)
             savedSettings.saveSettings("myCurrentLat",myCurrentLat)
             savedSettings.saveSettings("myCurrentLon",myCurrentLon)
-
+            // JT: Loading Progress Bar
+            var dialog = M.setProgressDialog(this)
+            dialog.show()
+            Handler().postDelayed({dialog.dismiss()},3000)
+            //JT
             loadClients()
         }else{
             toast(getString(R.string.no_internet_connection), Toast.LENGTH_LONG)
@@ -172,10 +174,15 @@ class GeoTrackListActivity : SimpleActivity() {
 
         val clientsData =  loadClientData.execute(url).get()
 
-        Log.d("loadClientDataClient",clientsData.toString())
+        if (clientsData == null){
+            toast(getString(R.string.no_client_data),Toast.LENGTH_LONG)
+            finish()
+        } else {
+            Log.d("loadClientDataClient",clientsData.toString())
 
-        for (client in clientsData){
-            saveClient(client)
+            for (client in clientsData){
+                saveClient(client)
+            }
         }
     }
 

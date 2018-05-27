@@ -426,6 +426,16 @@
     <string name="item_updated">El item se ha actualizado con éxito</string>
     <string name="items">Items</string>
     <string name="new_item">Nuevo Item</string>
+    <string name="enter_valid_email">Ingrese  correo valido</string>
+    <string name="enter_valid_password">Ingrese  contraseña valida</string>
+    <string name="enter_valid_email_password">Ingrese  correo y contraseña validos</string>
+    <string name="loading_text">Cargando ...</string>
+    <string name="no_calendar_data">No tiene datos de calendario, ingreselos en la Web</string>
+    <string name="no_client_data">Parece que no tienes ningún cliente.</string>
+    <string name="no_product_data">Parece que no tienes ningún producto.</string>
+    <string name="no_contact_data">Parece que no tienes ningún contacto.</string>
+    <string name="no_lead_data">Parece que no tienes ningún prospecto.</string>
+    <string name="no_analytics_data">Parece que no tienes ningún dato de Analitica.</string>
 
     <!--
         Haven't found some strings? There's more at

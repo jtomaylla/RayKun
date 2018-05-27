@@ -1,16 +1,20 @@
 package com.ecandle.raykun.activities
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.widget.Toast
 import com.ecandle.raykun.R
 import com.ecandle.raykun.extensions.dbHelper
 import com.ecandle.raykun.extensions.launchNewTaskIntent
 import com.ecandle.raykun.fragments.TaskListFragment
 import com.ecandle.raykun.helpers.ConnectionDetector
+import com.ecandle.raykun.helpers.M
 import com.ecandle.raykun.helpers.USER_ID
 import com.ecandle.raykun.models.DataEvent
 import com.ecandle.raykun.models.Task
 import com.ecandle.raykun.tasks.loadEventDataTask
 import com.simplemobiletools.commons.extensions.beVisible
+import com.simplemobiletools.commons.extensions.toast
 import kotlinx.android.synthetic.main.activity_task_list.*
 
 class TaskListActivity : SimpleActivity() {
@@ -37,6 +41,11 @@ class TaskListActivity : SimpleActivity() {
         val intent = intent ?: return
 
         if (connectionDetector!!.isConnectingToInternet) {
+            // JT: Loading Progress Bar
+            var dialog = M.setProgressDialog(this)
+            dialog.show()
+            Handler().postDelayed({dialog.dismiss()},3000)
+            //JT
             loadUserTasks()
         }
 
@@ -58,11 +67,17 @@ class TaskListActivity : SimpleActivity() {
 
         val tasksData =  loadTaskData.execute(url).get()
 
-        Log.d("loadTaskDataTask",tasksData.toString())
+        if (tasksData == null){
+            toast(getString(R.string.no_calendar_data),Toast.LENGTH_LONG)
+            finish()
+        } else {
+            Log.d("loadTaskDataTask",tasksData.toString())
 
-        for (task in tasksData){
-            saveTask(task)
+            for (task in tasksData){
+                saveTask(task)
+            }
         }
+
     }
 
     private fun saveTask(task: DataEvent) {

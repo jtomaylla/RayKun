@@ -1,18 +1,22 @@
 package com.ecandle.raykun.activities
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.CoordinatorLayout
 import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.widget.Toast
 import com.ecandle.raykun.R
 import com.ecandle.raykun.extensions.dbHelper
 import com.ecandle.raykun.fragments.LeadListFragment
 import com.ecandle.raykun.helpers.ConnectionDetector
+import com.ecandle.raykun.helpers.M
 import com.ecandle.raykun.helpers.USER_ID
 import com.ecandle.raykun.models.Lead
 import com.ecandle.raykun.tasks.loadLeadDataTask
 import com.simplemobiletools.commons.extensions.beVisible
+import com.simplemobiletools.commons.extensions.toast
 import kotlinx.android.synthetic.main.activity_lead_list.*
 
 class LeadListActivity : SimpleActivity() {
@@ -38,6 +42,11 @@ class LeadListActivity : SimpleActivity() {
         val intent = intent ?: return
 
         if (connectionDetector!!.isConnectingToInternet) {
+            // JT: Loading Progress Bar
+            var dialog = M.setProgressDialog(this)
+            dialog.show()
+            Handler().postDelayed({dialog.dismiss()},3000)
+            //JT
             loadLeads()
         }
 
@@ -80,10 +89,15 @@ class LeadListActivity : SimpleActivity() {
 
         val leadsData =  loadLeadData.execute(url).get()
 
-        Log.d("loadLeadData",leadsData.toString())
+        if (leadsData == null){
+            toast(getString(R.string.no_lead_data), Toast.LENGTH_LONG)
+            finish()
+        } else {
+            Log.d("loadLeadData",leadsData.toString())
 
-        for (lead in leadsData){
-            saveLead(lead)
+            for (lead in leadsData){
+                saveLead(lead)
+            }
         }
     }
     private fun saveLead(lead: Lead) {

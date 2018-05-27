@@ -1,15 +1,19 @@
 package com.ecandle.raykun.activities
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.widget.Toast
 import com.ecandle.raykun.R
 import com.ecandle.raykun.extensions.dbHelper
 import com.ecandle.raykun.extensions.launchNewItemIntent
 import com.ecandle.raykun.fragments.ProductListFragment
 import com.ecandle.raykun.helpers.ConnectionDetector
+import com.ecandle.raykun.helpers.M
 import com.ecandle.raykun.helpers.USER_ID
 import com.ecandle.raykun.models.Item
 import com.ecandle.raykun.tasks.loadItemDataTask
 import com.simplemobiletools.commons.extensions.beVisible
+import com.simplemobiletools.commons.extensions.toast
 import kotlinx.android.synthetic.main.activity_product_list.*
 
 class ProductListActivity : SimpleActivity() {
@@ -31,6 +35,11 @@ class ProductListActivity : SimpleActivity() {
         val intent = intent ?: return
 
         if (connectionDetector!!.isConnectingToInternet) {
+            // JT: Loading Progress Bar
+            var dialog = M.setProgressDialog(this)
+            dialog.show()
+            Handler().postDelayed({dialog.dismiss()},3000)
+            //JT
             loadProductItems()
         }
 
@@ -55,12 +64,19 @@ class ProductListActivity : SimpleActivity() {
         val loadItemData = loadItemDataTask(this)
 
         val itemsData =  loadItemData.execute(url).get()
+        //JT Check not null data
+        if (itemsData == null){
+            toast(getString(R.string.no_product_data), Toast.LENGTH_LONG)
+            finish()
+        } else {
+            Log.d("loadItemDataItem",itemsData.toString())
 
-        Log.d("loadItemDataItem",itemsData.toString())
-
-        for (item in itemsData){
-            saveItem(item)
+            for (item in itemsData){
+                saveItem(item)
+            }
         }
+        //JT
+
     }
 
     private fun saveItem(item: Item) {

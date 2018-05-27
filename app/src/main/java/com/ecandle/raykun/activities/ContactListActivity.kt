@@ -1,16 +1,20 @@
 package com.ecandle.raykun.activities
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.widget.Toast
 import com.ecandle.raykun.R
 import com.ecandle.raykun.extensions.dbHelper
 import com.ecandle.raykun.fragments.ContactListFragment
 import com.ecandle.raykun.helpers.ConnectionDetector
+import com.ecandle.raykun.helpers.M
 import com.ecandle.raykun.helpers.USER_ID
 import com.ecandle.raykun.models.Contact
 import com.ecandle.raykun.models.Item
 import com.ecandle.raykun.tasks.loadContactDataTask
 import com.simplemobiletools.commons.extensions.beVisible
+import com.simplemobiletools.commons.extensions.toast
 import kotlinx.android.synthetic.main.activity_contact_list.*
 
 class ContactListActivity : SimpleActivity() {
@@ -32,6 +36,11 @@ class ContactListActivity : SimpleActivity() {
         val intent = intent ?: return
 
         if (connectionDetector!!.isConnectingToInternet) {
+            // JT: Loading Progress Bar
+            var dialog = M.setProgressDialog(this)
+            dialog.show()
+            Handler().postDelayed({dialog.dismiss()},3000)
+            //JT
             loadContacts()
         }
 
@@ -63,10 +72,15 @@ class ContactListActivity : SimpleActivity() {
 
         val contactsData =  loadContactData.execute(url).get()
 
-        Log.d("loadContactData",contactsData.toString())
+        if (contactsData == null){
+            toast(getString(R.string.no_contact_data), Toast.LENGTH_LONG)
+            finish()
+        } else {
+            Log.d("loadContactData",contactsData.toString())
 
-        for (contact in contactsData){
-            saveContact(contact)
+            for (contact in contactsData){
+                saveContact(contact)
+            }
         }
     }
     private fun saveContact(contact: Contact) {

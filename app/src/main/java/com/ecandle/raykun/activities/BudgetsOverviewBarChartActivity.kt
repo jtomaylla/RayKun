@@ -2,14 +2,17 @@ package com.ecandle.raykun.activities
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
+import android.widget.Toast
 import com.ecandle.raykun.R
 import com.ecandle.raykun.custom.LabelXAxisFormatter
 import com.ecandle.raykun.custom.PercentAxisValueFormatter
 import com.ecandle.raykun.fragments.DemoBase
 import com.ecandle.raykun.helpers.ConnectionDetector
+import com.ecandle.raykun.helpers.M
 import com.ecandle.raykun.helpers.USER_ID
 import com.ecandle.raykun.tasks.pullServerDataTask
 import com.github.mikephil.charting.charts.BarChart
@@ -20,6 +23,7 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
+import com.simplemobiletools.commons.extensions.toast
 import org.json.JSONObject
 import java.util.*
 
@@ -138,7 +142,11 @@ class BudgetsOverviewBarChartActivity : DemoBase() {
         connectionDetector = ConnectionDetector(this)
         // Load Anaytics Data
         if (connectionDetector!!.isConnectingToInternet) {
-
+            // JT: Loading Progress Bar
+            var dialog = M.setProgressDialog(this)
+            dialog.show()
+            Handler().postDelayed({dialog.dismiss()},3000)
+            //JT
             val url = "http://ecandlemobile.com/RayKun/webservice/index.php/admin/home/showStatistics?id=$userid"
 
             val loadLoginData = pullServerDataTask()
@@ -189,77 +197,81 @@ class BudgetsOverviewBarChartActivity : DemoBase() {
 //            invoices_color_paid = invoice_overview_stat.getString("invoices_color_paid")
 
             //Log.d(Chart.LOG_TAG, "leads_stats : $invoices_color_paid")
-        } else {
-            //TODO Load data without connection
-        }
-
-
-//        var mLabels = arrayOf("Pending Invoices($total_invoices_awaiting_payment/$total_invoices)",
+            //        var mLabels = arrayOf("Pending Invoices($total_invoices_awaiting_payment/$total_invoices)",
 //                "Converted Leads($total_leads_converted/$total_leads)",
 //                "Active Projects($total_projects/$total_projects_in_progress)",
 //                "Pending Tasks($total_not_finished_tasks/$total_tasks)")
 
-        var mLabels = arrayOf("Draft","Not sent", "Sent", "Declined", "Accepted",  "Expired")
-        val xAxisFormatter = LabelXAxisFormatter(mLabels)
+            var mLabels = arrayOf("Draft","Not sent", "Sent", "Declined", "Accepted",  "Expired")
+            val xAxisFormatter = LabelXAxisFormatter(mLabels)
 
-        val xAxis = mChart!!.xAxis
-        xAxis.position = XAxisPosition.BOTTOM
-        xAxis.typeface = mTfLight
-        xAxis.setDrawAxisLine(true)
-        xAxis.setDrawGridLines(false)
-        xAxis.granularity = 10f
-        xAxis.setLabelCount(7)
-        xAxis.setValueFormatter(xAxisFormatter)
+            val xAxis = mChart!!.xAxis
+            xAxis.position = XAxisPosition.BOTTOM
+            xAxis.typeface = mTfLight
+            xAxis.setDrawAxisLine(true)
+            xAxis.setDrawGridLines(false)
+            xAxis.granularity = 10f
+            xAxis.setLabelCount(7)
+            xAxis.setValueFormatter(xAxisFormatter)
 
-        val barWidth = 4f
-        val spaceForBar = 10f
-        val yVals1 = ArrayList<BarEntry>()
+            val barWidth = 4f
+            val spaceForBar = 10f
+            val yVals1 = ArrayList<BarEntry>()
 
-        val myval1:Float = percent_draft.toFloat()
-        val myval2:Float = percent_not_sent.toFloat()
-        val myval3:Float = percent_sent.toFloat()
-        val myval4:Float = percent_declined.toFloat()
-        val myval5:Float = percent_accepted.toFloat()
-        val myval6:Float = percent_expired.toFloat()
+            val myval1:Float = percent_draft.toFloat()
+            val myval2:Float = percent_not_sent.toFloat()
+            val myval3:Float = percent_sent.toFloat()
+            val myval4:Float = percent_declined.toFloat()
+            val myval5:Float = percent_accepted.toFloat()
+            val myval6:Float = percent_expired.toFloat()
 
-        yVals1.add(BarEntry(1 * spaceForBar, myval1,
-                resources.getDrawable(R.drawable.star)))
-        yVals1.add(BarEntry(2 * spaceForBar, myval2,
-                resources.getDrawable(R.drawable.star)))
-        yVals1.add(BarEntry(3 * spaceForBar, myval3,
-                resources.getDrawable(R.drawable.star)))
-        yVals1.add(BarEntry(4 * spaceForBar, myval4,
-                resources.getDrawable(R.drawable.star)))
-        yVals1.add(BarEntry(5 * spaceForBar, myval5,
-                resources.getDrawable(R.drawable.star)))
-        yVals1.add(BarEntry(6 * spaceForBar, myval6,
-                resources.getDrawable(R.drawable.star)))
+            yVals1.add(BarEntry(1 * spaceForBar, myval1,
+                    resources.getDrawable(R.drawable.star)))
+            yVals1.add(BarEntry(2 * spaceForBar, myval2,
+                    resources.getDrawable(R.drawable.star)))
+            yVals1.add(BarEntry(3 * spaceForBar, myval3,
+                    resources.getDrawable(R.drawable.star)))
+            yVals1.add(BarEntry(4 * spaceForBar, myval4,
+                    resources.getDrawable(R.drawable.star)))
+            yVals1.add(BarEntry(5 * spaceForBar, myval5,
+                    resources.getDrawable(R.drawable.star)))
+            yVals1.add(BarEntry(6 * spaceForBar, myval6,
+                    resources.getDrawable(R.drawable.star)))
 
 
-        val set1: BarDataSet
+            val set1: BarDataSet
 
-        if (mChart!!.data != null && mChart!!.data.dataSetCount > 0) {
-            set1 = mChart!!.data.getDataSetByIndex(0) as BarDataSet
-            set1.values = yVals1
-            mChart!!.data.notifyDataChanged()
-            mChart!!.notifyDataSetChanged()
+            if (mChart!!.data != null && mChart!!.data.dataSetCount > 0) {
+                set1 = mChart!!.data.getDataSetByIndex(0) as BarDataSet
+                set1.values = yVals1
+                mChart!!.data.notifyDataChanged()
+                mChart!!.notifyDataSetChanged()
+            } else {
+                set1 = BarDataSet(yVals1, "Annual Budgets Overview")
+
+                set1.setDrawIcons(false)
+                set1.setColors(*INVOICE_STATUS_COLORS)
+
+                val dataSets = ArrayList<IBarDataSet>()
+                dataSets.add(set1)
+
+                val data = BarData(dataSets)
+                data.setValueTextSize(10f)
+                data.setValueTypeface(mTfLight)
+                data.barWidth = barWidth
+                mChart!!.data = data
+
+
+            }
+
         } else {
-            set1 = BarDataSet(yVals1, "Budgets Overview")
+            //TODO Load data without connection
+            toast(getString(R.string.no_internet_connection), Toast.LENGTH_LONG)
 
-            set1.setDrawIcons(false)
-            set1.setColors(*INVOICE_STATUS_COLORS)
-
-            val dataSets = ArrayList<IBarDataSet>()
-            dataSets.add(set1)
-
-            val data = BarData(dataSets)
-            data.setValueTextSize(10f)
-            data.setValueTypeface(mTfLight)
-            data.barWidth = barWidth
-            mChart!!.data = data
-
-
+            finish()
         }
+
+
     }
 
 }

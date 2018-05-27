@@ -1,5 +1,6 @@
 package com.ecandle.raykun.activities
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.CoordinatorLayout
 import android.util.Log
 import android.view.Gravity
@@ -10,6 +11,7 @@ import com.ecandle.raykun.extensions.dbHelper
 import com.ecandle.raykun.extensions.launchNewClientIntent
 import com.ecandle.raykun.fragments.ClientListFragment
 import com.ecandle.raykun.helpers.ConnectionDetector
+import com.ecandle.raykun.helpers.M
 import com.ecandle.raykun.helpers.USER_ID
 import com.ecandle.raykun.models.Client
 import com.ecandle.raykun.tasks.loadClientDataTask
@@ -41,6 +43,11 @@ class ClientListActivity : SimpleActivity() {
         val intent = intent ?: return
 
         if (connectionDetector!!.isConnectingToInternet) {
+            // JT: Loading Progress Bar
+            var dialog = M.setProgressDialog(this)
+            dialog.show()
+            Handler().postDelayed({dialog.dismiss()},3000)
+            //JT
             loadClients()
         }else{
             toast(getString(R.string.no_internet_connection), Toast.LENGTH_LONG)
@@ -80,11 +87,17 @@ class ClientListActivity : SimpleActivity() {
 
         val clientsData =  loadClientData.execute(url).get()
 
-        Log.d("loadClientDataClient",clientsData.toString())
+        if (clientsData == null){
+            toast(getString(R.string.no_client_data),Toast.LENGTH_LONG)
+            finish()
+        } else {
+            Log.d("loadClientDataClient",clientsData.toString())
 
-        for (client in clientsData){
-            saveClient(client)
+            for (client in clientsData){
+                saveClient(client)
+            }
         }
+
     }
 
     private fun saveClient(client: Client) {
