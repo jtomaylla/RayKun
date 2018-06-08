@@ -68,6 +68,11 @@ class SavedSettings {
 
     }
 
+    fun getJsonAnalyticsData(): String? {
+
+        return sharedRef!!.getString("json_show_statistics","")
+
+    }
     companion object {
         var userID=""
     }

@@ -15,26 +15,29 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/about_frame"
     android:layout_width="match_parent"
-    android:layout_height="192dp"
+    android:layout_height="wrap_content"
     android:background="?attr/colorPrimaryDark"
-    android:gravity="bottom"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="0dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:layout_width="100dp"
+        android:id="@+id/about_image"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:contentDescription="@string/app_name"
         android:src="@drawable/ic_launcher" />
 
-    <TextView
+    <com.simplemobiletools.commons.views.MyTextView
+        android:id="@+id/about_raykun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:text="@string/app_name"
+        android:layout_below="@+id/about_image"
+        android:text="@string/smart_sales_force"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textStyle="bold" />
 

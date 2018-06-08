@@ -2,7 +2,6 @@ package com.ecandle.raykun.activities
 
 import android.graphics.Color
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
@@ -11,10 +10,6 @@ import com.ecandle.raykun.R
 import com.ecandle.raykun.custom.LabelXAxisFormatter
 import com.ecandle.raykun.custom.PercentAxisValueFormatter
 import com.ecandle.raykun.fragments.DemoBase
-import com.ecandle.raykun.helpers.ConnectionDetector
-import com.ecandle.raykun.helpers.M
-import com.ecandle.raykun.helpers.USER_ID
-import com.ecandle.raykun.tasks.pullServerDataTask
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis.XAxisPosition
@@ -33,28 +28,20 @@ class BudgetsOverviewBarChartActivity : DemoBase() {
 
     private var tvX: TextView? = null
     private var tvY: TextView? = null
-//    "estimate_color_draft": "119, 119, 119",
-//    "estimate_color_not_sent": "255, 111, 0",
-//    "estimate_color_sent": "3, 169, 244",
-//    "estimate_color_declined": "252, 45, 66",
-//    "estimate_color_accepted": "0, 191, 54",
-//    "estimate_color_expired": "255, 111, 0"
-    //protected var mStatuses = arrayOf("Draft","Not sent", "Sent", "Declined", "Accepted",  "Expired")
     val INVOICE_STATUS_COLORS = intArrayOf(Color.rgb(119, 119, 119),
             Color.rgb(255, 111, 0),
             Color.rgb(3, 169, 244),
             Color.rgb(252, 45, 66),
             Color.rgb(0, 191, 54),
             Color.rgb(255, 111, 0))
-    private var mUserId: String? = null
-    var connectionDetector = ConnectionDetector(this)
+    var jsonShowStatistics = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_horizontalbarchart)
 
-        mUserId = intent.getStringExtra(USER_ID)
+        jsonShowStatistics = intent.getStringExtra("json_show_statistics")
 
         tvX = findViewById<View>(R.id.tvXMax) as TextView?
         tvY = findViewById<View>(R.id.tvYMax) as TextView?
@@ -115,7 +102,7 @@ class BudgetsOverviewBarChartActivity : DemoBase() {
 //        mChart!!.setMarker(mv) // Set the marker to the chart
 
         // setting data
-        loadRemoteData(6, 50f,mUserId!!)
+        loadRemoteData(6, 50f)
         // number of bars,
         //setData(12, 50f)
 
@@ -124,7 +111,7 @@ class BudgetsOverviewBarChartActivity : DemoBase() {
 
     }
 
-    fun loadRemoteData(count: Int, range: Float,userid:String) {
+    fun loadRemoteData(count: Int, range: Float) {
         var percent_draft =""
         var percent_not_sent =""
         var percent_sent =""
@@ -132,77 +119,43 @@ class BudgetsOverviewBarChartActivity : DemoBase() {
         var percent_accepted =""
         var percent_expired = ""
 
-        var estimate_percent_draft =""
-        var estimate_percent_not_sent =""
-        var estimate_percent_sent =""
-        var estimate_percent_declined =""
-        var estimate_percent_accepted =""
-        var estimate_percent_expired = ""
-
-        connectionDetector = ConnectionDetector(this)
         // Load Anaytics Data
-        if (connectionDetector!!.isConnectingToInternet) {
-            // JT: Loading Progress Bar
-            var dialog = M.setProgressDialog(this)
-            dialog.show()
-            Handler().postDelayed({dialog.dismiss()},3000)
-            //JT
-            val url = "http://ecandlemobile.com/RayKun/webservice/index.php/admin/home/showStatistics?id=$userid"
+        val loginData = jsonShowStatistics
+        if (loginData.isEmpty()){
+            toast(getString(R.string.no_analytics_data), Toast.LENGTH_LONG)
+            finish()
+        } else {
 
-            val loadLoginData = pullServerDataTask()
-
-            val loginData = loadLoginData.execute(url).get()
 
             var json = JSONObject(loginData)
 
             var estimate_overview_stat = json.getJSONObject("estimate_overview_stat")
 
-            var title = estimate_overview_stat.getString("labels")
-
             var estimate_percent_draft_obj = estimate_overview_stat.getJSONObject("estimate_percent_draft")
-            var total_draft = estimate_percent_draft_obj.getInt("total_by_status")
             percent_draft = estimate_percent_draft_obj.getString("percent")
 
             var estimate_percent_not_sent_obj = estimate_overview_stat.getJSONObject("estimate_percent_not_sent")
-            var total_not_sent = estimate_percent_not_sent_obj.getInt("total_by_status")
             percent_not_sent = estimate_percent_not_sent_obj.getString("percent")
 
             var estimate_percent_sent_obj = estimate_overview_stat.getJSONObject("estimate_percent_sent")
-            var total_sent = estimate_percent_sent_obj.getInt("total_by_status")
             percent_sent = estimate_percent_sent_obj.getString("percent")
 
             var estimate_percent_declined_obj = estimate_overview_stat.getJSONObject("estimate_percent_declined")
-            var total_declined = estimate_percent_declined_obj.getInt("total_by_status")
             percent_declined = estimate_percent_declined_obj.getString("percent")
 
             var estimate_percent_accepted_obj = estimate_overview_stat.getJSONObject("estimate_percent_accepted")
-            var total_accepted = estimate_percent_accepted_obj.getInt("total_by_status")
             percent_accepted = estimate_percent_accepted_obj.getString("percent")
 
             var estimate_percent_expired_obj = estimate_overview_stat.getJSONObject("estimate_percent_expired")
-            var total_expired = estimate_percent_expired_obj.getInt("total_by_status")
             percent_expired = estimate_percent_expired_obj.getString("percent")
 
-//            "invoices_color_draft": "114, 123, 144",
-//            "invoices_color_not_sent": "114, 123, 144",
-//            "invoices_color_unpaid": "252, 45, 66",
-//            "invoices_color_not_paid_completely": "255, 111, 0",
-//            "invoices_color_overdue": "255, 111, 0",
-//            "invoices_color_paid": "0, 191, 54"
-//            invoices_color_draft = invoice_overview_stat.getString("invoices_color_draft")
-//            invoices_color_not_sent = invoice_overview_stat.getString("invoices_color_not_sent")
-//            invoices_color_unpaid = invoice_overview_stat.getString("invoices_color_unpaid")
-//            invoices_color_not_paid_completely = invoice_overview_stat.getString("invoices_color_not_paid_completely")
-//            invoices_color_overdue = invoice_overview_stat.getString("invoices_color_overdue")
-//            invoices_color_paid = invoice_overview_stat.getString("invoices_color_paid")
 
-            //Log.d(Chart.LOG_TAG, "leads_stats : $invoices_color_paid")
-            //        var mLabels = arrayOf("Pending Invoices($total_invoices_awaiting_payment/$total_invoices)",
-//                "Converted Leads($total_leads_converted/$total_leads)",
-//                "Active Projects($total_projects/$total_projects_in_progress)",
-//                "Pending Tasks($total_not_finished_tasks/$total_tasks)")
-
-            var mLabels = arrayOf("Draft","Not sent", "Sent", "Declined", "Accepted",  "Expired")
+            var mLabels = arrayOf(resources.getString(R.string.draft),
+                    resources.getString(R.string.not_sent),
+                    resources.getString(R.string.not_sent),
+                    resources.getString(R.string.declined),
+                    resources.getString(R.string.accepted),
+                    resources.getString(R.string.expired))
             val xAxisFormatter = LabelXAxisFormatter(mLabels)
 
             val xAxis = mChart!!.xAxis
@@ -218,12 +171,12 @@ class BudgetsOverviewBarChartActivity : DemoBase() {
             val spaceForBar = 10f
             val yVals1 = ArrayList<BarEntry>()
 
-            val myval1:Float = percent_draft.toFloat()
-            val myval2:Float = percent_not_sent.toFloat()
-            val myval3:Float = percent_sent.toFloat()
-            val myval4:Float = percent_declined.toFloat()
-            val myval5:Float = percent_accepted.toFloat()
-            val myval6:Float = percent_expired.toFloat()
+            val myval1: Float = percent_draft.toFloat()
+            val myval2: Float = percent_not_sent.toFloat()
+            val myval3: Float = percent_sent.toFloat()
+            val myval4: Float = percent_declined.toFloat()
+            val myval5: Float = percent_accepted.toFloat()
+            val myval6: Float = percent_expired.toFloat()
 
             yVals1.add(BarEntry(1 * spaceForBar, myval1,
                     resources.getDrawable(R.drawable.star)))
@@ -247,7 +200,7 @@ class BudgetsOverviewBarChartActivity : DemoBase() {
                 mChart!!.data.notifyDataChanged()
                 mChart!!.notifyDataSetChanged()
             } else {
-                set1 = BarDataSet(yVals1, "Annual Budgets Overview")
+                set1 = BarDataSet(yVals1, getString(R.string.annual_budgets_overview))
 
                 set1.setDrawIcons(false)
                 set1.setColors(*INVOICE_STATUS_COLORS)
@@ -263,14 +216,7 @@ class BudgetsOverviewBarChartActivity : DemoBase() {
 
 
             }
-
-        } else {
-            //TODO Load data without connection
-            toast(getString(R.string.no_internet_connection), Toast.LENGTH_LONG)
-
-            finish()
         }
-
 
     }
 

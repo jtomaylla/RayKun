@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/about_scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:id="@+id/about_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        android:paddingTop="0dp"
+        tools:padding="0dp">
+
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/about_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimaryDark"
+            android:orientation="vertical"
+            android:padding="0dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+            <ImageView
+                android:id="@+id/about_image"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_launcher" />
+
+            <com.simplemobiletools.commons.views.MyTextView
+                android:id="@+id/about_raykun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_below="@+id/about_image"
+                android:text="@string/smart_sales_force"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textStyle="bold" />
+
+        </FrameLayout>
+        <com.simplemobiletools.commons.views.MyTextView
+            android:id="@+id/about_website"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_frame"
+            android:autoLink="web"
+            android:text="@string/my_website"
+            android:textColorLink="@color/color_primary" />
+
+        <com.simplemobiletools.commons.views.MyTextView
+            android:id="@+id/about_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_website"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:paddingBottom="@dimen/activity_margin"
+            android:text="@string/my_email"
+            android:textColorLink="@color/color_primary" />
+
+        <!--<com.simplemobiletools.commons.views.MyTextView-->
+        <!--android:id="@+id/about_faq"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/about_email"-->
+        <!--android:paddingBottom="@dimen/activity_margin"-->
+        <!--android:paddingTop="@dimen/activity_margin"-->
+        <!--android:text="@string/frequently_asked_questions"-->
+        <!--android:textColor="@color/color_primary"/>-->
+
+        <!--<com.simplemobiletools.commons.views.MyTextView-->
+        <!--android:id="@+id/about_more_apps"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/about_faq"-->
+        <!--android:paddingBottom="@dimen/activity_margin"-->
+        <!--android:paddingTop="@dimen/activity_margin"-->
+        <!--android:text="@string/more_apps_underlined"-->
+        <!--android:textColor="@color/color_primary"/>-->
+
+        <!--<com.simplemobiletools.commons.views.MyTextView-->
+        <!--android:id="@+id/about_invite"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/about_more_apps"-->
+        <!--android:paddingBottom="@dimen/activity_margin"-->
+        <!--android:paddingTop="@dimen/activity_margin"-->
+        <!--android:text="@string/invite_friends_underlined"-->
+        <!--android:textColor="@color/color_primary"/>-->
+
+        <!--<com.simplemobiletools.commons.views.MyTextView-->
+        <!--android:id="@+id/about_rate_us"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/about_invite"-->
+        <!--android:paddingBottom="@dimen/activity_margin"-->
+        <!--android:paddingTop="@dimen/activity_margin"-->
+        <!--android:text="@string/rate_us_underlined"-->
+        <!--android:textColor="@color/color_primary"/>-->
+
+        <com.simplemobiletools.commons.views.MyTextView
+            android:id="@+id/about_license"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_email"
+            android:paddingBottom="@dimen/activity_margin"
+            android:paddingTop="@dimen/activity_margin"
+            android:text="@string/third_party_licences_underlined"
+            android:textColor="@color/color_primary" />
+
+        <!--
+        <com.simplemobiletools.commons.views.MyTextView
+            android:id="@+id/about_donate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_license"
+            android:paddingBottom="@dimen/activity_margin"
+            android:paddingTop="@dimen/activity_margin"
+            android:text="@string/donate_underlined"
+            android:textColor="@color/color_primary"/>
+
+        <com.simplemobiletools.commons.views.MyTextView
+            android:id="@+id/about_follow_us"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_donate"
+            android:paddingBottom="@dimen/medium_margin"
+            android:paddingTop="@dimen/activity_margin"
+            android:text="@string/follow_us"/>
+-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/about_facebook"-->
+        <!--android:layout_width="@dimen/social_logo"-->
+        <!--android:layout_height="@dimen/social_logo"-->
+        <!--android:layout_below="@+id/about_license"-->
+        <!--android:src="@drawable/ic_facebook"/>-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/about_gplus"-->
+        <!--android:layout_width="@dimen/social_logo"-->
+        <!--android:layout_height="@dimen/social_logo"-->
+        <!--android:layout_below="@+id/about_facebook"-->
+        <!--android:layout_marginLeft="@dimen/medium_margin"-->
+        <!--android:layout_marginRight="@dimen/medium_margin"-->
+        <!--android:layout_toEndOf="@+id/about_facebook"-->
+        <!--android:layout_toRightOf="@+id/about_facebook"-->
+        <!--android:src="@drawable/ic_gplus"/>-->
+
+        <com.simplemobiletools.commons.views.MyTextView
+            android:id="@+id/about_copyright"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/about_license"
+            android:gravity="center_horizontal|bottom"
+            android:paddingTop="@dimen/activity_margin"
+            android:text="Version Alfa\nCopyright © eCandleMobile 2018" />
+
+    </RelativeLayout>
+</ScrollView>

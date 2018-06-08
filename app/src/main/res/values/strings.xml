@@ -429,9 +429,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_tab_layout_customers">Customers Info</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_geo_track_maps">GeoTrack</string>
@@ -449,4 +446,72 @@
     <string name="no_contact_data">Seems like you don\'t have any contacts.</string>
     <string name="no_lead_data">Seems like you don\'t have any leads.</string>
     <string name="no_analytics_data">Seems like you don\'t have any analytics data.</string>
+    <string name="top_finance_bar_chart">Top Finance</string>
+    <string name="top_finance_bar_chart_text">Horizontal bar chart about main financial rates.</string>
+    <string name="invoicing_overview_bar_chart_text">Horizontal bar chart about main invoicing rates.</string>
+    <string name="invoicing_overview_bar_chart">Invoicing Overview</string>
+    <string name="budgets_overview_bar_chart">Budgets Overview</string>
+    <string name="budgets_overview_bar_chart_text">Horizontal bar chart about main budgets rates.</string>
+    <string name="proposals_overview_bar_chart">Proposals Overview</string>
+    <string name="proposals_overview_bar_chart_text">Horizontal bar chart about main proposal rates.</string>
+    <string name="invoicing_overview_pie_chart">Invoicing Overview 2</string>
+    <string name="invoicing_overview_pie_chart_text">Pie chart about main invoicing rates.</string>
+
+    <string name="annual_finance_overview">Annual Finance Overview</string>
+    <string name="pending_invoices">Pending Invoices</string>
+    <string name="converted_leads">Converted Leads</string>
+    <string name="active_projects">Active Projects</string>
+    <string name="pending_tasks">Pending Tasks</string>
+
+    <string name="invoicing_overview">Invoicing Overview</string>
+    <string name="draft">Draft</string>
+    <string name="not_sent">Not Sent</string>
+    <string name="unpaid">Unpaid</string>
+    <string name="uncomplete">Uncomplete</string>
+    <string name="overdue">Overdue</string>
+    <string name="paid">Paid</string>
+
+    <string name="annual_budgets_overview">Annual Budgets Overview</string>
+    <string name="declined">Declined</string>
+    <string name="accepted">Accepted</string>
+    <string name="expired" >Expired</string>
+
+    <string name="proposals_overview">Proposals Overview</string>
+    <string name="open">Open</string>
+    <string name="revised">Revised</string>
+    <string name="sent">Sent</string>
+
+    <string name="invoice_stat">Invoicing Stat\n ..Analytics..</string>
+
+    <string name="my_website">\nhttp://ecandlemobile.com</string>
+    <string name="my_email">contacto@ecandlemobile.com</string>
+    <string name="third_party_licences">Third party licences</string>
+    <string name="third_party_licences_underlined"><u>Third party licences</u></string>
+    <string name="copyright">v %1$s\nCopyright © EcandleMobile %2$d</string>
+    <string name="mycopyright">v %1$s\nCopyright © EcandleMobile %2$d</string>
+    <!-- License -->
+    <string name="notice">This app uses the following third party libraries to make my life easier. Thank you.</string>
+    <string name="kotlin_title">Kotlin (programming language)</string>
+    <string name="subsampling_title">Subsampling Scale Image View (zoomable imageviews)</string>
+    <string name="glide_title">Glide (image loading and caching)</string>
+    <string name="picasso_title">Picasso (image loading and caching)</string>
+    <string name="cropper_title">Android Image Cropper (image crop and rotate)</string>
+    <string name="multiselect_title">RecyclerView MultiSelect (selecting multiple list items)</string>
+    <string name="rtl_viewpager_title">RtlViewPager (right to left swiping)</string>
+    <string name="joda_title">Joda-Time (Java date replacement)</string>
+    <string name="stetho_title">Stetho (debugging databases)</string>
+    <string name="otto_title">Otto (event bus)</string>
+    <string name="photoview_title">PhotoView (zoomable GIFs)</string>
+    <string name="pattern_title">PatternLockView (pattern protection)</string>
+    <string name="reprint_title">Reprint (fingerprint protection)</string>
+    <string name="gif_drawable_title">Gif Drawable (loading GIFs)</string>
+    <string name="autofittextview_title">AutoFitTextView (resizing text)</string>
+    <string name="robolectric_title">Robolectric (testing framework)</string>
+    <string name="espresso_title">Espresso (testing helper)</string>
+    <string name="gson_title">Gson (JSON parser)</string>
+    <string name="leak_canary_title">Leak Canary (memory leak detector)</string>
+    <string name="number_picker_title">Number Picker (customizable number picker)</string>
+    <string name="simplecalendar_title">Gson (JSON parser)</string>
+    <string name="website_label">More apps and services at</string>
+    <string name="two_string_placeholder">%1$s%2$s</string>
 </resources>

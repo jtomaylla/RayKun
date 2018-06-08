@@ -2,6 +2,34 @@ package com.ecandle.raykun.helpers
 
 import com.ecandle.raykun.R
 
+val APP_NAME = "app_name"
+val APP_LICENSES = "app_licenses"
+val APP_VERSION_NAME = "app_version_name"
+
+
+// licenses
+val LICENSE_KOTLIN = 1
+val LICENSE_SUBSAMPLING = 2
+val LICENSE_GLIDE = 4
+val LICENSE_CROPPER = 8
+val LICENSE_MULTISELECT = 16
+val LICENSE_RTL = 32
+val LICENSE_JODA = 64
+val LICENSE_STETHO = 128
+val LICENSE_OTTO = 256
+val LICENSE_PHOTOVIEW = 512
+val LICENSE_PICASSO = 1024
+val LICENSE_PATTERN = 2048
+val LICENSE_REPRINT = 4096
+val LICENSE_GIF_DRAWABLE = 8192
+val LICENSE_AUTOFITTEXTVIEW = 16384
+val LICENSE_ROBOLECTRIC = 32768
+val LICENSE_ESPRESSO = 65536
+val LICENSE_GSON = 131072
+val LICENSE_LEAK_CANARY = 262144
+val LICENSE_SIMPLE_CALENDAR = 262244
+
+
 val LOW_ALPHA = .3f
 val MEDIUM_ALPHA = .6f
 val STORED_LOCALLY_ONLY = 0
@@ -20,8 +48,8 @@ val ITEM_ID = "item_id"
 val CONTACT_ID = "id"
 val LEAD_ID = "id"
 
-val USER_EMAIL = "juan.tomaylla@gmail.com"
-val USER_KEY = "cajahuan02"
+val USER_EMAIL = "test@ecandlemobile.com"
+val USER_KEY = "DYCSMKlrWBcf"
 
 val CLIENT_LATITUDE ="latitude"
 val CLIENT_LONGITUDE ="longitude"

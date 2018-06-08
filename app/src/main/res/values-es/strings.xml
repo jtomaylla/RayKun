@@ -436,6 +436,42 @@
     <string name="no_contact_data">Parece que no tienes ningún contacto.</string>
     <string name="no_lead_data">Parece que no tienes ningún prospecto.</string>
     <string name="no_analytics_data">Parece que no tienes ningún dato de Analitica.</string>
+    <string name="top_finance_bar_chart">Resumen Financiero Gráfico de Barras</string>
+    <string name="top_finance_bar_chart_text">Gráfico de barras horizontal sobre los principales indicadores financieros.</string>
+    <string name="invoicing_overview_bar_chart_text">Gráfico de barras horizontales sobre las tasas de facturación principales.</string>
+    <string name="invoicing_overview_bar_chart">Resumen de facturación Gráfico de Barras</string>
+    <string name="budgets_overview_bar_chart">Resumen de presupuestos</string>
+    <string name="budgets_overview_bar_chart_text">Gráfico de barras horizontales sobre las principales tasas de presupuestos.</string>
+    <string name="proposals_overview_bar_chart">Resumen de propuestas</string>
+    <string name="proposals_overview_bar_chart_text">Gráfico de barras horizontales sobre las principales tasas de propuestas.</string>
+    <string name="invoicing_overview_pie_chart">Resumen de facturación 2</string>
+    <string name="invoicing_overview_pie_chart_text">Gráfico circular por sectores  sobre las principales tasas de facturación.</string>
+    <string name="pending_invoices">Facturas pendientes</string>
+    <string name="converted_leads">Prospectos Convertidos</string>
+    <string name="active_projects">Proyectos Activos</string>
+    <string name="pending_tasks">Tareas Pendientes</string>
+    <string name="invoicing_overview">Resumen de facturación</string>
+    <string name="draft">Borrador</string>
+    <string name="not_sent">No Enviado</string>
+    <string name="unpaid">Sin Pago</string>
+    <string name="uncomplete">Incompleta</string>
+    <string name="overdue">Vencida</string>
+    <string name="paid">Pagada</string>
+    <string name="annual_finance_overview">Resumen Financiero Anual</string>
+    <string name="annual_budgets_overview">Resumen de Presupuestos Anual</string>
+    <string name="declined">Rechazado</string>
+    <string name="accepted">Aceptado</string>
+    <string name="expired">Vencido</string>
+    <string name="proposals_overview">Resumen de propuestas Anual</string>
+    <string name="open">Abierto</string>
+    <string name="revised">Revisado</string>
+    <string name="sent">Enviado</string>
+    <string name="invoice_stat">Facturacion...\n ...Resumen...</string>
+    <string name="third_party_licences">Licencias de Terceros</string>
+    <string name="third_party_licences_underlined"><u>Licencias de Terceros</u></string>
+    <string name="my_website">\nhttp://ecandlemobile.com</string>
+    <string name="website_label">Mas apps y servicios en</string>
+    <string name="two_string_placeholder">%1$s%2$s</string>
 
     <!--
         Haven't found some strings? There's more at

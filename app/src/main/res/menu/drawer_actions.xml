@@ -17,10 +17,6 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/exit_menu"
-    android:icon="@android:drawable/ic_lock_power_off"
-    android:title="@string/exit" />
-
     <item android:id="@+id/calendar_menu"
         android:icon="@drawable/ic_event_white_24dp"
         android:title="@string/calendar"
@@ -69,4 +65,11 @@
         android:icon="@drawable/ic_location_on_white_24dp"
         android:title="@string/geolocation"
         />
+    <item android:id="@+id/about_menu"
+        android:icon="@drawable/round_info_white_24dp"
+        android:title="@string/about" />
+    <item android:id="@+id/exit_menu"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:title="@string/exit" />
+
 </menu>

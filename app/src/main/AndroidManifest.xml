@@ -44,7 +44,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.simplemobiletools.commons.activities.AboutActivity"
+            android:name=".activities.AboutActivity"
             android:label="@string/about"
             android:parentActivityName=".activities.MainActivity" />
         <activity
@@ -52,9 +52,9 @@
             android:label="@string/customize_colors"
             android:parentActivityName=".activities.SettingsActivity" />
         <activity
-            android:name="com.simplemobiletools.commons.activities.LicenseActivity"
+            android:name=".activities.LicenseActivity"
             android:label="@string/third_party_licences"
-            android:parentActivityName="com.simplemobiletools.commons.activities.AboutActivity" />
+            android:parentActivityName=".activities.AboutActivity" />
         <activity
             android:name=".activities.DayActivity"
             android:label="@string/details"

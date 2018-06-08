@@ -18,7 +18,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
-import com.ecandle.raykun.BuildConfig
 import com.ecandle.raykun.R
 import com.ecandle.raykun.adapters.MyMonthPagerAdapter
 import com.ecandle.raykun.adapters.MyWeekPagerAdapter
@@ -39,7 +38,10 @@ import com.ecandle.raykun.tasks.loadEventDataTask
 import com.ecandle.raykun.views.MyScrollView
 import com.simplemobiletools.commons.dialogs.RadioGroupDialog
 import com.simplemobiletools.commons.extensions.*
-import com.simplemobiletools.commons.helpers.*
+import com.simplemobiletools.commons.helpers.PERMISSION_READ_CALENDAR
+import com.simplemobiletools.commons.helpers.PERMISSION_READ_CONTACTS
+import com.simplemobiletools.commons.helpers.PERMISSION_WRITE_CALENDAR
+import com.simplemobiletools.commons.helpers.getDateFormats
 import com.simplemobiletools.commons.models.RadioItem
 import kotlinx.android.synthetic.main.activity_calendar.*
 import org.joda.time.DateTime
@@ -717,8 +719,8 @@ class CalendarActivity : SimpleActivity(), NavigationListener {
     }
 
     private fun launchAbout() {
-        startAboutActivity(R.string.app_name, LICENSE_KOTLIN or LICENSE_JODA or LICENSE_STETHO or LICENSE_MULTISELECT or LICENSE_GSON or
-                LICENSE_LEAK_CANARY, BuildConfig.VERSION_NAME)
+//        startAboutActivity(R.string.app_name, LICENSE_KOTLIN or LICENSE_JODA or LICENSE_STETHO or LICENSE_MULTISELECT or LICENSE_GSON or
+//                LICENSE_LEAK_CANARY, BuildConfig.VERSION_NAME)
     }
 
     private fun resetTitle() {
